@@ -4,25 +4,27 @@
 
 - Features:
   - Main window is ready
-  - Support for PDF format
-  - 
+  - Support of PDF file format
+  - English localization
 
 - Release date:
-  15.11.2022
+  30.11.2022
 
 ## v0.1.1
 
 - Features:
-  - Support for CSV format
+  - Support of CSV file format
+  - Polish localization
 
 - Release date:
-  25.11.2022
+  15.12.2022
 
 ## v0.1.2
 
 - Features:
-  - Support for DOCX format
+  - Support for DOCX file format
+  - Ukrainian localization
 
 - Release date:
-  15.12.2022
+  15.01.2022
 
