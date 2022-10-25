@@ -25,8 +25,18 @@ if (UNIX AND NOT APPLE)
     set(LIB_DIR "lib/linux")
 endif()
 
-include_directories(${INCLUDE_DIR})
-link_directories(${LIB_DIR})
+include_directories(
+    ${INCLUDE_DIR}/gtkmm
+    ${INCLUDE_DIR}/glib
+    ${INCLUDE_DIR}/glibmm
+    ${INCLUDE_DIR}/gtest
+)
+link_directories(
+    ${LIB_DIR}/glib
+    ${LIB_DIR}/gtkmm
+    ${LIB_DIR}/glibmm
+    ${LIB_DIR}/gtest
+)
 
 file(GLOB src
     "**/*.h"
@@ -40,8 +50,11 @@ target_link_libraries(
 
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtest/libgtest_main.a
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtest/libgtest.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtkmm/libgtkmm-3.0.dylib
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glibmm/libglibmm-2.68
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/giomm/libgiomm-2.68
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glib/libglib-2.0
 )
-
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 message("Make build output path is /cmd")
