@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Volumes/Files/c/university/project/include/darwin/gtkmm -I/Volumes/Files/c/university/project/include/darwin/glib -I/Volumes/Files/c/university/project/include/darwin/glibmm -I/Volumes/Files/c/university/project/include/darwin/gtest
+CXX_INCLUDES = -I/Volumes/Files/c/university/project/include/darwin/sigc++ -I/Volumes/Files/c/university/project/include/darwin/giomm -I/Volumes/Files/c/university/project/include/darwin/gtkmm -I/Volumes/Files/c/university/project/include/darwin/glib -I/Volumes/Files/c/university/project/include/darwin/glibmm -I/Volumes/Files/c/university/project/include/darwin/gtest -I/Volumes/Files/c/university/project/include/darwin/gdkmm -I/Volumes/Files/c/university/project/include/darwin/pangomm -I/Volumes/Files/c/university/project/include/darwin/gtk -I/Volumes/Files/c/university/project/include/darwin/gdk -I/Volumes/Files/c/university/project/include/darwin/pango -I/Volumes/Files/c/university/project/include/darwin/harfbuzz
 
 CXX_FLAGS = -std=c++2a -D_XOPEN_SOURCE_EXTENDED -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
 
