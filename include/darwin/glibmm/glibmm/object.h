@@ -53,9 +53,8 @@ class GLIBMM_API GSigConnectionNode;
 
 /* ConstructParams::ConstructParams() takes a varargs list of properties
  * and values, like g_object_new() does.  This list will then be converted
- * to an array of parameter names and an array of parameter values,
- * for use with g_object_new_with_properties().  No overhead is
- * involved, since g_object_new() is just a wrapper around g_object_new_with_properties()
+ * to a GParameter array, for use with g_object_newv().  No overhead is
+ * involved, since g_object_new() is just a wrapper around g_object_newv()
  * as well.
  *
  * The advantage of an auxiliary ConstructParams object over g_object_new()
@@ -71,16 +70,24 @@ class GLIBMM_API ConstructParams
 public:
   const Glib::Class& glibmm_class;
   unsigned int n_parameters;
-  const char ** parameter_names;
-  GValue* parameter_values;
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  GParameter* parameters;
+G_GNUC_END_IGNORE_DEPRECATIONS
 
   explicit ConstructParams(const Glib::Class& glibmm_class_);
   ConstructParams(const Glib::Class& glibmm_class_, const char* first_property_name,
     ...) G_GNUC_NULL_TERMINATED; // warn if called without a trailing NULL pointer
   ~ConstructParams() noexcept;
 
-  ConstructParams(const ConstructParams& other) = delete;
-  ConstructParams& operator=(const ConstructParams&) = delete;
+  // The copy constructor is semantically required by the C++ compiler
+  // (since g++ 3.4) to be able to create temporary instances, depending
+  // on the usage context.  Apparently the compiler will actually optimize
+  // away the copy, though.  See bug #132300.
+  ConstructParams(const ConstructParams& other);
+
+private:
+  // no copy assignment
+  ConstructParams& operator=(const ConstructParams&);
 };
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
@@ -180,7 +187,7 @@ struct TypeTraits<Glib::RefPtr<T>>
     // because that would be "dependent", and g++ 3.4 does not allow that.
     // The specific Glib::wrap() overloads don't do anything special anyway.
     GObject* cobj = (GObject*)const_cast<CTypeNonConst>(ptr);
-    return Glib::make_refptr_for_instance<T>(dynamic_cast<T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
+    return Glib::RefPtr<T>(dynamic_cast<T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
     // We use dynamic_cast<> in case of multiple inheritance.
   }
 
@@ -216,7 +223,7 @@ struct TypeTraits<Glib::RefPtr<const T>>
     // because that would be "dependent", and g++ 3.4 does not allow that.
     // The specific Glib::wrap() overloads don't do anything special anyway.
     GObject* cobj = (GObject*)(ptr);
-    return Glib::make_refptr_for_instance<const T>(
+    return Glib::RefPtr<const T>(
       dynamic_cast<const T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
     // We use dynamic_cast<> in case of multiple inheritance.
   }
@@ -232,9 +239,9 @@ struct TypeTraits<Glib::RefPtr<const T>>
 
 } // namespace Container_Helpers
 
-template <class PtrT>
+template <class T, class PtrT>
 inline PtrT
-Value_Pointer<PtrT>::get_(Glib::Object*) const
+Value_Pointer<T, PtrT>::get_(Glib::Object*) const
 {
   return dynamic_cast<T*>(get_object());
 }
@@ -251,8 +258,8 @@ public:
 
   static GType value_type() { return T::get_base_type(); }
 
-  void set(const CppType& data) { set_object(data.get()); }
-  CppType get() const { return std::dynamic_pointer_cast<T>(get_object_copy()); }
+  void set(const CppType& data) { set_object(data.operator->()); }
+  CppType get() const { return Glib::RefPtr<T>::cast_dynamic(get_object_copy()); }
 };
 
 // The SUN Forte Compiler has a problem with this:
@@ -270,8 +277,8 @@ public:
 
   static GType value_type() { return T::get_base_type(); }
 
-  void set(const CppType& data) { set_object(const_cast<T*>(data.get())); }
-  CppType get() const { return std::dynamic_pointer_cast<T>(get_object_copy()); }
+  void set(const CppType& data) { set_object(const_cast<T*>(data.operator->())); }
+  CppType get() const { return Glib::RefPtr<T>::cast_dynamic(get_object_copy()); }
 };
 #endif /* GLIBMM_HAVE_DISAMBIGUOUS_CONST_TEMPLATE_SPECIALIZATIONS */
 

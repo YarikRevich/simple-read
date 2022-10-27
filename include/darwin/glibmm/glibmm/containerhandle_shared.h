@@ -53,6 +53,43 @@ enum OwnershipType
   OWNERSHIP_DEEP /*!< Release the list, and its elements, when the container is deleted. */
 };
 
+/** Utility class holding an iterator sequence.
+ * @ingroup ContHandles
+ * This can be used to initialize a Glib container handle (such as
+ * Glib::ArrayHandle) with an iterator sequence.  Use the helper
+ * function Glib::sequence() to create a Sequence<> object.
+ */
+template <class Iterator>
+class Sequence
+{
+private:
+  Iterator pbegin_;
+  Iterator pend_;
+
+public:
+  Sequence(Iterator pbegin, Iterator pend) : pbegin_(pbegin), pend_(pend) {}
+
+  Iterator begin() const { return pbegin_; }
+  Iterator end() const { return pend_; }
+  std::size_t size() const { return std::distance(pbegin_, pend_); }
+};
+
+/** Helper function to create a Glib::Sequence<> object, which
+ * in turn can be used to initialize a container handle.
+ * @ingroup ContHandles
+ *
+ * @par Usage example:
+ * @code
+ * combo.set_popdown_strings(Glib::sequence(foo_begin, foo_end));
+ * @endcode
+ */
+template <class Iterator>
+inline Sequence<Iterator>
+sequence(Iterator pbegin, Iterator pend)
+{
+  return Sequence<Iterator>(pbegin, pend);
+}
+
 namespace Container_Helpers
 {
 
@@ -84,8 +121,7 @@ struct TypeTraits
 // be next to the objects that they use.
 #ifdef GLIBMM_CAN_USE_DYNAMIC_CAST_IN_UNUSED_TEMPLATE_WITHOUT_DEFINITION
 
-/** Partial specialization for pointers to GObject instances.
- * The C++ type is not a Glib::RefPtr<>. It can be a gtkmm widget.
+/** Partial specialization for pointers to GtkObject instances.
  * @ingroup ContHelpers
  */
 template <class T>
@@ -117,8 +153,7 @@ struct TypeTraits<T*>
 // This confuse the SUN Forte compiler, so we ifdef it out:
 #ifdef GLIBMM_HAVE_DISAMBIGUOUS_CONST_TEMPLATE_SPECIALIZATIONS
 
-/** Partial specialization for pointers to const GObject instances.
- * The C++ type is not a Glib::RefPtr<>. It can be a gtkmm widget.
+/** Partial specialization for pointers to const GtkObject instances.
  * @ingroup ContHelpers
  */
 template <class T>
@@ -170,7 +205,7 @@ struct TypeTraits<Glib::RefPtr<T>>
     // because that would be "dependent", and g++ 3.4 does not allow that.
     // The specific Glib::wrap() overloads don't do anything special anyway.
     GObject* cobj = (GObject*)(ptr);
-    return Glib::make_refptr_for_instance<T>(dynamic_cast<T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
+    return Glib::RefPtr<T>(dynamic_cast<T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
     // We use dynamic_cast<> in case of multiple inheritance.
   }
 
@@ -206,7 +241,7 @@ struct TypeTraits<Glib::RefPtr<const T>>
     // because that would be "dependent", and g++ 3.4 does not allow that.
     // The specific Glib::wrap() overloads don't do anything special anyway.
     GObject* cobj = (GObject*)const_cast<CTypeNonConst>(ptr);
-    return Glib::make_refptr_for_instance<const T>(
+    return Glib::RefPtr<const T>(
       dynamic_cast<const T*>(Glib::wrap_auto(cobj, true /* take_copy */)));
     // We use dynamic_cast<> in case of multiple inheritance.
   }
@@ -229,7 +264,7 @@ struct TypeTraits<Glib::RefPtr<const T>>
  * the output type cannot be 'const char*'.
  */
 template <>
-struct TypeTraits<Glib::ustring>
+struct GLIBMM_API TypeTraits<Glib::ustring>
 {
   using CppType = Glib::ustring;
   using CType = const char*;
@@ -251,7 +286,7 @@ struct TypeTraits<Glib::ustring>
  * cannot be 'const char*'.
  */
 template <>
-struct TypeTraits<std::string>
+struct GLIBMM_API TypeTraits<std::string>
 {
   using CppType = std::string;
   using CType = const char*;
@@ -270,7 +305,7 @@ struct TypeTraits<std::string>
  * @ingroup ContHelpers
  */
 template <>
-struct TypeTraits<bool>
+struct GLIBMM_API TypeTraits<bool>
 {
   using CppType = bool;
   using CType = gboolean;
@@ -286,7 +321,7 @@ struct TypeTraits<bool>
  * @ingroup ContHelpers
  */
 template <>
-struct TypeTraits<Glib::VariantBase>
+struct GLIBMM_API TypeTraits<Glib::VariantBase>
 {
   using CppType = Glib::VariantBase;
   using CType = GVariant*;
@@ -305,7 +340,7 @@ struct TypeTraits<Glib::VariantBase>
  * @ingroup ContHelpers
  */
 template <>
-struct TypeTraits<Glib::VariantContainerBase>
+struct GLIBMM_API TypeTraits<Glib::VariantContainerBase>
 {
   using CppType = Glib::VariantContainerBase;
   using CType = GVariant*;

@@ -26,7 +26,6 @@
 #include <glibmmconfig.h>
 #include <new>
 #include <typeinfo>
-#include <type_traits>
 
 namespace Glib
 {
@@ -60,12 +59,12 @@ GType custom_pointer_type_register(const char* type_name);
 /**
  * @ingroup glibmmValue
  */
-template <class PtrT>
+template <class T, class PtrT>
 class Value_Pointer : public ValueBase_Object
 {
 public:
-  using T = std::remove_cv_t<std::remove_pointer_t<PtrT>>;
   using CppType = PtrT;
+  using CType = void*;
 
   static inline GType value_type() G_GNUC_CONST;
 
@@ -99,24 +98,12 @@ private:
  * cannot ensure that no exceptions will be thrown, consider using either
  * a normal pointer or a smart pointer to hold your objects indirectly.
  */
-template <class T, typename Enable = void>
+template <class T>
 class Value : public ValueBase_Boxed
 {
-  static_assert(std::is_default_constructible<T>(), "T should be default constructible");
-  static_assert(std::is_copy_constructible<T>(), "T should be copy constructible");
-  static_assert(std::is_assignable<T&, T>(), "T should be assignable");
-  static_assert(std::is_assignable<T&, T&>(), "T should be assignable");
-  static_assert(std::is_assignable<T&, const T&>(), "T should be assignable");
-  static_assert(std::is_destructible<T>(), "T should be destructible");
-  static_assert(std::is_move_assignable<T>(), "T should be move assignable");
-  static_assert(std::is_move_constructible<T>(), "T should be move constructible");
-
 public:
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-  // Used in class Glib::Traits::ValueCompatibleWithWrapProperty.
-  using dont_use_with_wrap_property_ = int;
-#endif
   using CppType = T;
+  using CType = T*;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -136,8 +123,8 @@ private:
  * No attempt is made to manage the memory associated with the
  * pointer, you must take care of that yourself.
  */
-template <class T, typename Enable>
-class GLIBMM_API Value<T*, Enable> : public Value_Pointer<T*>
+template <class T>
+class Value<T*> : public Value_Pointer<T, T*>
 {
 };
 
@@ -146,37 +133,37 @@ class GLIBMM_API Value<T*, Enable> : public Value_Pointer<T*>
  * No attempt is made to manage the memory associated with the
  * pointer, you must take care of that yourself.
  */
-template <class T, typename Enable>
-class GLIBMM_API Value<const T*, Enable> : public Value_Pointer<const T*>
+template <class T>
+class Value<const T*> : public Value_Pointer<T, const T*>
 {
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
-/**** Glib::Value_Pointer<PtrT> *****************************************/
+/**** Glib::Value_Pointer<T, PtrT> *****************************************/
 
 /** Implementation for Glib::Object pointers **/
 
 // static
-template <class PtrT>
+template <class T, class PtrT>
 inline GType
-Value_Pointer<PtrT>::value_type_(Glib::Object*)
+Value_Pointer<T, PtrT>::value_type_(Glib::Object*)
 {
   return T::get_base_type();
 }
 
-template <class PtrT>
+template <class T, class PtrT>
 inline void
-Value_Pointer<PtrT>::set_(PtrT data, Glib::Object*)
+Value_Pointer<T, PtrT>::set_(PtrT data, Glib::Object*)
 {
   set_object(const_cast<T*>(data));
 }
 
 // More spec-compliant compilers (such as Tru64) need this to be near Glib::Object instead.
 #ifdef GLIBMM_CAN_USE_DYNAMIC_CAST_IN_UNUSED_TEMPLATE_WITHOUT_DEFINITION
-template <class PtrT>
+template <class T, class PtrT>
 inline PtrT
-Value_Pointer<PtrT>::get_(Glib::Object*) const
+Value_Pointer<T, PtrT>::get_(Glib::Object*) const
 {
   return dynamic_cast<T*>(get_object());
 }
@@ -185,9 +172,9 @@ Value_Pointer<PtrT>::get_(Glib::Object*) const
 /** Implementation for custom pointers **/
 
 // static
-template <class PtrT>
+template <class T, class PtrT>
 GType
-Value_Pointer<PtrT>::value_type_(void*)
+Value_Pointer<T, PtrT>::value_type_(void*)
 {
   static GType custom_type = 0;
 
@@ -197,16 +184,16 @@ Value_Pointer<PtrT>::value_type_(void*)
   return custom_type;
 }
 
-template <class PtrT>
+template <class T, class PtrT>
 inline void
-Value_Pointer<PtrT>::set_(PtrT data, void*)
+Value_Pointer<T, PtrT>::set_(PtrT data, void*)
 {
   gobject_.data[0].v_pointer = const_cast<T*>(data);
 }
 
-template <class PtrT>
+template <class T, class PtrT>
 inline PtrT
-Value_Pointer<PtrT>::get_(void*) const
+Value_Pointer<T, PtrT>::get_(void*) const
 {
   return static_cast<T*>(gobject_.data[0].v_pointer);
 }
@@ -214,25 +201,25 @@ Value_Pointer<PtrT>::get_(void*) const
 /** Public forwarding interface **/
 
 // static
-template <class PtrT>
+template <class T, class PtrT>
 inline GType
-Value_Pointer<PtrT>::value_type()
+Value_Pointer<T, PtrT>::value_type()
 {
   // Dispatch to the specific value_type_() overload.
-  return Value_Pointer<PtrT>::value_type_(static_cast<T*>(nullptr));
+  return Value_Pointer<T, PtrT>::value_type_(static_cast<T*>(nullptr));
 }
 
-template <class PtrT>
+template <class T, class PtrT>
 inline void
-Value_Pointer<PtrT>::set(PtrT data)
+Value_Pointer<T, PtrT>::set(PtrT data)
 {
   // Dispatch to the specific set_() overload.
   this->set_(data, static_cast<T*>(nullptr));
 }
 
-template <class PtrT>
+template <class T, class PtrT>
 inline PtrT
-Value_Pointer<PtrT>::get() const
+Value_Pointer<T, PtrT>::get() const
 {
   // Dispatch to the specific get_() overload.
   return this->get_(static_cast<T*>(nullptr));
@@ -241,29 +228,29 @@ Value_Pointer<PtrT>::get() const
 /**** Glib::Value<T> *******************************************************/
 
 // Static data, specific to each template instantiation.
-template <class T, typename Enable>
-GType Value<T, Enable>::custom_type_ = 0;
+template <class T>
+GType Value<T>::custom_type_ = 0;
 
-template <class T, typename Enable>
+template <class T>
 inline void
-Value<T, Enable>::set(const typename Value<T, Enable>::CppType& data)
+Value<T>::set(const typename Value<T>::CppType& data)
 {
   // Assume the value is already default-initialized.  See value_init_func().
   *static_cast<T*>(gobject_.data[0].v_pointer) = data;
 }
 
-template <class T, typename Enable>
-inline typename Value<T, Enable>::CppType
-Value<T, Enable>::get() const
+template <class T>
+inline typename Value<T>::CppType
+Value<T>::get() const
 {
   // Assume the pointer is not NULL.  See value_init_func().
   return *static_cast<T*>(gobject_.data[0].v_pointer);
 }
 
 // static
-template <class T, typename Enable>
+template <class T>
 GType
-Value<T, Enable>::value_type()
+Value<T>::value_type()
 {
   if (!custom_type_)
   {
@@ -274,62 +261,31 @@ Value<T, Enable>::value_type()
 }
 
 // static
-template <class T, typename Enable>
+template <class T>
 void
-Value<T, Enable>::value_init_func(GValue* value)
+Value<T>::value_init_func(GValue* value)
 {
   // Never store a NULL pointer (unless we're out of memory).
   value->data[0].v_pointer = new (std::nothrow) T();
 }
 
 // static
-template <class T, typename Enable>
+template <class T>
 void
-Value<T, Enable>::value_free_func(GValue* value)
+Value<T>::value_free_func(GValue* value)
 {
   delete static_cast<T*>(value->data[0].v_pointer);
 }
 
 // static
-template <class T, typename Enable>
+template <class T>
 void
-Value<T, Enable>::value_copy_func(const GValue* src_value, GValue* dest_value)
+Value<T>::value_copy_func(const GValue* src_value, GValue* dest_value)
 {
   // Assume the source is not NULL.  See value_init_func().
   const T& source = *static_cast<T*>(src_value->data[0].v_pointer);
   dest_value->data[0].v_pointer = new (std::nothrow) T(source);
 }
-
-namespace Traits
-{
-/** Helper class for testing if Glib::Value<T> would instantiate a Glib::Value
- * that can be used in _WRAP_PROPERTY and _WRAP_CHILD_PROPERTY.
- *
- * Some instantiations of Glib::Value, such as instantiations of the primary
- * template, generate code which is useless but compilable when generated by
- * _WRAP_PROPERTY and _WRAP_CHILD_PROPERTY.
- */
-template <typename T>
-class ValueCompatibleWithWrapProperty
-{
-private:
-  struct big
-  {
-    int memory[64];
-  };
-
-  static big check_type(...);
-
-  // If Glib::Value<X>::dont_use_with_wrap_property_ is not a type, this check_type()
-  // overload is ignored because of the SFINAE rule (Substitution Failure Is Not An Error).
-  template <typename X>
-  static typename Glib::Value<X>::dont_use_with_wrap_property_ check_type(X* obj);
-
-public:
-  static const bool value = sizeof(check_type(static_cast<T*>(nullptr))) == sizeof(big);
-};
-
-} // namespace Traits
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 

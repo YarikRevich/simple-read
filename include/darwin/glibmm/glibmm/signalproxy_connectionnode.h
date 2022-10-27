@@ -38,7 +38,7 @@ namespace Glib
   * It lives between the layer of Gtk+ and libsigc++.
   * It is very much an internal class.
   */
-class GLIBMM_API SignalProxyConnectionNode : public sigc::notifiable
+class GLIBMM_API SignalProxyConnectionNode
 {
 public:
   /** @param slot The signal handler for the glib signal.
@@ -57,7 +57,7 @@ public:
    * This callback is registered in the slot.
    * @param data The SignalProxyConnectionNode object (@p this).
    */
-  static void notify(sigc::notifiable* data);
+  static void* notify(void* data);
 
   /** Callback that is executed when the glib closure is destroyed.
    * @param data The SignalProxyConnectionNode object (@p this).

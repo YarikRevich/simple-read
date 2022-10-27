@@ -1,5 +1,8 @@
+// -*- c++ -*-
 #ifndef _GLIBMM_CLASS_H
 #define _GLIBMM_CLASS_H
+
+/* $Id$ */
 
 /* Copyright 2001 Free Software Foundation
  * Copyright (C) 1998-2002 The gtkmm Development Team
@@ -51,13 +54,40 @@ public:
 
   inline GType get_type() const;
 
+  // TODO: Remove this method at the next ABI/API break.
+  /** Register a static custom GType, derived from the parent of this class's type.
+   * The parent type of the registered custom type is the same C class as the parent
+   * of the get_type() type. If a type with the specified name is already registered,
+   * nothing is done. register_derived_type() must have been called.
+   * @param custom_type_name The name of the registered type is
+   *        "gtkmm__CustomObject_" + canonic(custom_type_name), where canonic()
+   *        replaces special characters with '+'.
+   * @return The registered type.
+   */
+  GType clone_custom_type(const char* custom_type_name) const;
+
   /// The type that holds pointers to the interfaces of custom types.
-  using interface_classes_type = std::vector<const Interface_Class*>;
+  using interface_class_vector_type = std::vector<const Interface_Class*>;
+
   /** The type that holds pointers to extra class init functions of custom types.
    * The std::tuple contains a function pointer and a pointer to class data.
    * The class data pointer can be nullptr, if the function does not need it.
    */
   using class_init_funcs_type = std::vector<std::tuple<GClassInitFunc, void*>>;
+
+  // TODO: Remove this method at the next ABI/API break.
+  /** Register a static custom GType, derived from the parent of this class's type.
+   * The parent type of the registered custom type is the same C class as the parent
+   * of the get_type() type. If a type with the specified name is already registered,
+   * nothing is done. register_derived_type() must have been called.
+   * @param custom_type_name The name of the registered type is
+   *        "gtkmm__CustomObject_" + canonic(custom_type_name), where canonic()
+   *        replaces special characters with '+'.
+   * @param interface_classes Interfaces that the custom type implements.
+   * @return The registered type.
+   */
+  GType clone_custom_type(
+    const char* custom_type_name, const interface_class_vector_type& interface_classes) const;
 
   /** Register a static custom GType, derived from the parent of this class's type.
    * The parent type of the registered custom type is the same C class as the parent
@@ -74,7 +104,7 @@ public:
    * @return The registered type.
    */
   GType clone_custom_type(
-    const char* custom_type_name, const interface_classes_type* interface_classes,
+    const char* custom_type_name, const interface_class_vector_type* interface_classes,
     const class_init_funcs_type* class_init_funcs, GInstanceInitFunc instance_init_func) const;
 
 protected:

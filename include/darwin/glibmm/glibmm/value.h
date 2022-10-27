@@ -27,8 +27,8 @@
 namespace Glib
 {
 
-class ObjectBase;
-class Object;
+class GLIBMM_API ObjectBase;
+class GLIBMM_API Object;
 
 /** @defgroup glibmmValue Generic Values
  *
@@ -103,6 +103,7 @@ public:
   static GType value_type() G_GNUC_CONST;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -121,8 +122,10 @@ public:
   static GType value_type() G_GNUC_CONST;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
+
 #endif
 
 protected:
@@ -137,11 +140,14 @@ protected:
 class GLIBMM_API ValueBase_Enum : public ValueBase
 {
 public:
+  using CType = gint;
   static GType value_type() G_GNUC_CONST;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
+
 #endif
 
 protected:
@@ -155,11 +161,14 @@ protected:
 class GLIBMM_API ValueBase_Flags : public ValueBase
 {
 public:
+  using CType = guint;
   static GType value_type() G_GNUC_CONST;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
+
 #endif
 
 protected:
@@ -173,11 +182,14 @@ protected:
 class GLIBMM_API ValueBase_String : public ValueBase
 {
 public:
+  using CType = const gchar*;
   static GType value_type() G_GNUC_CONST;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
+
 #endif
 
 protected:
@@ -224,11 +236,12 @@ class Value_Boxed : public ValueBase_Boxed
 // Used by _CLASS_BOXEDTYPE and _CLASS_BOXEDTYPE_STATIC
 public:
   using CppType = T;
+  using CType = typename T::BaseObjectType*;
 
   static GType value_type() { return T::get_type(); }
 
   void set(const CppType& data) { set_boxed(data.gobj()); }
-  CppType get() const { return CppType(static_cast<typename T::BaseObjectType*>(get_boxed())); }
+  CppType get() const { return CppType(static_cast<CType>(get_boxed())); }
 };
 
 /**
@@ -254,43 +267,20 @@ public:
 // More spec-compliant compilers (such as Tru64) need this to be near Glib::Object instead.
 #ifdef GLIBMM_CAN_USE_DYNAMIC_CAST_IN_UNUSED_TEMPLATE_WITHOUT_DEFINITION
 
-namespace Traits {
-
-template<typename, typename>
-struct HasGetBaseType;
-
-template<typename T, typename Ret, typename... Args>
-struct HasGetBaseType<T, Ret(Args...)> {
-  template<typename U, U>
-   struct Check;
-
-  template<typename U>
-  static std::true_type
-  Test(Check<Ret(*)(Args...), &U::get_base_type>*);
-
-  template<typename U>
-  static std::false_type Test(...);
-
-  static const bool value = decltype(Test<T>(0))::value;
-  //using type = decltype(Test<T>(0));
-};
-
-} // namespace Traits
-
 /** Partial specialization for RefPtr<> to Glib::Object.
  * @ingroup glibmmValue
  */
 template <class T>
-class Value<Glib::RefPtr<T>, typename std::enable_if<Glib::Traits::HasGetBaseType<T, GType()>::value>::type>
-: public ValueBase_Object
+class Value<Glib::RefPtr<T>> : public ValueBase_Object
 {
 public:
   using CppType = Glib::RefPtr<T>;
+  using CType = typename T::BaseObjectType*;
 
   static GType value_type() { return T::get_base_type(); }
 
-  void set(const CppType& data) { set_object(const_cast<std::remove_const_t<T>*>(data.get())); }
-  CppType get() const { return std::dynamic_pointer_cast<T>(get_object_copy()); }
+  void set(const CppType& data) { set_object(data.operator->()); }
+  CppType get() const { return Glib::RefPtr<T>::cast_dynamic(get_object_copy()); }
 };
 
 // The SUN Forte Compiler has a problem with this:
@@ -299,19 +289,18 @@ public:
 /** Partial specialization for RefPtr<> to const Glib::Object.
  * @ingroup glibmmValue
  */
-/*
 template <class T>
-class Value<Glib::RefPtr<const T>, typename std::enable_if<std::is_base_of<Glib::ObjectBase, T>::value>::type> : public ValueBase_Object
+class Value<Glib::RefPtr<const T>> : public ValueBase_Object
 {
 public:
   using CppType = Glib::RefPtr<const T>;
+  using CType = typename T::BaseObjectType*;
 
   static GType value_type() { return T::get_base_type(); }
 
-  void set(const CppType& data) { set_object(const_cast<T*>(data.get())); }
-  CppType get() const { return std::dynamic_pointer_cast<T>(get_object_copy()); }
+  void set(const CppType& data) { set_object(const_cast<T*>(data.operator->())); }
+  CppType get() const { return Glib::RefPtr<T>::cast_dynamic(get_object_copy()); }
 };
-*/
 #endif // GLIBMM_HAVE_DISAMBIGUOUS_CONST_TEMPLATE_SPECIALIZATIONS
 
 #endif // GLIBMM_CAN_USE_DYNAMIC_CAST_IN_UNUSED_TEMPLATE_WITHOUT_DEFINITION
@@ -392,7 +381,7 @@ class Value_Enum : public ValueBase_Enum
 public:
   using CppType = T;
 
-  void set(CppType data) { set_enum(static_cast<int>(data)); }
+  void set(CppType data) { set_enum(data); }
   CppType get() const { return CppType(get_enum()); }
 };
 
@@ -405,7 +394,7 @@ class Value_Flags : public ValueBase_Flags
 public:
   using CppType = T;
 
-  void set(CppType data) { set_flags(static_cast<unsigned int>(data)); }
+  void set(CppType data) { set_flags(data); }
   CppType get() const { return CppType(get_flags()); }
 };
 

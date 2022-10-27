@@ -1,4 +1,4 @@
-// This is a generated file. Do not edit it.  Generated from ../../gnome/glibmm/glib/glibmm/../src/variant_basictypes.h.m4
+// This is a generated file. Do not edit it.  Generated from ../../gnome/glibmm-2.4/glib/glibmm/../src/variant_basictypes.h.m4
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 #ifndef _GLIBMM_VARIANT_H_INCLUDE_VARIANT_BASICTYPES_H

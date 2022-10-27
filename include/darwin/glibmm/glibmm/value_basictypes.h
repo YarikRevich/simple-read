@@ -1,4 +1,4 @@
-// This is a generated file, do not edit.  Generated from ../../gnome/glibmm/glib/glibmm/../src/value_basictypes.h.m4
+// This is a generated file, do not edit.  Generated from ../../gnome/glibmm-2.4/glib/glibmm/../src/value_basictypes.h.m4
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 #ifndef _GLIBMM_VALUE_H_INCLUDE_VALUE_BASICTYPES_H
@@ -23,6 +23,7 @@ class GLIBMM_API Value<bool> : public ValueBase
 {
 public:
   using CppType = bool;
+  using CType = gboolean;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -30,11 +31,38 @@ public:
   bool get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
 };
 
+#ifndef GLIBMM_DISABLE_DEPRECATED
+/// @deprecated Use Value<signed char> instead.
+
+/**
+ * @ingroup glibmmValue
+ */
+template <>
+class GLIBMM_API Value<char> : public ValueBase
+{
+public:
+  using CppType = char;
+  using CType = gchar;
+
+  static GType value_type() G_GNUC_CONST;
+
+  void set(char data);
+  char get() const;
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
+  GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
+                                const Glib::ustring& blurb, Glib::ParamFlags flags) const;
+#endif
+};
+
+#endif // GLIBMM_DISABLE_DEPRECATED
 /// @newin{2,44}
 
 /**
@@ -45,6 +73,7 @@ class GLIBMM_API Value<signed char> : public ValueBase
 {
 public:
   using CppType = signed char;
+  using CType = gint8;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -52,6 +81,7 @@ public:
   signed char get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -66,6 +96,7 @@ class GLIBMM_API Value<unsigned char> : public ValueBase
 {
 public:
   using CppType = unsigned char;
+  using CType = guchar;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -73,6 +104,7 @@ public:
   unsigned char get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -87,6 +119,7 @@ class GLIBMM_API Value<int> : public ValueBase
 {
 public:
   using CppType = int;
+  using CType = gint;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -94,6 +127,7 @@ public:
   int get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -108,6 +142,7 @@ class GLIBMM_API Value<unsigned int> : public ValueBase
 {
 public:
   using CppType = unsigned int;
+  using CType = guint;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -115,6 +150,7 @@ public:
   unsigned int get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -129,6 +165,7 @@ class GLIBMM_API Value<long> : public ValueBase
 {
 public:
   using CppType = long;
+  using CType = glong;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -136,6 +173,7 @@ public:
   long get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -150,6 +188,7 @@ class GLIBMM_API Value<unsigned long> : public ValueBase
 {
 public:
   using CppType = unsigned long;
+  using CType = gulong;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -157,6 +196,7 @@ public:
   unsigned long get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -171,6 +211,7 @@ class GLIBMM_API Value<long long> : public ValueBase
 {
 public:
   using CppType = long long;
+  using CType = gint64;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -178,6 +219,7 @@ public:
   long long get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -192,6 +234,7 @@ class GLIBMM_API Value<unsigned long long> : public ValueBase
 {
 public:
   using CppType = unsigned long long;
+  using CType = guint64;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -199,6 +242,7 @@ public:
   unsigned long long get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -213,6 +257,7 @@ class GLIBMM_API Value<float> : public ValueBase
 {
 public:
   using CppType = float;
+  using CType = gfloat;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -220,6 +265,7 @@ public:
   float get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -234,6 +280,7 @@ class GLIBMM_API Value<double> : public ValueBase
 {
 public:
   using CppType = double;
+  using CType = gdouble;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -241,6 +288,7 @@ public:
   double get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif
@@ -255,6 +303,7 @@ class GLIBMM_API Value<void*> : public ValueBase
 {
 public:
   using CppType = void*;
+  using CType = gpointer;
 
   static GType value_type() G_GNUC_CONST;
 
@@ -262,6 +311,7 @@ public:
   void* get() const;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
+  GParamSpec* create_param_spec(const Glib::ustring& name) const;
   GParamSpec* create_param_spec(const Glib::ustring& name, const Glib::ustring& nick,
                                 const Glib::ustring& blurb, Glib::ParamFlags flags) const;
 #endif

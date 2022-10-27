@@ -38,6 +38,11 @@ include_directories(
     ${INCLUDE_DIR}/gdk
     ${INCLUDE_DIR}/pango
     ${INCLUDE_DIR}/harfbuzz
+    ${INCLUDE_DIR}/cairo
+    ${INCLUDE_DIR}/cairomm
+    ${INCLUDE_DIR}/gdk-pixbuf
+    ${INCLUDE_DIR}/freetype2
+    ${INCLUDE_DIR}/fontconfig
 )
 link_directories(
     ${LIB_DIR}/sigc++
@@ -52,6 +57,11 @@ link_directories(
     ${LIB_DIR}/gdk
     ${LIB_DIR}/pango
     ${LIB_DIR}/harfbuzz
+    ${LIB_DIR}/cairo
+    ${LIB_DIR}/cairomm
+    ${LIB_DIR}/gdk-pixbuf
+    ${LIB_DIR}/freetype2
+    ${LIB_DIR}/fontconfig
 )
 
 file(GLOB src
@@ -67,16 +77,25 @@ target_link_libraries(
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtest/libgtest_main.a
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtest/libgtest.a
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtkmm/libgtkmm-3.0.dylib
-    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glibmm/libglibmm-2.68.dylib
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glibmm/libglibmm_generate_extra_defs-2.4.dylib
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glibmm/libglibmm-2.4.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/giomm/libgiomm-2.68.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/glib/libglib-2.0.dylib
-    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/sigc++/libsigc-3.0.0.dylib
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/sigc++/libsigc-2.0.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gdkmm/libgdk-3.0.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/pangomm/libpangomm-1.4.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gtk/libgdk-3.0.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gdk/libgtk-3.0.dylib
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/pango/libpango-1.0.a
     ${CMAKE_SOURCE_DIR}/${LIB_DIR}/harfbuzz/libharfbuzz.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/cairo/cairo.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/cairo/cairo-fdr.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/cairo/cairo-sphinx.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/cairo/libcairo-trace.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/cairomm/libcairomm-1.0
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/gdk-pixbuf/libgdk_pixbuf-2.0.dylib
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/freetype2/libfreetype.a
+    ${CMAKE_SOURCE_DIR}/${LIB_DIR}/fontconfig/libfontconfig.a
 )
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)

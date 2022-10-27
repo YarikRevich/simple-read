@@ -27,7 +27,9 @@
 #include <glibmm/debug.h>
 #include <sigc++/trackable.h>
 #include <typeinfo>
-#include <memory>
+#include <map> // Needed until the next ABI break.
+#include <memory> // Not used by ObjectBase any more, but user code may rely on it being here.
+#include <mutex>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 extern "C" {
@@ -58,14 +60,6 @@ public:
   // noncopyable
   ObjectBase(const ObjectBase&) = delete;
   ObjectBase& operator=(const ObjectBase&) = delete;
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-  // get_base_type() is needed so Glib::ObjectBase can be used with
-  // Glib::Value and _WRAP_PROPERTY in Glib::Binding without a
-  // Value<RefPtr<ObjectBase>> specialization.
-  // The Value<RefPtr<T>> specialization requires T::get_base_type().
-  static GType get_base_type() G_GNUC_CONST;
-#endif
 
 protected:
   /** This default constructor is called implicitly from the constructor of user-derived
@@ -125,19 +119,34 @@ public:
   template <class PropertyType>
   void get_property(const Glib::ustring& property_name, PropertyType& value) const;
 
-  /// You probably want to use a specific property_*() accessor method instead.
-  template <class PropertyType>
-  PropertyType get_property(const Glib::ustring& property_name) const;
-
+  // TODO: At the next ABI break, delete connect_property_changed_with_return()
+  // and let connect_property_changed() return sigc::connection.
   /** You can use the signal_changed() signal of the property proxy instead.
+   *
+   * See also connect_property_changed_with_return().
    */
-  sigc::connection connect_property_changed(const Glib::ustring& property_name, const sigc::slot<void()>& slot);
+  void connect_property_changed(const Glib::ustring& property_name, const sigc::slot<void>& slot);
 
   /** You can use the signal_changed() signal of the property proxy instead.
    *
    * @newin{2,48}
    */
-  sigc::connection connect_property_changed(const Glib::ustring& property_name, sigc::slot<void()>&& slot);
+  void connect_property_changed(const Glib::ustring& property_name, sigc::slot<void>&& slot);
+
+  /** You can use the signal_changed() signal of the property proxy instead.
+   *
+   * This method was added because connect_property_changed() does not return a sigc::connection,
+   * and we could not break the ABI by changing that function.
+   */
+  sigc::connection connect_property_changed_with_return(
+    const Glib::ustring& property_name, const sigc::slot<void>& slot);
+
+  /** You can use the signal_changed() signal of the property proxy instead.
+   *
+   * @newin{2,48}
+   */
+  sigc::connection connect_property_changed_with_return(
+    const Glib::ustring& property_name, sigc::slot<void>&& slot);
 
   /** Increases the freeze count on object. If the freeze count is non-zero, the
    * emission of "notify" signals on object is stopped. The signals are queued
@@ -215,7 +224,7 @@ protected:
   void add_custom_interface_class(const Interface_Class* iface_class);
   void add_custom_class_init_function(GClassInitFunc class_init_func, void* class_data = nullptr);
   void set_custom_instance_init_function(GInstanceInitFunc instance_init_func);
-  const Class::interface_classes_type* get_custom_interface_classes() const;
+  const Class::interface_class_vector_type* get_custom_interface_classes() const;
   const Class::class_init_funcs_type* get_custom_class_init_functions() const;
   GInstanceInitFunc get_custom_instance_init_function() const;
   void custom_class_init_finished();
@@ -246,15 +255,34 @@ protected:
 
 private:
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
-  // Private part of implementation.
-  // Used only during construction of named custom types.
-  struct PrivImpl;
-  std::unique_ptr<PrivImpl> priv_pimpl_;
-
   virtual void set_manage(); // calls g_error()
 
-  friend class Glib::GSigConnectionNode; // for GSigConnectionNode::notify()
+  // TODO: At the next ABI break, replace extra_object_base_data by a non-static
+  // data member.
+  // Private part of implementation.
+  // Used only during construction of named custom types.
+  // This is a new data member that can't be added as instance data to
+  // ObjectBase now, because it would break ABI.
+  struct ExtraObjectBaseData
+  {
+    // Pointers to the interfaces of custom types.
+    Class::interface_class_vector_type custom_interface_classes;
+    // Pointers to extra class init functions.
+    Class::class_init_funcs_type custom_class_init_functions;
+    // Pointer to the instance init function.
+    GInstanceInitFunc custom_instance_init_function = nullptr;
+  };
+
+  using extra_object_base_data_type = std::map<const ObjectBase*, ExtraObjectBaseData>;
+  static extra_object_base_data_type extra_object_base_data;
+  // ObjectBase instances may be used in different threads.
+  // Accesses to extra_object_base_data must be thread-safe.
+  static std::mutex extra_object_base_data_mutex;
 #endif // DOXYGEN_SHOULD_SKIP_THIS
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+  friend class Glib::GSigConnectionNode; // for GSigConnectionNode::notify()
+#endif
 };
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -280,16 +308,6 @@ ObjectBase::get_property(const Glib::ustring& property_name, PropertyType& value
   this->get_property_value(property_name, property_value);
 
   value = property_value.get();
-}
-
-template <class PropertyType>
-inline PropertyType
-ObjectBase::get_property(const Glib::ustring& property_name) const
-{
-  PropertyType value;
-  get_property(property_name, value);
-
-  return value;
 }
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

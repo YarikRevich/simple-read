@@ -133,9 +133,9 @@ private:
  *
  * This %Property class currently supports the name, nick name, description, default value and flags.
  * The minimum and maximum bounds are set to the full range of the value.
- * Because of internal implementation, flags shouldn't be set to values: Glib::ParamFlags::STATIC_NAME,
- * Glib::ParamFlags::STATIC_NICK, Glib::ParamFlags::STATIC_BLURB, Glib::ParamFlags::CONSTRUCT and
- * Glib::ParamFlags::CONSTRUCT_ONLY.
+ * Because of internal implementation, flags shouldn't be set to values: Glib::PARAM_STATIC_NAME,
+ * Glib::PARAM_STATIC_NICK, Glib::PARAM_STATIC_BLURB, Glib::PARAM_CONSTRUCT and
+ * Glib::PARAM_CONSTRUCT_ONLY.
  *
  * The class information must be installed into the GObject system once per
  * property, but this is handled automatically.
@@ -286,6 +286,11 @@ public:
    */
   inline operator PropertyType() const;
 
+  //TODO: Remove the non-const get_proxy() when we can break ABI.
+  /** Returns a proxy object that can be used to read this property.
+   */
+  inline Glib::PropertyProxy_ReadOnly<T> get_proxy();
+
   /** Returns a proxy object that can be used to read this property.
    */
   inline Glib::PropertyProxy_ReadOnly<T> get_proxy() const;
@@ -346,7 +351,7 @@ public:
 
 template <class T>
 Property<T>::Property(Glib::Object& object, const Glib::ustring& name)
-: Property(object, name, Glib::ustring(), Glib::ustring(), Glib::ParamFlags::READWRITE)
+: Property(object, name, Glib::ustring(), Glib::ustring(), Glib::PARAM_READWRITE)
 {
 }
 
@@ -354,7 +359,7 @@ template <class T>
 Property<T>::Property(Glib::Object& object, const Glib::ustring& name,
   const typename Property<T>::PropertyType& default_value)
 : Property(object, name, default_value, Glib::ustring(),
-    Glib::ustring(), Glib::ParamFlags::READWRITE)
+    Glib::ustring(), Glib::PARAM_READWRITE)
 {
 }
 
@@ -363,7 +368,7 @@ Property<T>::Property(Glib::Object& object, const Glib::ustring& name,
            const Glib::ustring& nick, const Glib::ustring& blurb, Glib::ParamFlags flags)
 : PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::READWRITE;
+  flags |= Glib::PARAM_READWRITE;
 
   if (!lookup_property(name))
     install_property(static_cast<ValueType&>(value_).create_param_spec(name, nick, blurb, flags));
@@ -375,7 +380,7 @@ Property<T>::Property(Glib::Object& object, const Glib::ustring& name, const Pro
 :
   PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::READWRITE;
+  flags |= Glib::PARAM_READWRITE;
 
   static_cast<ValueType&>(value_).set(default_value);
 
@@ -431,7 +436,7 @@ Property<T>::get_proxy() const
 
 template <class T>
 Property_ReadOnly<T>::Property_ReadOnly(Glib::Object& object, const Glib::ustring& name)
-: Property_ReadOnly(object, name, Glib::ustring(), Glib::ustring(), Glib::ParamFlags::READABLE)
+: Property_ReadOnly(object, name, Glib::ustring(), Glib::ustring(), Glib::PARAM_READABLE)
 {
 }
 
@@ -439,7 +444,7 @@ template <class T>
 Property_ReadOnly<T>::Property_ReadOnly(Glib::Object& object, const Glib::ustring& name,
   const typename Property_ReadOnly<T>::PropertyType& default_value)
 : Property_ReadOnly(object, name, default_value, Glib::ustring(), Glib::ustring(),
-    Glib::ParamFlags::READABLE)
+    Glib::PARAM_READABLE)
 {
 }
 
@@ -448,8 +453,8 @@ Property_ReadOnly<T>::Property_ReadOnly(Glib::Object& object, const Glib::ustrin
            const Glib::ustring& nick, const Glib::ustring& blurb, Glib::ParamFlags flags)
 : PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::READABLE;
-  flags &= ~Glib::ParamFlags::WRITABLE;
+  flags |= Glib::PARAM_READABLE;
+  flags &= ~Glib::PARAM_WRITABLE;
 
   if (!lookup_property(name))
     install_property(static_cast<ValueType&>(value_).create_param_spec(name, nick, blurb, flags));
@@ -460,8 +465,8 @@ Property_ReadOnly<T>::Property_ReadOnly(Glib::Object& object, const Glib::ustrin
            const Glib::ustring& nick, const Glib::ustring& blurb, Glib::ParamFlags flags)
 : PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::READABLE;
-  flags &= ~Glib::ParamFlags::WRITABLE;
+  flags |= Glib::PARAM_READABLE;
+  flags &= ~Glib::PARAM_WRITABLE;
 
   static_cast<ValueType&>(value_).set(default_value);
 
@@ -484,6 +489,13 @@ inline Property_ReadOnly<T>::operator T() const
 
 template <class T>
 inline Glib::PropertyProxy_ReadOnly<T>
+Property_ReadOnly<T>::get_proxy()
+{
+  return Glib::PropertyProxy_ReadOnly<T>(object_, get_name_internal());
+}
+
+template <class T>
+inline Glib::PropertyProxy_ReadOnly<T>
 Property_ReadOnly<T>::get_proxy() const
 {
   return Glib::PropertyProxy_ReadOnly<T>(object_, get_name_internal());
@@ -494,7 +506,7 @@ Property_ReadOnly<T>::get_proxy() const
 template <class T>
 Property_WriteOnly<T>::Property_WriteOnly(Glib::Object& object, const Glib::ustring& name)
 : Property_WriteOnly(object, name, Glib::ustring(),
-    Glib::ustring(), Glib::ParamFlags::WRITABLE)
+    Glib::ustring(), Glib::PARAM_WRITABLE)
 {
 }
 
@@ -502,7 +514,7 @@ template <class T>
 Property_WriteOnly<T>::Property_WriteOnly(Glib::Object& object, const Glib::ustring& name,
   const typename Property_WriteOnly<T>::PropertyType& default_value)
 : Property_WriteOnly(object, name, default_value, Glib::ustring(),
-    Glib::ustring(), Glib::ParamFlags::WRITABLE)
+    Glib::ustring(), Glib::PARAM_WRITABLE)
 {
 }
 
@@ -511,8 +523,8 @@ Property_WriteOnly<T>::Property_WriteOnly(Glib::Object& object, const Glib::ustr
            const Glib::ustring& nick, const Glib::ustring& blurb, Glib::ParamFlags flags)
 : PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::WRITABLE;
-  flags &= ~Glib::ParamFlags::READABLE;
+  flags |= Glib::PARAM_WRITABLE;
+  flags &= ~Glib::PARAM_READABLE;
 
   if (!lookup_property(name))
     install_property(static_cast<ValueType&>(value_).create_param_spec(name, nick, blurb, flags));
@@ -524,8 +536,8 @@ Property_WriteOnly<T>::Property_WriteOnly(Glib::Object& object, const Glib::ustr
            const Glib::ustring& nick, const Glib::ustring& blurb, Glib::ParamFlags flags)
 : PropertyBase(object, ValueType::value_type())
 {
-  flags |= Glib::ParamFlags::WRITABLE;
-  flags &= ~Glib::ParamFlags::READABLE;
+  flags |= Glib::PARAM_WRITABLE;
+  flags &= ~Glib::PARAM_READABLE;
 
   static_cast<ValueType&>(value_).set(default_value);
 

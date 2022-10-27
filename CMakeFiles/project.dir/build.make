@@ -95,16 +95,25 @@ build/project: CMakeFiles/project.dir/build.make
 build/project: lib/darwin/gtest/libgtest_main.a
 build/project: lib/darwin/gtest/libgtest.a
 build/project: lib/darwin/gtkmm/libgtkmm-3.0.dylib
-build/project: lib/darwin/glibmm/libglibmm-2.68.dylib
+build/project: lib/darwin/glibmm/libglibmm_generate_extra_defs-2.4.dylib
+build/project: lib/darwin/glibmm/libglibmm-2.4.dylib
 build/project: lib/darwin/giomm/libgiomm-2.68.dylib
 build/project: lib/darwin/glib/libglib-2.0.dylib
-build/project: lib/darwin/sigc++/libsigc-3.0.0.dylib
+build/project: lib/darwin/sigc++/libsigc-2.0.dylib
 build/project: lib/darwin/gdkmm/libgdk-3.0.dylib
 build/project: lib/darwin/pangomm/libpangomm-1.4.dylib
 build/project: lib/darwin/gtk/libgdk-3.0.dylib
 build/project: lib/darwin/gdk/libgtk-3.0.dylib
 build/project: lib/darwin/pango/libpango-1.0.a
 build/project: lib/darwin/harfbuzz/libharfbuzz.a
+build/project: lib/darwin/cairo/cairo.a
+build/project: lib/darwin/cairo/cairo-fdr.a
+build/project: lib/darwin/cairo/cairo-sphinx.a
+build/project: lib/darwin/cairo/libcairo-trace.a
+build/project: lib/darwin/cairomm/libcairomm-1.0
+build/project: lib/darwin/gdk-pixbuf/libgdk_pixbuf-2.0.dylib
+build/project: lib/darwin/freetype2/libfreetype.a
+build/project: lib/darwin/fontconfig/libfontconfig.a
 build/project: CMakeFiles/project.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Volumes/Files/c/university/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable build/project"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/project.dir/link.txt --verbose=$(VERBOSE)

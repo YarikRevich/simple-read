@@ -78,6 +78,7 @@ public:
   inline const GObject* gobj() const { return gobject_; }
 };
 
+GLIBMM_API
 RefPtr<ObjectBase> wrap_interface(GObject* object, bool take_copy = false);
 
 } // namespace Glib
