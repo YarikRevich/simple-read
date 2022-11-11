@@ -5,6 +5,9 @@ MenuBarCreator::MenuBarCreator()
     this->menuBar = new QMenuBar();
     QMenu *fileMenu=this->menuBar->addMenu("File");
     QAction* openAction=fileMenu->addAction("Open");
+//    openAction->connect();
+
+
     QAction* saveAction=fileMenu->addAction("Save");
     QAction* printAction=fileMenu->addAction("Print");
 

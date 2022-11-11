@@ -32,7 +32,7 @@ public:
 
     void retranslateUi(QWidget *CSVWindow)
     {
-        CSVWindow->setWindowTitle(QCoreApplication::translate("CSVWindow", "Form", nullptr));
+        CSVWindow->setWindowTitle(QCoreApplication::translate("CSVWindow", "CSVWindow", nullptr));
     } // retranslateUi
 
 };

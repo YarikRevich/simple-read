@@ -54,26 +54,37 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../project/csvwindow.cpp \
 		../project/docxwindow.cpp \
+		../project/filedialog.cpp \
 		../project/main.cpp \
 		../project/mainwindow.cpp \
 		../project/menubarcreator.cpp \
-		../project/pdfwindow.cpp qrc_qmake_qmake_qm_files.cpp \
+		../project/pdfwindow.cpp \
+		../project/settingswindow.cpp \
+		../project/txtwindow.cpp qrc_qmake_qmake_qm_files.cpp \
 		moc_csvwindow.cpp \
 		moc_docxwindow.cpp \
 		moc_mainwindow.cpp \
-		moc_pdfwindow.cpp
+		moc_pdfwindow.cpp \
+		moc_settingswindow.cpp \
+		moc_txtwindow.cpp
 OBJECTS       = csvwindow.o \
 		docxwindow.o \
+		filedialog.o \
 		main.o \
 		mainwindow.o \
 		menubarcreator.o \
 		pdfwindow.o \
+		settingswindow.o \
+		txtwindow.o \
 		qrc_qmake_qmake_qm_files.o \
 		moc_csvwindow.o \
 		moc_docxwindow.o \
 		moc_mainwindow.o \
-		moc_pdfwindow.o
-DIST          = ../project/project_uk_150.ts \
+		moc_pdfwindow.o \
+		moc_settingswindow.o \
+		moc_txtwindow.o
+DIST          = ../project/project_pl_150.ts \
+		../project/project_uk_150.ts \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_pre.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/device_config.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/common/unix.conf \
@@ -223,14 +234,20 @@ DIST          = ../project/project_uk_150.ts \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/lex.prf \
 		../project/project.pro ../project/csvwindow.h \
 		../project/docxwindow.h \
+		../project/filedialog.h \
 		../project/mainwindow.h \
 		../project/menubarcreator.h \
-		../project/pdfwindow.h ../project/csvwindow.cpp \
+		../project/pdfwindow.h \
+		../project/settingswindow.h \
+		../project/txtwindow.h ../project/csvwindow.cpp \
 		../project/docxwindow.cpp \
+		../project/filedialog.cpp \
 		../project/main.cpp \
 		../project/mainwindow.cpp \
 		../project/menubarcreator.cpp \
-		../project/pdfwindow.cpp
+		../project/pdfwindow.cpp \
+		../project/settingswindow.cpp \
+		../project/txtwindow.cpp
 QMAKE_TARGET  = project
 DESTDIR       = 
 TARGET        = project.app/Contents/MacOS/project
@@ -251,7 +268,7 @@ include /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-project.app/Contents/MacOS/project: ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h $(OBJECTS)  
+project.app/Contents/MacOS/project: ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h $(OBJECTS)  
 	@test -d project.app/Contents/MacOS/ || mkdir -p project.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -589,12 +606,12 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.h ../project/docxwindow.h ../project/mainwindow.h ../project/menubarcreator.h ../project/pdfwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/docxwindow.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubarcreator.cpp ../project/pdfwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.ui ../project/docxwindow.ui ../project/mainwindow.ui ../project/pdfwindow.ui $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.h ../project/docxwindow.h ../project/filedialog.h ../project/mainwindow.h ../project/menubarcreator.h ../project/pdfwindow.h ../project/settingswindow.h ../project/txtwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/docxwindow.cpp ../project/filedialog.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubarcreator.cpp ../project/pdfwindow.cpp ../project/settingswindow.cpp ../project/txtwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.ui ../project/docxwindow.ui ../project/mainwindow.ui ../project/pdfwindow.ui ../project/settingswindow.ui ../project/txtwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -621,27 +638,31 @@ check: first
 
 benchmark: first
 
-compiler_lrelease_make_all: .qm/project_en_150.qm .qm/project_uk_150.qm
+compiler_lrelease_make_all: .qm/project_en_150.qm .qm/project_uk_150.qm .qm/project_pl_150.qm
 compiler_lrelease_clean:
-	-$(DEL_FILE) .qm/project_en_150.qm .qm/project_uk_150.qm
+	-$(DEL_FILE) .qm/project_en_150.qm .qm/project_uk_150.qm .qm/project_pl_150.qm
 .qm/project_en_150.qm: ../project/project_en_150.ts
 	/Volumes/Files/Qt/6.4.0/macos/bin/lrelease ../project/project_en_150.ts -qm .qm/project_en_150.qm
 
 .qm/project_uk_150.qm: ../project/project_uk_150.ts
 	/Volumes/Files/Qt/6.4.0/macos/bin/lrelease ../project/project_uk_150.ts -qm .qm/project_uk_150.qm
 
+.qm/project_pl_150.qm: ../project/project_pl_150.ts
+	/Volumes/Files/Qt/6.4.0/macos/bin/lrelease ../project/project_pl_150.ts -qm .qm/project_pl_150.qm
+
 compiler_rcc_make_all: qrc_qmake_qmake_qm_files.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_qmake_qmake_qm_files.cpp
 qrc_qmake_qmake_qm_files.cpp: qmake_qmake_qm_files.qrc \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/rcc \
+		.qm/project_pl_150.qm \
 		.qm/project_uk_150.qm \
 		.qm/project_en_150.qm
 	/Volumes/Files/Qt/6.4.0/macos/libexec/rcc -name qmake_qmake_qm_files --no-zstd qmake_qmake_qm_files.qrc -o qrc_qmake_qmake_qm_files.cpp
 
-compiler_moc_header_make_all: moc_csvwindow.cpp moc_docxwindow.cpp moc_mainwindow.cpp moc_pdfwindow.cpp
+compiler_moc_header_make_all: moc_csvwindow.cpp moc_docxwindow.cpp moc_mainwindow.cpp moc_pdfwindow.cpp moc_settingswindow.cpp moc_txtwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_csvwindow.cpp moc_docxwindow.cpp moc_mainwindow.cpp moc_pdfwindow.cpp
+	-$(DEL_FILE) moc_csvwindow.cpp moc_docxwindow.cpp moc_mainwindow.cpp moc_pdfwindow.cpp moc_settingswindow.cpp moc_txtwindow.cpp
 moc_csvwindow.cpp: ../project/csvwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
@@ -668,13 +689,25 @@ moc_pdfwindow.cpp: ../project/pdfwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
 	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/pdfwindow.h -o moc_pdfwindow.cpp
 
+moc_settingswindow.cpp: ../project/settingswindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/settingswindow.h -o moc_settingswindow.cpp
+
+moc_txtwindow.cpp: ../project/txtwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/txtwindow.h -o moc_txtwindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h
+compiler_uic_make_all: ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h
+	-$(DEL_FILE) ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h
 ui_csvwindow.h: ../project/csvwindow.ui \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
 	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/csvwindow.ui -o ui_csvwindow.h
@@ -690,6 +723,14 @@ ui_mainwindow.h: ../project/mainwindow.ui \
 ui_pdfwindow.h: ../project/pdfwindow.ui \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
 	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/pdfwindow.ui -o ui_pdfwindow.h
+
+ui_settingswindow.h: ../project/settingswindow.ui \
+		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
+	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/settingswindow.ui -o ui_settingswindow.h
+
+ui_txtwindow.h: ../project/txtwindow.ui \
+		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
+	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/txtwindow.ui -o ui_txtwindow.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -715,6 +756,25 @@ docxwindow.o: ../project/docxwindow.cpp ../project/docxwindow.h \
 		ui_docxwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docxwindow.o ../project/docxwindow.cpp
 
+filedialog.o: ../project/filedialog.cpp ../project/filedialog.h \
+		../project/docxwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../project/pdfwindow.h \
+		../project/txtwindow.h \
+		../project/csvwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QList \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlist.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QRegularExpression \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qregularexpression.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filedialog.o ../project/filedialog.cpp
+
 main.o: ../project/main.cpp ../project/menubarcreator.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMenuBar \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
@@ -729,14 +789,24 @@ main.o: ../project/main.cpp ../project/menubarcreator.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qtranslator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../project/main.cpp
 
-mainwindow.o: ../project/mainwindow.cpp ../project/docxwindow.h \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		../project/mainwindow.h \
+mainwindow.o: ../project/mainwindow.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMenuBar \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
+		../project/filedialog.h \
+		../project/docxwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../project/pdfwindow.h \
+		../project/txtwindow.h \
+		../project/csvwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QList \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlist.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../project/mainwindow.cpp
 
@@ -750,6 +820,18 @@ pdfwindow.o: ../project/pdfwindow.cpp ../project/pdfwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_pdfwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pdfwindow.o ../project/pdfwindow.cpp
+
+settingswindow.o: ../project/settingswindow.cpp ../project/settingswindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_settingswindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settingswindow.o ../project/settingswindow.cpp
+
+txtwindow.o: ../project/txtwindow.cpp ../project/txtwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui_txtwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o txtwindow.o ../project/txtwindow.cpp
 
 qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qmake_qmake_qm_files.o qrc_qmake_qmake_qm_files.cpp
@@ -765,6 +847,12 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_pdfwindow.o: moc_pdfwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pdfwindow.o moc_pdfwindow.cpp
+
+moc_settingswindow.o: moc_settingswindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_settingswindow.o moc_settingswindow.cpp
+
+moc_txtwindow.o: moc_txtwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_txtwindow.o moc_txtwindow.cpp
 
 ####### Install
 

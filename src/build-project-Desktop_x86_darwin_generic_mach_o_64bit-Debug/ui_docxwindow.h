@@ -32,7 +32,7 @@ public:
 
     void retranslateUi(QWidget *DOCXWindow)
     {
-        DOCXWindow->setWindowTitle(QCoreApplication::translate("DOCXWindow", "Form", nullptr));
+        DOCXWindow->setWindowTitle(QCoreApplication::translate("DOCXWindow", "DOCXWindow", nullptr));
     } // retranslateUi
 
 };

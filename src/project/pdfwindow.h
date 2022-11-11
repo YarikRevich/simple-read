@@ -12,11 +12,13 @@ class PDFWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit PDFWindow(QWidget *parent = nullptr);
+    explicit PDFWindow(QString fileName, QWidget *parent = nullptr);
     ~PDFWindow();
 
 private:
     Ui::PDFWindow *ui;
+
+    QString fileName;
 };
 
 #endif // PDFWINDOW_H

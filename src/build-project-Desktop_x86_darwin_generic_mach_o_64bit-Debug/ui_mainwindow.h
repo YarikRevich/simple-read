@@ -53,14 +53,14 @@ public:
         pushButton_open = new QPushButton(gridLayoutWidget);
         pushButton_open->setObjectName("pushButton_open");
         pushButton_open->setCursor(QCursor(Qt::PointingHandCursor));
+        pushButton_open->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
 
         horizontalLayout->addWidget(pushButton_open);
 
         pushButton_settings = new QPushButton(gridLayoutWidget);
         pushButton_settings->setObjectName("pushButton_settings");
         pushButton_settings->setCursor(QCursor(Qt::PointingHandCursor));
-        pushButton_settings->setStyleSheet(QString::fromUtf8("color: rgb(247, 255, 254);\n"
-"background-color: rgb(255, 255, 255);"));
+        pushButton_settings->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         pushButton_settings->setLocale(QLocale(QLocale::English, QLocale::Europe));
 
         horizontalLayout->addWidget(pushButton_settings);

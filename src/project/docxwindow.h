@@ -12,11 +12,13 @@ class DOCXWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit DOCXWindow(QWidget *parent = nullptr);
+    explicit DOCXWindow(QString fileName, QWidget *parent = nullptr);
     ~DOCXWindow();
 
 private:
     Ui::DOCXWindow *ui;
+
+    QString fileName;
 };
 
 #endif // DOCXWINDOW_H

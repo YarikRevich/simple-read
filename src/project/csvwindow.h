@@ -12,11 +12,13 @@ class CSVWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit CSVWindow(QWidget *parent = nullptr);
+    explicit CSVWindow(QString fileName, QWidget *parent = nullptr);
     ~CSVWindow();
 
 private:
     Ui::CSVWindow *ui;
+
+    QString fileName;
 };
 
 #endif // CSVWINDOW_H

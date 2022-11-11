@@ -32,7 +32,7 @@ public:
 
     void retranslateUi(QWidget *PDFWindow)
     {
-        PDFWindow->setWindowTitle(QCoreApplication::translate("PDFWindow", "Form", nullptr));
+        PDFWindow->setWindowTitle(QCoreApplication::translate("PDFWindow", "PDFWindow", nullptr));
     } // retranslateUi
 
 };

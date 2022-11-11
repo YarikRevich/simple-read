@@ -11,27 +11,36 @@ CONFIG += c++17
 SOURCES += \
     csvwindow.cpp \
     docxwindow.cpp \
+    filedialog.cpp \
     main.cpp \
     mainwindow.cpp \
     menubarcreator.cpp \
-    pdfwindow.cpp
+    pdfwindow.cpp \
+    settingswindow.cpp \
+    txtwindow.cpp
 
 HEADERS += \
     csvwindow.h \
     docxwindow.h \
+    filedialog.h \
     mainwindow.h \
     menubarcreator.h \
-    pdfwindow.h
+    pdfwindow.h \
+    settingswindow.h \
+    txtwindow.h
 
 FORMS += \
     csvwindow.ui \
     docxwindow.ui \
     mainwindow.ui \
-    pdfwindow.ui
+    pdfwindow.ui \
+    settingswindow.ui \
+    txtwindow.ui
 
 TRANSLATIONS += \
     project_en_150.ts \
-    project_uk_150.ts
+    project_uk_150.ts \
+    project_pl_150.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -41,4 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    project_pl_150.ts \
     project_uk_150.ts

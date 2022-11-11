@@ -53,6 +53,9 @@
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>Open</string>
        </property>
@@ -64,8 +67,7 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(247, 255, 254);
-background-color: rgb(255, 255, 255);</string>
+        <string notr="true">background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="locale">
         <locale language="English" country="Europe"/>
