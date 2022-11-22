@@ -16,6 +16,8 @@ public:
     ~DOCXWindow();
 
 private:
+    void process();
+
     Ui::DOCXWindow *ui;
 
     QString fileName;

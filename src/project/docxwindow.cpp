@@ -10,6 +10,10 @@ DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
 
 }
 
+void DOCXWindow::process(){
+
+}
+
 DOCXWindow::~DOCXWindow()
 {
     delete ui;
