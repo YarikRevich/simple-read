@@ -6,10 +6,10 @@
 #include <QList>
 #include <QString>
 
-#define DOCX "\\.docx"
-#define PDF "\\.pdf"
-#define TXT "\\.txt"
-#define CSV "\\.csv"
+#define DOCX "^(.+)\\/([^\\/]+)\\.docx$"
+#define PDF "^(.+)\\/([^\\/]+)\\.pdf$"
+#define TXT "^(.+)\\/([^\\/]+)\\.txt$"
+#define CSV "^(.+)\\/([^\\/]+)\\.csv$"
 
 class FileDialog
 {

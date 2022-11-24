@@ -17,7 +17,7 @@ CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../project -I. -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -F/Volumes/Files/Qt/6.4.0/macos/lib
+INCPATH       = -I../project -I. -I../../include/duckx -I../../include/pugixml -I../../include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -F/Volumes/Files/Qt/6.4.0/macos/lib
 QMAKE         = /Volumes/Files/Qt/6.4.0/macos/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = project1.0.0
 DISTDIR = /Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.tmp/project1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/Volumes/Files/Qt/6.4.0/macos/lib
-LIBS          = $(SUBLIBS) -F/Volumes/Files/Qt/6.4.0/macos/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework AGL -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/Volumes/Files/Qt/6.4.0/macos/lib -L/Volumes/Files/c/university/project/src/project/../../lib/duckx/ -lduckx -L/Volumes/Files/c/university/project/src/project/../../lib/pugixml/ -lpugixml -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework AGL -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -268,7 +268,7 @@ include /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-project.app/Contents/MacOS/project: ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h $(OBJECTS)  
+project.app/Contents/MacOS/project: /Volumes/Files/c/university/project/src/project/../../lib/duckx/libduckx.a /Volumes/Files/c/university/project/src/project/../../lib/pugixml/libpugixml.a ui_csvwindow.h ui_docxwindow.h ui_mainwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h $(OBJECTS)  
 	@test -d project.app/Contents/MacOS/ || mkdir -p project.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -667,13 +667,13 @@ moc_csvwindow.cpp: ../project/csvwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/csvwindow.h -o moc_csvwindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/csvwindow.h -o moc_csvwindow.cpp
 
 moc_docxwindow.cpp: ../project/docxwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/docxwindow.h -o moc_docxwindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/docxwindow.h -o moc_docxwindow.cpp
 
 moc_mainwindow.cpp: ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -681,25 +681,25 @@ moc_mainwindow.cpp: ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMenuBar \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/mainwindow.h -o moc_mainwindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/mainwindow.h -o moc_mainwindow.cpp
 
 moc_pdfwindow.cpp: ../project/pdfwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/pdfwindow.h -o moc_pdfwindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/pdfwindow.h -o moc_pdfwindow.cpp
 
 moc_settingswindow.cpp: ../project/settingswindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/settingswindow.h -o moc_settingswindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/settingswindow.h -o moc_settingswindow.cpp
 
 moc_txtwindow.cpp: ../project/txtwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
-	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/txtwindow.h -o moc_txtwindow.cpp
+	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/txtwindow.h -o moc_txtwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -753,16 +753,16 @@ csvwindow.o: ../project/csvwindow.cpp ../project/csvwindow.h \
 docxwindow.o: ../project/docxwindow.cpp ../project/docxwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		ui_docxwindow.h
+		ui_docxwindow.h \
+		../../include/duckx/duckx.hpp \
+		../../include/duckx/constants.hpp \
+		../../include/duckx/duckxiterator.hpp \
+		../../include/pugixml/pugixml.hpp \
+		../../include/pugixml/pugiconfig.hpp \
+		../../include/zip/zip.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o docxwindow.o ../project/docxwindow.cpp
 
 filedialog.o: ../project/filedialog.cpp ../project/filedialog.h \
-		../project/docxwindow.h \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		../project/pdfwindow.h \
-		../project/txtwindow.h \
-		../project/csvwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
@@ -771,6 +771,12 @@ filedialog.o: ../project/filedialog.cpp ../project/filedialog.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlist.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
+		../project/docxwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		../project/pdfwindow.h \
+		../project/txtwindow.h \
+		../project/csvwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QRegularExpression \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qregularexpression.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filedialog.o ../project/filedialog.cpp
@@ -795,19 +801,16 @@ mainwindow.o: ../project/mainwindow.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QMenuBar \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qmenubar.h \
 		../project/filedialog.h \
-		../project/docxwindow.h \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
-		../project/pdfwindow.h \
-		../project/txtwindow.h \
-		../project/csvwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QList \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlist.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../project/settingswindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../project/mainwindow.cpp
 
 menubarcreator.o: ../project/menubarcreator.cpp ../project/menubarcreator.h \
