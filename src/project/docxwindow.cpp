@@ -29,6 +29,13 @@ void DOCXWindow::process(){
 
 }
 
+void DOCXWindow::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+
+    DataView *dataView = new DataView();
+    dataView->show();
+}
+
 DOCXWindow::~DOCXWindow()
 {
     delete ui;

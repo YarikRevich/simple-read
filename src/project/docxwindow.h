@@ -1,6 +1,7 @@
 #ifndef DOCXWINDOW_H
 #define DOCXWINDOW_H
 
+#include "dataview.h"
 #include <QWidget>
 
 namespace Ui {
@@ -15,6 +16,7 @@ public:
     explicit DOCXWindow(QString fileName, QWidget *parent = nullptr);
     ~DOCXWindow();
 
+    void showEvent(QShowEvent* event);
 private:
     void process();
 

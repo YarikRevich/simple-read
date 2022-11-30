@@ -1,7 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="i18n">
-<file alias="project_en_150.qm">/Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qm/project_en_150.qm</file>
-<file alias="project_uk_150.qm">/Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qm/project_uk_150.qm</file>
-<file alias="project_pl_150.qm">/Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qm/project_pl_150.qm</file>
-</qresource>
-</RCC>
