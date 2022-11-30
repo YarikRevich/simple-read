@@ -7,7 +7,13 @@ DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
 {
     this->fileName = fileName;
     ui->setupUi(this);
+}
 
+void DOCXWindow::showEvent(QShowEvent* event) {
+    QWidget::showEvent(event);
+
+    DataView *dataView = new DataView();
+    dataView->show();
 }
 
 DOCXWindow::~DOCXWindow()

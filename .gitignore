@@ -33,3 +33,7 @@
 
 # CMake
 build/
+
+# Build
+
+src/build-*

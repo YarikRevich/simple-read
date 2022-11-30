@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     csvwindow.cpp \
+    dataview.cpp \
     docxwindow.cpp \
     filedialog.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     csvwindow.h \
+    dataview.h \
     docxwindow.h \
     filedialog.h \
     mainwindow.h \
