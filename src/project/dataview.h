@@ -10,11 +10,10 @@ public:
     DataView(QWidget *parent);
 
     void addParagraph(QString paragraph);
-    void addTable();
 
     void show();
 private:
-
+    QWidget *parent;
 };
 
 #endif // DATAVIEW_H
