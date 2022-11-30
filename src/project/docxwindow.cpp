@@ -32,7 +32,7 @@ void DOCXWindow::process(){
 void DOCXWindow::showEvent(QShowEvent* event) {
     QWidget::showEvent(event);
 
-    DataView *dataView = new DataView();
+    DataView *dataView = new DataView(this);
     dataView->show();
 }
 

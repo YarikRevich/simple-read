@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../project/csvwindow.cpp \
+		../project/dataview.cpp \
 		../project/docxwindow.cpp \
 		../project/filedialog.cpp \
 		../project/main.cpp \
@@ -68,6 +69,7 @@ SOURCES       = ../project/csvwindow.cpp \
 		moc_settingswindow.cpp \
 		moc_txtwindow.cpp
 OBJECTS       = csvwindow.o \
+		dataview.o \
 		docxwindow.o \
 		filedialog.o \
 		main.o \
@@ -202,7 +204,6 @@ DIST          = ../project/project_pl_150.ts \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf \
-		../project/.qmake.stash \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -233,6 +234,7 @@ DIST          = ../project/project_pl_150.ts \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/yacc.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/lex.prf \
 		../project/project.pro ../project/csvwindow.h \
+		../project/dataview.h \
 		../project/docxwindow.h \
 		../project/filedialog.h \
 		../project/mainwindow.h \
@@ -240,6 +242,7 @@ DIST          = ../project/project_pl_150.ts \
 		../project/pdfwindow.h \
 		../project/settingswindow.h \
 		../project/txtwindow.h ../project/csvwindow.cpp \
+		../project/dataview.cpp \
 		../project/docxwindow.cpp \
 		../project/filedialog.cpp \
 		../project/main.cpp \
@@ -256,7 +259,7 @@ TARGET        = project.app/Contents/MacOS/project
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.3
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = /Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qmake.stash
+EXPORT__QMAKE_STASH_ = 
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -389,7 +392,6 @@ Makefile: ../project/project.pro /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clan
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -542,7 +544,6 @@ Makefile: ../project/project.pro /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clan
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf:
@@ -608,8 +609,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.h ../project/docxwindow.h ../project/filedialog.h ../project/mainwindow.h ../project/menubarcreator.h ../project/pdfwindow.h ../project/settingswindow.h ../project/txtwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/docxwindow.cpp ../project/filedialog.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubarcreator.cpp ../project/pdfwindow.cpp ../project/settingswindow.cpp ../project/txtwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.h ../project/dataview.h ../project/docxwindow.h ../project/filedialog.h ../project/mainwindow.h ../project/menubarcreator.h ../project/pdfwindow.h ../project/settingswindow.h ../project/txtwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/dataview.cpp ../project/docxwindow.cpp ../project/filedialog.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubarcreator.cpp ../project/pdfwindow.cpp ../project/settingswindow.cpp ../project/txtwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../project/csvwindow.ui ../project/docxwindow.ui ../project/mainwindow.ui ../project/pdfwindow.ui ../project/settingswindow.ui ../project/txtwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 
@@ -621,7 +622,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r project.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -670,6 +670,9 @@ moc_csvwindow.cpp: ../project/csvwindow.h \
 	/Volumes/Files/Qt/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -I/Volumes/Files/c/university/project/src/project -I/Volumes/Files/c/university/project/include/duckx -I/Volumes/Files/c/university/project/include/pugixml -I/Volumes/Files/c/university/project/include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/13.1.6/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/Volumes/Files/Qt/6.4.0/macos/lib ../project/csvwindow.h -o moc_csvwindow.cpp
 
 moc_docxwindow.cpp: ../project/docxwindow.h \
+		../project/dataview.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/moc
@@ -750,10 +753,24 @@ csvwindow.o: ../project/csvwindow.cpp ../project/csvwindow.h \
 		ui_csvwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o csvwindow.o ../project/csvwindow.cpp
 
+dataview.o: ../project/dataview.cpp ../project/dataview.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QLabel \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qlabel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dataview.o ../project/dataview.cpp
+
 docxwindow.o: ../project/docxwindow.cpp ../project/docxwindow.h \
+		../project/dataview.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		ui_docxwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QScrollArea \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qscrollarea.h \
 		../../include/duckx/duckx.hpp \
 		../../include/duckx/constants.hpp \
 		../../include/duckx/duckxiterator.hpp \
@@ -772,6 +789,7 @@ filedialog.o: ../project/filedialog.cpp ../project/filedialog.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
 		../project/docxwindow.h \
+		../project/dataview.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qwidget.h \
 		../project/pdfwindow.h \
