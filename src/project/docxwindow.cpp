@@ -1,40 +1,48 @@
 #include "docxwindow.h"
 #include "ui_docxwindow.h"
+#include <QLabel>
 #include <QScrollArea>
+#include <QString>
 #include <duckx.hpp>
 #include <iostream>
 
 DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
-    QWidget(parent),
+    FileWindow(parent),
     ui(new Ui::DOCXWindow)
 {   
     this->fileName = fileName;
-    ui->setupUi(this);
+    this->dataView = new DataView(this);
     this->process();
+
+    ui->setupUi(this);
 }
 
 void DOCXWindow::process(){
-
-
     duckx::Document doc(this->fileName.toStdString());
 
     doc.open();
 
 
+    std::string src;
     for (auto p = doc.paragraphs(); p.has_next(); p.next()) {
             for (auto r = p.runs(); r.has_next(); r.next()) {
-                std::cout << r.get_text() << std::endl;
+                src.append(r.get_text());
             }
     }
 
+    /*QLabel *label = new QLabel(QString::fromStdString(src).toUtf8(), this);
+    label->setGeometry(100, 100, 1280, 500);
+    label->show();*/
+
+//    this->dataView->show();
+
 }
 
-void DOCXWindow::showEvent(QShowEvent* event) {
-    QWidget::showEvent(event);
+//void DOCXWindow::showEvent(QShowEvent* event) {
+//    QWidget::showEvent(event);
 
-    DataView *dataView = new DataView(this);
-    dataView->show();
-}
+
+//}
 
 DOCXWindow::~DOCXWindow()
 {

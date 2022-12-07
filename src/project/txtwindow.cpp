@@ -2,7 +2,7 @@
 #include "ui_txtwindow.h"
 
 TXTWindow::TXTWindow(QString fileName, QWidget *parent) :
-    QWidget(parent),
+    FileWindow(parent),
     ui(new Ui::TXTWindow)
 {
     this->fileName = fileName;

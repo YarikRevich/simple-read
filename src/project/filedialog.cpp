@@ -64,6 +64,4 @@ QString FileDialog::getSelectedFileWithPattern(QString pattern){
 
 QString FileDialog::getAllowedFilesFilter(){
     return "Files (*.docx *.csv *.pdf *.txt)";
-
-
 }

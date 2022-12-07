@@ -1,13 +1,15 @@
 #ifndef TXTWINDOW_H
 #define TXTWINDOW_H
 
+#include "filewindow.h"
+
 #include <QWidget>
 
 namespace Ui {
 class TXTWindow;
 }
 
-class TXTWindow : public QWidget
+class TXTWindow : public FileWindow
 {
     Q_OBJECT
 

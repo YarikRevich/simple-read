@@ -13,6 +13,7 @@ SOURCES += \
     dataview.cpp \
     docxwindow.cpp \
     filedialog.cpp \
+    filewindow.cpp \
     main.cpp \
     mainwindow.cpp \
     menubarcreator.cpp \
@@ -25,6 +26,7 @@ HEADERS += \
     dataview.h \
     docxwindow.h \
     filedialog.h \
+    filewindow.h \
     mainwindow.h \
     menubarcreator.h \
     pdfwindow.h \

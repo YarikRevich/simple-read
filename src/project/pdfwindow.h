@@ -1,13 +1,15 @@
 #ifndef PDFWINDOW_H
 #define PDFWINDOW_H
 
+#include "filewindow.h"
+
 #include <QWidget>
 
 namespace Ui {
 class PDFWindow;
 }
 
-class PDFWindow : public QWidget
+class PDFWindow : public FileWindow
 {
     Q_OBJECT
 
