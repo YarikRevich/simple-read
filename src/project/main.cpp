@@ -1,29 +1,28 @@
-#include "menubarcreator.h"
 #include "mainwindow.h"
+#include "qmltyperegistrator.h"
+#include "translatorregistrator.h"
 
 #include <QApplication>
 #include <QLocale>
+#include <QQmlApplicationEngine>
 #include <QTranslator>
+#include <QQmlEngine>
+#include <QQuickView>
+#include <QQuickWindow>
+#include <QString>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
+    QApplication app(argc, argv);
 
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "project_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
-    }
+    TranslatorRegistrator translatorRegistrator;
+    translatorRegistrator.exec();
 
-    MainWindow w;
+    QQmlApplicationEngine engine(QML_MAINWINDOW);
 
-    MenuBarCreator m;
-    w.setMenuBar(m.getMenuBar());
+    QMLTypeRegistrator qmlTypeRegistrator(engine.rootContext());
+    qmlTypeRegistrator.exec();
 
-    w.show();
-    return a.exec();
+    return app.exec();
 }

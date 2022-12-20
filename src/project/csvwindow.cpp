@@ -1,15 +1,14 @@
 #include "csvwindow.h"
-#include "ui_csvwindow.h"
 
-CSVWindow::CSVWindow(QString fileName, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::CSVWindow)
-{
-    this->fileName = fileName;
-    ui->setupUi(this);
+void CSVWindow::exec(){
+
 }
 
-CSVWindow::~CSVWindow()
-{
-    delete ui;
+void CSVWindow::onOpen(){
+    QMLWindow::onOpen(QML_CSVWINDOW);
 }
+
+void CSVWindow::setFileName(QString fileName){
+    FileWindow::setFileName(fileName);
+}
+

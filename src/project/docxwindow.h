@@ -2,25 +2,28 @@
 #define DOCXWINDOW_H
 
 #include "dataview.h"
-#include <QWidget>
+#include "filewindow.h"
+#include <QObject>
+#include <QString>
 
-namespace Ui {
-class DOCXWindow;
-}
+#define QML_DOCXWINDOW "qrc:/docxwindow.qml"
 
-class DOCXWindow : public QWidget
+/*!
+ * \brief The DOCXWindow class used for representation of opened files
+ */
+class DOCXWindow : public QObject, public FileWindow
 {
     Q_OBJECT
-
 public:
-    explicit DOCXWindow(QString fileName, QWidget *parent = nullptr);
-    ~DOCXWindow();
+    explicit DOCXWindow(QObject* parent = 0) : QObject(parent){};
+    Q_INVOKABLE void onOpen();
 
-    void showEvent(QShowEvent* event);
+    Q_INVOKABLE void exec() override;
+
+    Q_INVOKABLE void setFileName(QString);
+
 private:
-    Ui::DOCXWindow *ui;
-
-    QString fileName;
+    DataView *dataView;
 };
 
 #endif // DOCXWINDOW_H

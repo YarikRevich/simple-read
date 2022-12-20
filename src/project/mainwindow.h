@@ -1,26 +1,20 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include <QQuickWidget>
 #include <QMenuBar>
+#include <QObject>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+#define QML_MAINWINDOW "qrc:/mainwindow.qml"
 
-class MainWindow : public QMainWindow
+class MainWindow : public QObject
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow (QObject* parent = 0) : QObject(parent) {}
 
-private slots:
-    void on_pushButton_open_clicked();
-    void on_pushButton_settings_clicked();
-
-private:
-    Ui::MainWindow *ui;
+    Q_INVOKABLE void onOpenButton();
+    Q_INVOKABLE void onSettingsButton();
 };
 #endif // MAINWINDOW_H

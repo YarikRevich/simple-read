@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QWidget>
+#include <QLabel>
 
 class DataView
 {
