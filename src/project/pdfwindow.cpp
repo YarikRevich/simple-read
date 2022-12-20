@@ -1,15 +1,15 @@
 #include "pdfwindow.h"
 #include "ui_pdfwindow.h"
 
-PDFWindow::PDFWindow(QString fileName, QWidget *parent) :
-    FileWindow(parent),
-    ui(new Ui::PDFWindow)
-{
-    this->fileName = fileName;
-    ui->setupUi(this);
+void PDFWindow::exec(){
+
 }
 
-PDFWindow::~PDFWindow()
-{
-    delete ui;
+void PDFWindow::onOpen(){
+    QMLWindow::onOpen(QML_PDFWINDOW);
 }
+
+void PDFWindow::setFileName(QString fileName){
+    FileWindow::setFileName(fileName);
+}
+

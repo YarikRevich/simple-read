@@ -1,4 +1,5 @@
 QT       += core gui
+QT += quickwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,34 +13,32 @@ SOURCES += \
     csvwindow.cpp \
     dataview.cpp \
     docxwindow.cpp \
-    filedialog.cpp \
     filewindow.cpp \
     main.cpp \
     mainwindow.cpp \
-    menubarcreator.cpp \
+    menubar.cpp \
     pdfwindow.cpp \
+    qmltyperegistrator.cpp \
+    qmlwindow.cpp \
     settingswindow.cpp \
+    translatorregistrator.cpp \
     txtwindow.cpp
 
 HEADERS += \
     csvwindow.h \
     dataview.h \
     docxwindow.h \
-    filedialog.h \
     filewindow.h \
     mainwindow.h \
-    menubarcreator.h \
+    menubar.h \
     pdfwindow.h \
+    qmltyperegistrator.h \
+    qmlwindow.h \
     settingswindow.h \
+    translatorregistrator.h \
     txtwindow.h
 
-FORMS += \
-    csvwindow.ui \
-    docxwindow.ui \
-    mainwindow.ui \
-    pdfwindow.ui \
-    settingswindow.ui \
-    txtwindow.ui
+FORMS +=
 
 TRANSLATIONS += \
     project_en_150.ts \
@@ -48,14 +47,18 @@ TRANSLATIONS += \
 CONFIG += lrelease
 CONFIG += embed_translations
 
+RESOURCES += \
+    mainwindow.qml \
+    settingswindow.qml \
+    docxwindow.qml \
+    csvwindow.qml \
+    pdfwindow.qml \
+    txtwindow.qml
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-DISTFILES += \
-    project_pl_150.ts \
-    project_uk_150.ts
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/duckx/release/ -lduckx
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/duckx/debug/ -lduckx
@@ -85,3 +88,10 @@ else:unix: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/libpugixml.a
 
 INCLUDEPATH += $$PWD/../../include/zip
 DEPENDPATH += $$PWD/../../include/zip
+
+DISTFILES += \
+    csvwindow.qml \
+    docxwindow.qml \
+    pdfwindow.qml \
+    settingswindow.qml \
+    txtwindow.qml

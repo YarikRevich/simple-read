@@ -6,18 +6,18 @@
 #include <duckx.hpp>
 #include <iostream>
 
-DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
-    FileWindow(parent),
-    ui(new Ui::DOCXWindow)
-{   
-    this->fileName = fileName;
-    this->dataView = new DataView(this);
-    this->process();
+//DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
+//    FileWindow(parent),
+//    ui(new Ui::DOCXWindow)
+//{
+//    this->fileName = fileName;
+//    this->dataView = new DataView(this);
+//    this->process();
 
-    ui->setupUi(this);
-}
+//    ui->setupUi(this);
+//}
 
-void DOCXWindow::process(){
+void DOCXWindow::exec(){
     duckx::Document doc(this->fileName.toStdString());
 
     doc.open();
@@ -38,13 +38,10 @@ void DOCXWindow::process(){
 
 }
 
-//void DOCXWindow::showEvent(QShowEvent* event) {
-//    QWidget::showEvent(event);
+void DOCXWindow::onOpen(){
+    QMLWindow::onOpen(QML_DOCXWINDOW);
+}
 
-
-//}
-
-DOCXWindow::~DOCXWindow()
-{
-    delete ui;
+void DOCXWindow::setFileName(QString fileName){
+    FileWindow::setFileName(fileName);
 }

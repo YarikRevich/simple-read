@@ -1,22 +1,17 @@
 #ifndef SETTINGSWINDOW_H
 #define SETTINGSWINDOW_H
 
-#include <QWidget>
+#include "qmlwindow.h"
 
-namespace Ui {
-class SettingsWindow;
-}
+#define QML_SETTINGSWINDOW "qrc:/settingswindow.qml"
 
-class SettingsWindow : public QWidget
+class SettingsWindow : public QObject, public QMLWindow
 {
     Q_OBJECT
 
 public:
-    explicit SettingsWindow(QWidget *parent = nullptr);
-    ~SettingsWindow();
-
-private:
-    Ui::SettingsWindow *ui;
+    explicit SettingsWindow(QObject* = 0){};
+    Q_INVOKABLE void onOpen();
 };
 
 #endif // SETTINGSWINDOW_H

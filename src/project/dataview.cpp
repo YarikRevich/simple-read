@@ -1,7 +1,5 @@
 #include "dataview.h"
 
-#include <QLabel>
-
 DataView::DataView(QWidget *parent)
 {
   this->parent = parent;
