@@ -15,6 +15,8 @@ QMLTypeRegistrator::QMLTypeRegistrator(QQmlContext* context){
 
 void QMLTypeRegistrator::exec()
 {
+    qInfo("QMLTypeRegistrator is initialized!");
+
     MainWindow *mainWindow = new MainWindow();
     this->context->setContextProperty("MainWindow", mainWindow);
 
