@@ -17,7 +17,7 @@ CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
 DEFINES       = -DQT_QML_DEBUG -DQT_QUICKWIDGETS_LIB -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=10.14 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../project -I. -I../../include/duckx -I../../include/pugixml -I../../include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtOpenGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQmlModels.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQml.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/include -I/Volumes/Files/Qt/6.4.0/macos/include/QtQmlIntegration -I/Volumes/Files/Qt/6.4.0/macos/lib/QtNetwork.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -F/Volumes/Files/Qt/6.4.0/macos/lib
+INCPATH       = -I../project -I. -I../../include/duckx -I../../include/pugixml -I../../include/zip -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtOpenGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQmlModels.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtQml.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/include -I/Volumes/Files/Qt/6.4.0/macos/include/QtQmlIntegration -I/Volumes/Files/Qt/6.4.0/macos/lib/QtNetwork.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang -F/Volumes/Files/Qt/6.4.0/macos/lib
 QMAKE         = /Volumes/Files/Qt/6.4.0/macos/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -56,6 +56,7 @@ SOURCES       = ../project/csvwindow.cpp \
 		../project/dataview.cpp \
 		../project/docxwindow.cpp \
 		../project/filewindow.cpp \
+		../project/logger.cpp \
 		../project/main.cpp \
 		../project/mainwindow.cpp \
 		../project/menubar.cpp \
@@ -76,6 +77,7 @@ OBJECTS       = csvwindow.o \
 		dataview.o \
 		docxwindow.o \
 		filewindow.o \
+		logger.o \
 		main.o \
 		mainwindow.o \
 		menubar.o \
@@ -249,6 +251,7 @@ DIST          = ../project/csvwindow.qml \
 		../project/dataview.h \
 		../project/docxwindow.h \
 		../project/filewindow.h \
+		../project/logger.h \
 		../project/mainwindow.h \
 		../project/menubar.h \
 		../project/pdfwindow.h \
@@ -260,6 +263,7 @@ DIST          = ../project/csvwindow.qml \
 		../project/dataview.cpp \
 		../project/docxwindow.cpp \
 		../project/filewindow.cpp \
+		../project/logger.cpp \
 		../project/main.cpp \
 		../project/mainwindow.cpp \
 		../project/menubar.cpp \
@@ -289,7 +293,7 @@ include /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-project.app/Contents/MacOS/project: /Volumes/Files/c/university/project/src/project/../../lib/duckx/libduckx.a /Volumes/Files/c/university/project/src/project/../../lib/pugixml/libpugixml.a ui_docxwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h $(OBJECTS)  
+project.app/Contents/MacOS/project: /Volumes/Files/c/university/project/src/project/../../lib/duckx/libduckx.a /Volumes/Files/c/university/project/src/project/../../lib/pugixml/libpugixml.a $(OBJECTS)  
 	@test -d project.app/Contents/MacOS/ || mkdir -p project.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -643,9 +647,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc qmake_qmake_immediate.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.h ../project/dataview.h ../project/docxwindow.h ../project/filewindow.h ../project/mainwindow.h ../project/menubar.h ../project/pdfwindow.h ../project/qmltyperegistrator.h ../project/qmlwindow.h ../project/settingswindow.h ../project/translatorregistrator.h ../project/txtwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/dataview.cpp ../project/docxwindow.cpp ../project/filewindow.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubar.cpp ../project/pdfwindow.cpp ../project/qmltyperegistrator.cpp ../project/qmlwindow.cpp ../project/settingswindow.cpp ../project/translatorregistrator.cpp ../project/txtwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../project/docxwindow.ui ../project/pdfwindow.ui ../project/settingswindow.ui ../project/txtwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.h ../project/dataview.h ../project/docxwindow.h ../project/filewindow.h ../project/logger.h ../project/mainwindow.h ../project/menubar.h ../project/pdfwindow.h ../project/qmltyperegistrator.h ../project/qmlwindow.h ../project/settingswindow.h ../project/translatorregistrator.h ../project/txtwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../project/csvwindow.cpp ../project/dataview.cpp ../project/docxwindow.cpp ../project/filewindow.cpp ../project/logger.cpp ../project/main.cpp ../project/mainwindow.cpp ../project/menubar.cpp ../project/pdfwindow.cpp ../project/qmltyperegistrator.cpp ../project/qmlwindow.cpp ../project/settingswindow.cpp ../project/translatorregistrator.cpp ../project/txtwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../project/project_en_150.ts ../project/project_uk_150.ts ../project/project_pl_150.ts $(DISTDIR)/
 
 
@@ -799,25 +802,8 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_docxwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h
+compiler_uic_make_all:
 compiler_uic_clean:
-	-$(DEL_FILE) ui_docxwindow.h ui_pdfwindow.h ui_settingswindow.h ui_txtwindow.h
-ui_docxwindow.h: ../project/docxwindow.ui \
-		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
-	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/docxwindow.ui -o ui_docxwindow.h
-
-ui_pdfwindow.h: ../project/pdfwindow.ui \
-		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
-	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/pdfwindow.ui -o ui_pdfwindow.h
-
-ui_settingswindow.h: ../project/settingswindow.ui \
-		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
-	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/settingswindow.ui -o ui_settingswindow.h
-
-ui_txtwindow.h: ../project/txtwindow.ui \
-		/Volumes/Files/Qt/6.4.0/macos/libexec/uic
-	/Volumes/Files/Qt/6.4.0/macos/libexec/uic ../project/txtwindow.ui -o ui_txtwindow.h
-
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -826,7 +812,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_lrelease_clean compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_lrelease_clean compiler_rcc_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -890,6 +876,13 @@ filewindow.o: ../project/filewindow.cpp ../project/filewindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filewindow.o ../project/filewindow.cpp
 
+logger.o: ../project/logger.cpp ../project/logger.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QtGlobal \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qglobal.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logger.o ../project/logger.cpp
+
 main.o: ../project/main.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/QQuickWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h \
@@ -912,7 +905,11 @@ main.o: ../project/main.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QLocale \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlocale.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/QQuickView \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/qquickview.h
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/qquickview.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/QQuickWindow \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/qquickwindow.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../project/main.cpp
 
 mainwindow.o: ../project/mainwindow.cpp ../project/mainwindow.h \

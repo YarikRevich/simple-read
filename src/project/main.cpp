@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "qmltyperegistrator.h"
 #include "translatorregistrator.h"
+#include "logger.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -15,6 +16,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
     QApplication app(argc, argv);
+
+    Logger logger;
+    qInstallMessageHandler(loggingHandler);
 
     TranslatorRegistrator translatorRegistrator;
     translatorRegistrator.exec();

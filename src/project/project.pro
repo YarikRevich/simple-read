@@ -14,6 +14,7 @@ SOURCES += \
     dataview.cpp \
     docxwindow.cpp \
     filewindow.cpp \
+    logger.cpp \
     main.cpp \
     mainwindow.cpp \
     menubar.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     dataview.h \
     docxwindow.h \
     filewindow.h \
+    logger.h \
     mainwindow.h \
     menubar.h \
     pdfwindow.h \
