@@ -1,4 +1,4 @@
-# university-project
+# simple-read
 
 ![Linux](https://svgshare.com/i/Zhy.svg)
 ![macOS](https://svgshare.com/i/ZjP.svg)
