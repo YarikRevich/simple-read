@@ -11,6 +11,7 @@
 #include <QQuickView>
 #include <QQuickWindow>
 #include <QString>
+#include <QQmlComponent>
 
 int main(int argc, char *argv[])
 {

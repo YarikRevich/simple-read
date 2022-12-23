@@ -1,7 +1,10 @@
 #include "qmlwindow.h"
 
+#include <QQuickView>
+
 void QMLWindow::onOpen(const char * path){
-    QQuickWidget *quickWidget = new QQuickWidget();
-    quickWidget->setSource(QUrl(path));
-    quickWidget->show();
+    QQuickView *view = new QQuickView();
+    view->setSource(QUrl(path));
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
+    view->show();
 };
