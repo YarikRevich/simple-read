@@ -4,7 +4,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 
 Item {
-    id: docxWindow;
+    id: root;
     visible: true;
     height: 80 * Screen.desktopAvailableHeight / 100;
     width: 80 * Screen.desktopAvailableWidth / 100;
