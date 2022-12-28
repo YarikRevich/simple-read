@@ -95,7 +95,8 @@ OBJECTS       = csvwindow.o \
 		moc_pdfwindow.o \
 		moc_settingswindow.o \
 		moc_txtwindow.o
-DIST          = ../project/csvwindow.qml \
+DIST          = ../project/Info.plist \
+		../project/csvwindow.qml \
 		../project/docxwindow.qml \
 		../project/pdfwindow.qml \
 		../project/settingswindow.qml \
@@ -217,7 +218,6 @@ DIST          = ../project/csvwindow.qml \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf \
-		../project/.qmake.stash \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -281,7 +281,7 @@ TARGET        = project.app/Contents/MacOS/project
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.3
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools
-EXPORT__QMAKE_STASH_ = /Volumes/Files/c/university/project/src/build-project-Desktop_x86_darwin_generic_mach_o_64bit-Debug/.qmake.stash
+EXPORT__QMAKE_STASH_ = 
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = x86_64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -414,7 +414,6 @@ Makefile: ../project/project.pro /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clan
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		/Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -574,7 +573,6 @@ Makefile: ../project/project.pro /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clan
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/qt_config.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/qmake.conf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/exclusive_builds.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/mac/sdk.prf:
 /Volumes/Files/Qt/6.4.0/macos/mkspecs/features/toolchain.prf:
@@ -632,12 +630,17 @@ project.app/Contents/Resources/empty.lproj:
 project.app/Contents/Info.plist: 
 	@test -d project.app/Contents || mkdir -p project.app/Contents
 	@$(DEL_FILE) project.app/Contents/Info.plist
-	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,scc.project,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},scc.project,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.14,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,\$${IOS_LAUNCH_SCREEN},LaunchScreen,g" -e "s,@ICON@,,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},,g" -e "s,@EXECUTABLE@,project,g" -e "s,@LIBRARY@,project,g" -e "s,\$${EXECUTABLE_NAME},project,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" /Volumes/Files/Qt/6.4.0/macos/mkspecs/macx-clang/Info.plist.app >project.app/Contents/Info.plist
+	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,\$${QMAKE_SHORT_VERSION},1.0,g" -e "s,@FULL_VERSION@,1.0.0,g" -e "s,\$${QMAKE_FULL_VERSION},1.0.0,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" -e "s,@BUNDLEIDENTIFIER@,scc.project,g" -e "s,\$${PRODUCT_BUNDLE_IDENTIFIER},scc.project,g" -e "s,\$${MACOSX_DEPLOYMENT_TARGET},10.14,g" -e "s,\$${IPHONEOS_DEPLOYMENT_TARGET},,g" -e "s,\$${TVOS_DEPLOYMENT_TARGET},,g" -e "s,\$${WATCHOS_DEPLOYMENT_TARGET},,g" -e "s,\$${IOS_LAUNCH_SCREEN},LaunchScreen,g" -e "s,@ICON@,icon.icns,g" -e "s,\$${ASSETCATALOG_COMPILER_APPICON_NAME},icon.icns,g" -e "s,@EXECUTABLE@,project,g" -e "s,@LIBRARY@,project,g" -e "s,\$${EXECUTABLE_NAME},project,g" -e "s,@TYPEINFO@,????,g" -e "s,\$${QMAKE_PKGINFO_TYPEINFO},????,g" ../project/Info.plist >project.app/Contents/Info.plist
+project.app/Contents/Resources/icon.icns: ../project/icon.icns
+	@test -d project.app/Contents/Resources/ || mkdir -p project.app/Contents/Resources/
+	@$(DEL_FILE) project.app/Contents/Resources/icon.icns
+	@$(COPY_FILE) ../project/icon.icns project.app/Contents/Resources/icon.icns
 
 all: Makefile \
 		project.app/Contents/PkgInfo \
 		project.app/Contents/Resources/empty.lproj \
-		project.app/Contents/Info.plist project.app/Contents/MacOS/project
+		project.app/Contents/Info.plist \
+		project.app/Contents/Resources/icon.icns project.app/Contents/MacOS/project
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -659,7 +662,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r project.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -700,6 +702,7 @@ qrc_qmake_qmake_qm_files.cpp: qmake_qmake_qm_files.qrc \
 
 qrc_qmake_qmake_immediate.cpp: qmake_qmake_immediate.qrc \
 		/Volumes/Files/Qt/6.4.0/macos/libexec/rcc \
+		../project/test.icns \
 		../project/settingswindow.qml \
 		../project/csvwindow.qml \
 		../project/txtwindow.qml \
@@ -855,7 +858,6 @@ docxwindow.o: ../project/docxwindow.cpp ../project/docxwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/QQuickWidget \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h \
-		ui_docxwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/QScrollArea \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qscrollarea.h \
 		../../include/duckx/duckx.hpp \
@@ -902,6 +904,9 @@ main.o: ../project/main.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QTranslator \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qtranslator.h \
+		../project/logger.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QtGlobal \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qglobal.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QLocale \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qlocale.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/QQuickView \
@@ -909,7 +914,11 @@ main.o: ../project/main.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/QQuickWindow \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/qquickwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QString \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQml.framework/Headers/QQmlComponent \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQml.framework/Headers/qqmlcomponent.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers/QIcon \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtGui.framework/Headers/qicon.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../project/main.cpp
 
 mainwindow.o: ../project/mainwindow.cpp ../project/mainwindow.h \
@@ -930,7 +939,6 @@ mainwindow.o: ../project/mainwindow.cpp ../project/mainwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QRegularExpression \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qregularexpression.h \
-		ui_mainwindow.h \
 		../project/settingswindow.h \
 		../project/qmlwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQml.framework/Headers/QQmlComponent \
@@ -955,8 +963,7 @@ pdfwindow.o: ../project/pdfwindow.cpp ../project/pdfwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/QQuickWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h \
-		ui_pdfwindow.h
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pdfwindow.o ../project/pdfwindow.cpp
 
 qmltyperegistrator.o: ../project/qmltyperegistrator.cpp ../project/docxwindow.h \
@@ -1003,7 +1010,9 @@ qmlwindow.o: ../project/qmlwindow.cpp ../project/qmlwindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/QQuickWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/QQuickView \
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuick.framework/Headers/qquickview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qmlwindow.o ../project/qmlwindow.cpp
 
 settingswindow.o: ../project/settingswindow.cpp ../project/settingswindow.h \
@@ -1011,8 +1020,7 @@ settingswindow.o: ../project/settingswindow.cpp ../project/settingswindow.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/QObject \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/QQuickWidget \
-		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h \
-		ui_settingswindow.h
+		/Volumes/Files/Qt/6.4.0/macos/lib/QtQuickWidgets.framework/Headers/qquickwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settingswindow.o ../project/settingswindow.cpp
 
 translatorregistrator.o: ../project/translatorregistrator.cpp ../project/translatorregistrator.h \

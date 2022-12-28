@@ -1,5 +1,4 @@
 #include "docxwindow.h"
-#include "ui_docxwindow.h"
 #include <QLabel>
 #include <QScrollArea>
 #include <QString>

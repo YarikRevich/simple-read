@@ -40,7 +40,8 @@ HEADERS += \
     translatorregistrator.h \
     txtwindow.h
 
-FORMS +=
+ICON = icon.icns
+QMAKE_INFO_PLIST = Info.plist
 
 TRANSLATIONS += \
     project_en_150.ts \
@@ -92,6 +93,7 @@ INCLUDEPATH += $$PWD/../../include/zip
 DEPENDPATH += $$PWD/../../include/zip
 
 DISTFILES += \
+    Info.plist \
     csvwindow.qml \
     docxwindow.qml \
     pdfwindow.qml \

@@ -1,0 +1,266 @@
+0chain-core-sdk [INFO]   2022/12/26 08:22:36.284926 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0chain-core-sdk [INFO]   2022/12/26 08:22:36.487151 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0chain-core-sdk [INFO]   2022/12/26 08:22:36.488352 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner03/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:22:36.488381 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner02/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:22:36.488393 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner01/v1/client/put
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:36.544404 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner03/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:36.544457 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner02/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:36.544532 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner01/v1/client/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:22:46.710954 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0chain-core-sdk [INFO]   2022/12/26 08:22:46.934828 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0chain-core-sdk [INFO]   2022/12/26 08:22:46.935226 transaction.go:258: New transaction interface
+0chain-core-sdk [INFO]   2022/12/26 08:22:46.999653 wallet_base.go:221: Minimum miners used for submit :2
+0chain-core-sdk [INFO]   2022/12/26 08:22:47.009444 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner01 with JSON {
+  "hash": "cddf8b408379180a0d08eacd3f2fd17fd6134a64f9813e864e22e4a7cab7def6",
+  "version": "1.0",
+  "client_id": "591d6d0d5642bdbc924756ca2647b4b59adce0acd02a487ecc4d1bd4669293a8",
+  "public_key": "ac8798bcadd5ce5ea14f4745850eec61aa080e6fedc1d769af95c42e0079ba03ee9710e9dc966f7c5eb9cd6ef9184af51869d5a345b9520e507aa55ba22bf902",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "99e8c680a772ff45ac2dfcd68a36295e0e06442a6623c72aeb377a27133ce48d",
+  "creation_date": 1672039366,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [INFO]   2022/12/26 08:22:47.009504 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner02 with JSON {
+  "hash": "cddf8b408379180a0d08eacd3f2fd17fd6134a64f9813e864e22e4a7cab7def6",
+  "version": "1.0",
+  "client_id": "591d6d0d5642bdbc924756ca2647b4b59adce0acd02a487ecc4d1bd4669293a8",
+  "public_key": "ac8798bcadd5ce5ea14f4745850eec61aa080e6fedc1d769af95c42e0079ba03ee9710e9dc966f7c5eb9cd6ef9184af51869d5a345b9520e507aa55ba22bf902",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "99e8c680a772ff45ac2dfcd68a36295e0e06442a6623c72aeb377a27133ce48d",
+  "creation_date": 1672039366,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:47.064551 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner02/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:47.065257 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner01/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:22:50.065839 transaction_query.go:122: zcn: check health https://dev-3.devnet-0chain.net/sharder02/v1/healthcheck
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.254012 transaction_query.go:297: GEThttps://dev-3.devnet-0chain.net/sharder02/v1/transaction/get/confirmation?hash=cddf8b408379180a0d08eacd3f2fd17fd6134a64f9813e864e22e4a7cab7def6&content=lfb
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.309683 transaction_query.go:307: {"confirmation":{"version":"1.0","hash":"cddf8b408379180a0d08eacd3f2fd17fd6134a64f9813e864e22e4a7cab7def6","block_hash":"bd3b5a3daea85f5d2b3c332e757bf7559fdef779d29dc23a9b7075db0260c26f","previous_block_hash":"cb8294707ecf5930180ace404d1adb53796718c42906c08a36b0bacdb099ce9d","txn":{"hash":"cddf8b408379180a0d08eacd3f2fd17fd6134a64f9813e864e22e4a7cab7def6","version":"1.0","client_id":"591d6d0d5642bdbc924756ca2647b4b59adce0acd02a487ecc4d1bd4669293a8","public_key":"ac8798bcadd5ce5ea14f4745850eec61aa080e6fedc1d769af95c42e0079ba03ee9710e9dc966f7c5eb9cd6ef9184af51869d5a345b9520e507aa55ba22bf902","to_client_id":"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3","chain_id":"0afc093ffb509f059c55478bc1a60351cef7b4e9c008a53a6cc8241ca8617dfe","transaction_data":"{\"name\":\"pour\",\"input\":\"{}\"}","transaction_value":1000000000000,"signature":"99e8c680a772ff45ac2dfcd68a36295e0e06442a6623c72aeb377a27133ce48d","creation_date":1672039366,"transaction_fee":0,"transaction_nonce":1,"transaction_type":1000,"transaction_output":"{\"from\":\"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3\",\"to\":\"591d6d0d5642bdbc924756ca2647b4b59adce0acd02a487ecc4d1bd4669293a8\",\"amount\":10000000000}","txn_output_hash":"8aac63a9b9748866092d961d85690f652a906afb6be95b4ce6581afeb5e9a2ca","transaction_status":1},"creation_date":1672039367,"miner_id":"73ad5727612116c025bb4405bf3adb4a4a04867ae508c51cf885395bffc8a949","round":85412,"transaction_status":1,"round_random_seed":-8160296412007927221,"state_changes_count":19,"merkle_tree_root":"28f2dd119b1e230d532037682cf98b2d7936c171ffcb6239cd76355f3bcd3056","merkle_tree_path":{"nodes":["6c39a866b0487c99e1722c6a17f4dac4ddb864b7d2af93cc8dd5a98be1859ad1","dc3d317e3a98e0afa1ef45b52ed8c03eb94f933cc7bfdacbcc4d347580126029"],"leaf_index":0},"receipt_merkle_tree_root":"a43091f467838967022630b8b9f2596b6c5975dd4587a9dab41220c8c9e7de4e","receipt_merkle_tree_path":{"nodes":["a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a","851ca37489c34dca0d2c951de0b2d481d59889d2c1d060e0effbd788614f2a3c"],"leaf_index":0}},"latest_finalized_block":{"version":"1.0","creation_date":1672039369,"hash":"2b23760b3777416e8c8b9e225f510db7e539381d76a6c62e4933745c699ae302","miner_id":"3ec9a42db3355f33c35750ce589ed717c08787997b7f34a7f1f9fb0a03f2b17c","round":85421,"round_random_seed":-5786079685364771204,"state_changes_count":13,"merkle_tree_root":"f248288d0e6bd3c8ca9b40e641ba9c0103600528d867c89c957327b06d74a6ae","state_hash":"SzCrv6bl95+MO0/d66eq9e/Qrrw9JzC+MDmMy1JiBj4=","receipt_merkle_tree_root":"958beb669158ace6e88ceb39363f8b32fcb011c8f2a84a0889f1382d33673347","num_txns":2}}
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.310399 transaction_base.go:604: Confirmation round: 85412
+0chain-core-sdk [INFO]   2022/12/26 08:22:50.310541 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85413&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:22:50.310573 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85413&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.374073 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85413&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.374389 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85413&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:22:50.374613 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85414&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:22:50.374637 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85414&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.432010 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85414&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:22:50.432228 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85414&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.475693 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.746492 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.749773 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner02/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.749822 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner01/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.749927 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner03/v1/client/put
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:25.808989 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner03/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:25.809066 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner02/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:25.809088 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner01/v1/client/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.810016 transaction.go:258: New transaction interface
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.867839 wallet_base.go:221: Minimum miners used for submit :2
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.868486 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner03 with JSON {
+  "hash": "82f9a6a3fd60868ad65929d97ef5425d455acfad50d7a9cbb3b17a6a04ab3649",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d7",
+  "transaction_data": "{\"name\":\"new_read_pool\",\"input\":null}",
+  "transaction_value": 0,
+  "signature": "067ed37d5a4f6b7ef72f734538cd043c2aa94913794127367c02f7e41ea7699f",
+  "creation_date": 1672039465,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [INFO]   2022/12/26 08:24:25.868531 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner02 with JSON {
+  "hash": "82f9a6a3fd60868ad65929d97ef5425d455acfad50d7a9cbb3b17a6a04ab3649",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d7",
+  "transaction_data": "{\"name\":\"new_read_pool\",\"input\":null}",
+  "transaction_value": 0,
+  "signature": "067ed37d5a4f6b7ef72f734538cd043c2aa94913794127367c02f7e41ea7699f",
+  "creation_date": 1672039465,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:25.976922 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner02/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:25.977041 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner03/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:24:28.978619 transaction_query.go:122: zcn: check health https://dev-3.devnet-0chain.net/sharder01/v1/healthcheck
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.187168 transaction_query.go:297: GEThttps://dev-3.devnet-0chain.net/sharder01/v1/transaction/get/confirmation?hash=82f9a6a3fd60868ad65929d97ef5425d455acfad50d7a9cbb3b17a6a04ab3649&content=lfb
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.244214 transaction_query.go:307: {"confirmation":{"version":"1.0","hash":"82f9a6a3fd60868ad65929d97ef5425d455acfad50d7a9cbb3b17a6a04ab3649","block_hash":"77c319d67ef5f3fe026edead8315c02f869c0563f1f30c9070b2642c07001e18","previous_block_hash":"ebcc28288fd54b3e68c313071979bd6c5b58254badebd75f98d75be8945dc06b","txn":{"hash":"82f9a6a3fd60868ad65929d97ef5425d455acfad50d7a9cbb3b17a6a04ab3649","version":"1.0","client_id":"cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21","public_key":"97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d","to_client_id":"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d7","chain_id":"0afc093ffb509f059c55478bc1a60351cef7b4e9c008a53a6cc8241ca8617dfe","transaction_data":"{\"name\":\"new_read_pool\",\"input\":null}","transaction_value":0,"signature":"067ed37d5a4f6b7ef72f734538cd043c2aa94913794127367c02f7e41ea7699f","creation_date":1672039465,"transaction_fee":0,"transaction_nonce":1,"transaction_type":1000,"transaction_output":"{\"balance\":0}","txn_output_hash":"df3143e64cf71a91ea7c064573457b70facf038bc2326c0f9f3095547c93d551","transaction_status":1},"creation_date":1672039466,"miner_id":"c6f4b8ce5da386b278ba8c4e6cf98b24b32d15bc675b4d12c95e082079c91937","round":85900,"transaction_status":1,"round_random_seed":6006947743119042114,"state_changes_count":16,"merkle_tree_root":"ba1ac50312d437321c0fd2796aad3104174a8c602498e9d920afc50f3cc729e5","merkle_tree_path":{"nodes":["b5d70fc447abd0e2ec73bcd33e65fc08f318860eb59af7eabc4178ba8ec2c7a1","8304c9e1df6ab1aea93d27df069916d57e36cdb77992cc5f53dc11feb89493b7"],"leaf_index":0},"receipt_merkle_tree_root":"29d95642e578027293a7d66e096a921e9539dcb3bf5de187dd785f732f7caeec","receipt_merkle_tree_path":{"nodes":["a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a","851ca37489c34dca0d2c951de0b2d481d59889d2c1d060e0effbd788614f2a3c"],"leaf_index":0}},"latest_finalized_block":{"version":"1.0","creation_date":1672039468,"hash":"78080031b6386e56d7c18be1485fc8adfab4e29b9ac1642a3480578a4c403726","miner_id":"c6f4b8ce5da386b278ba8c4e6cf98b24b32d15bc675b4d12c95e082079c91937","round":85909,"round_random_seed":-1448360502888699012,"state_changes_count":11,"merkle_tree_root":"a13a4033bb09c8c6527b261593ad1c6e77f45712a1ae4ba3a4d058106b337265","state_hash":"XK2NcUxL6KZyeLyx397F1cfo5sqOFVSiOxM+HZuSvgY=","receipt_merkle_tree_root":"958beb669158ace6e88ceb39363f8b32fcb011c8f2a84a0889f1382d33673347","num_txns":2}}
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.245339 transaction_base.go:604: Confirmation round: 85900
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.245521 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85901&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.245582 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85901&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.299883 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85901&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.300307 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85901&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.300479 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85902&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.300492 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85902&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.359674 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=85902&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.359910 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=85902&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.360583 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner02/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.360607 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner01/v1/client/put
+0chain-core-sdk [INFO]   2022/12/26 08:24:29.360638 wallet_base.go:345: https://dev-3.devnet-0chain.net/miner03/v1/client/put
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.417159 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner02/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.417343 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner03/v1/client/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:24:29.417378 wallet_base.go:368: https://dev-3.devnet-0chain.net/miner01/v1/client/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:16.719188 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0chain-core-sdk [INFO]   2022/12/26 08:36:16.924985 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0chain-core-sdk [INFO]   2022/12/26 08:36:16.926463 transaction.go:258: New transaction interface
+0chain-core-sdk [INFO]   2022/12/26 08:36:17.084663 wallet_base.go:221: Minimum miners used for submit :2
+0chain-core-sdk [INFO]   2022/12/26 08:36:17.085050 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner02 with JSON {
+  "hash": "1983f8ce750f9493fcb9b99b20da151602e381dd1037bbd9e3284f655baafdee",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "1f0f76240593999d507e9bb03f97ed20ab6399bc96a112982e33a5a435479a10",
+  "creation_date": 1672040176,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 2,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [INFO]   2022/12/26 08:36:17.085330 transaction_base.go:278: Submitting smart contract transaction to https://dev-3.devnet-0chain.net/miner01 with JSON {
+  "hash": "1983f8ce750f9493fcb9b99b20da151602e381dd1037bbd9e3284f655baafdee",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "1f0f76240593999d507e9bb03f97ed20ab6399bc96a112982e33a5a435479a10",
+  "creation_date": 1672040176,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 2,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:17.142872 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner02/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:17.143181 transaction_base.go:294: https://dev-3.devnet-0chain.net/miner01/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:20.146421 transaction_query.go:122: zcn: check health https://dev-3.devnet-0chain.net/sharder01/v1/healthcheck
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.335716 transaction_query.go:297: GEThttps://dev-3.devnet-0chain.net/sharder01/v1/transaction/get/confirmation?hash=1983f8ce750f9493fcb9b99b20da151602e381dd1037bbd9e3284f655baafdee&content=lfb
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.391775 transaction_query.go:307: {"confirmation":{"version":"1.0","hash":"1983f8ce750f9493fcb9b99b20da151602e381dd1037bbd9e3284f655baafdee","block_hash":"72d5897cd5a2f0e41b04b25c7bd668f5e087e4c02e11d694f9c94fd8683e778f","previous_block_hash":"4d27a1e7808ebb17cfa0704e6e31949014d95889221ef4372bd03de6f58bc6ad","txn":{"hash":"1983f8ce750f9493fcb9b99b20da151602e381dd1037bbd9e3284f655baafdee","version":"1.0","client_id":"cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21","public_key":"97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d","to_client_id":"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3","chain_id":"0afc093ffb509f059c55478bc1a60351cef7b4e9c008a53a6cc8241ca8617dfe","transaction_data":"{\"name\":\"pour\",\"input\":\"{}\"}","transaction_value":1000000000000,"signature":"1f0f76240593999d507e9bb03f97ed20ab6399bc96a112982e33a5a435479a10","creation_date":1672040176,"transaction_fee":0,"transaction_nonce":2,"transaction_type":1000,"transaction_output":"{\"from\":\"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3\",\"to\":\"cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21\",\"amount\":10000000000}","txn_output_hash":"1deb3069efc748ccc4cf0b0f1076359bbfd5e0f17e0f55a277de78dd6d211356","transaction_status":1},"creation_date":1672040177,"miner_id":"73ad5727612116c025bb4405bf3adb4a4a04867ae508c51cf885395bffc8a949","round":89405,"transaction_status":1,"round_random_seed":7843505458550983605,"state_changes_count":20,"merkle_tree_root":"32bb486911b2d6b6e761aa1b8d2f576b4f76456f0e5991a910526ba5aa709761","merkle_tree_path":{"nodes":["da221a79f8dfa4a6554ded6b7cc95c417dd181c4f647b7aa93dd7be0c44dc0e1","4af3f3df398544e59c432e537b862c7872aa4b7beac7f32978b2d6a6841d32f6"],"leaf_index":0},"receipt_merkle_tree_root":"0dfde3ac773462d00a7c04d896215f336f52ca8b7ea7684fccd959e2c0597392","receipt_merkle_tree_path":{"nodes":["a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a","db5d4c756620d1925922fbbe62375181bdafb98795a8199e214b8d5f1c004d22"],"leaf_index":0}},"latest_finalized_block":{"version":"1.0","creation_date":1672040179,"hash":"73b5ad71bd0810f760874258f9f2c6bc0866a3e1d33384fc8097ad133810e034","miner_id":"73ad5727612116c025bb4405bf3adb4a4a04867ae508c51cf885395bffc8a949","round":89414,"round_random_seed":8731298520854497162,"state_changes_count":12,"merkle_tree_root":"b47f1537e38239937a68066048a6b64fa2cd3e8fc4e73a65904966f665c0a80d","state_hash":"W9k4PhDxGGMB7OuQLRPyMBxNO7uD+uszzOiYImFl6Uk=","receipt_merkle_tree_root":"319a1dab4f196d160de779ca24cb044c6c6705a686def4c125112d62acffa364","num_txns":3}}
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.392359 transaction_base.go:604: Confirmation round: 89405
+0chain-core-sdk [INFO]   2022/12/26 08:36:20.392445 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=89406&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:36:20.392465 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=89406&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.448141 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=89406&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.453320 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=89406&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:20.453521 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=89407&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:36:20.453600 transaction_base.go:439: Query from https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=89407&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.507152 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder02/v1/block/get?round=89407&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:20.507369 transaction_base.go:555: https://dev-3.devnet-0chain.net/sharder01/v1/block/get?round=89407&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:34.786415 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:36:34.787640 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:36:35.016830 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:36:35.187182 networkworker.go:105: Get network result:{"miners":["https://dev-3.devnet-0chain.net/miner02","https://dev-3.devnet-0chain.net/miner01","https://dev-3.devnet-0chain.net/miner03"],"sharders":["https://dev-3.devnet-0chain.net/sharder02","https://dev-3.devnet-0chain.net/sharder01"]}
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.492712 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.703534 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.704136 transaction.go:258: New transaction interface
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.771650 wallet_base.go:221: Minimum miners used for submit :2
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.772130 transaction_base.go:278: Submitting smart contract transaction to https://dev.0chain.net/miner03 with JSON {
+  "hash": "c6252d5b3a2485f678f9af51262b88c3c41cc96d2fb442d47e4e04e1cfa7eb0f",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "48a68d485fd57ecb3339b9e7b93e3246483323252f4533f892bf7c3d0224620e",
+  "creation_date": 1672040210,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [INFO]   2022/12/26 08:36:50.772292 transaction_base.go:278: Submitting smart contract transaction to https://dev.0chain.net/miner01 with JSON {
+  "hash": "c6252d5b3a2485f678f9af51262b88c3c41cc96d2fb442d47e4e04e1cfa7eb0f",
+  "version": "1.0",
+  "client_id": "cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21",
+  "public_key": "97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d",
+  "to_client_id": "6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3",
+  "transaction_data": "{\"name\":\"pour\",\"input\":\"{}\"}",
+  "transaction_value": 1000000000000,
+  "signature": "48a68d485fd57ecb3339b9e7b93e3246483323252f4533f892bf7c3d0224620e",
+  "creation_date": 1672040210,
+  "transaction_type": 1000,
+  "transaction_fee": 0,
+  "transaction_nonce": 1,
+  "txn_output_hash": "",
+  "transaction_status": 0
+}
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:50.832292 transaction_base.go:294: https://dev.0chain.net/miner03/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:50.832443 transaction_base.go:294: https://dev.0chain.net/miner01/v1/transaction/putStatus: 200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:53.833887 transaction_query.go:122: zcn: check health https://dev.0chain.net/sharder01/v1/healthcheck
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.030787 transaction_query.go:297: GEThttps://dev.0chain.net/sharder01/v1/transaction/get/confirmation?hash=c6252d5b3a2485f678f9af51262b88c3c41cc96d2fb442d47e4e04e1cfa7eb0f&content=lfb
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.088093 transaction_query.go:307: {"confirmation":{"version":"1.0","hash":"c6252d5b3a2485f678f9af51262b88c3c41cc96d2fb442d47e4e04e1cfa7eb0f","block_hash":"b253636e974df31e183c5cda1d42a37fdfc7981cf8043b516b23f1be6cfcf684","previous_block_hash":"f93cc2efdd58a66c67c3c31b9b6fef975e1921fe10d96fcb7273fe84a5a99073","txn":{"hash":"c6252d5b3a2485f678f9af51262b88c3c41cc96d2fb442d47e4e04e1cfa7eb0f","version":"1.0","client_id":"cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21","public_key":"97a119142838061b3094c5b25289db3e90d3659da85511bab21441d1c987ca21e211d2a6ce81885d87035133f88a8464c097c57ec5d640084222faa20505eb1d","to_client_id":"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3","chain_id":"0afc093ffb509f059c55478bc1a60351cef7b4e9c008a53a6cc8241ca8617dfe","transaction_data":"{\"name\":\"pour\",\"input\":\"{}\"}","transaction_value":1000000000000,"signature":"48a68d485fd57ecb3339b9e7b93e3246483323252f4533f892bf7c3d0224620e","creation_date":1672040210,"transaction_fee":0,"transaction_nonce":1,"transaction_type":1000,"transaction_output":"{\"from\":\"6dba10422e368813802877a85039d3985d96760ed844092319743fb3a76712d3\",\"to\":\"cb82ef761945c3b23f2cb020afb621df56c0753c65f5337638d0bf94d2042c21\",\"amount\":1000000000000}","txn_output_hash":"6546a4c1a3b7188a6858ccbcbfd45a9b32fa6dfa4964fabc7434f9663b770566","transaction_status":1},"creation_date":1672040211,"miner_id":"776d48b254d64473fce3e3de311fb23e1db739a49282f6dc6d68b67ef9df90ac","round":216026,"transaction_status":1,"round_random_seed":-9068285612623531513,"state_changes_count":47,"merkle_tree_root":"91f3e1f6cb405d486aab65952cb427cc6002b0f225fb09129f6137d52f3c4db8","merkle_tree_path":{"nodes":["089c8a050833765998a96f11420867b141c63f6006995675b00ba92bbd8cd18b","91815a1895388008ecd217b4128e709e128c71d6f713c9aa717e797fbbd6b9d3"],"leaf_index":0},"receipt_merkle_tree_root":"c73abcfa7a9ea7d2a6113979fd6674b8a99b607dcccbf3469ab60c0c9f5f6a37","receipt_merkle_tree_path":{"nodes":["a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a","db5d4c756620d1925922fbbe62375181bdafb98795a8199e214b8d5f1c004d22"],"leaf_index":0}},"latest_finalized_block":{"version":"1.0","creation_date":1672040213,"hash":"78ac92b9d59a6a039677aae4baed359168e72c1912c7cf49ef672982d7568c04","miner_id":"61f27e931fdd88f6551c155aeb6e393577bb4fcf6468f10c9b35c700ba1c1e98","round":216035,"round_random_seed":2719960171191115080,"state_changes_count":36,"merkle_tree_root":"96e8a20c49cc25e2b4e79391e354c18cff53f4fc0089b0743d34eceab317bea5","state_hash":"VqbzvUcEm3ZFTqns7i8VUfL+jndz3+uxPYfjHvU6vKI=","receipt_merkle_tree_root":"a9e5d8b060cf9c30ca5c4737ad97227fdc6d0389ad1403b1918708d1b8f2ad5d","num_txns":3}}
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.088625 transaction_base.go:604: Confirmation round: 216026
+0chain-core-sdk [INFO]   2022/12/26 08:36:54.088715 transaction_base.go:439: Query from https://dev.0chain.net/sharder01/v1/block/get?round=216027&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:36:54.088743 transaction_base.go:439: Query from https://dev.0chain.net/sharder02/v1/block/get?round=216027&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.145938 transaction_base.go:555: https://dev.0chain.net/sharder01/v1/block/get?round=216027&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.146223 transaction_base.go:555: https://dev.0chain.net/sharder02/v1/block/get?round=216027&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:36:54.146338 transaction_base.go:439: Query from https://dev.0chain.net/sharder02/v1/block/get?round=216028&content=header
+0chain-core-sdk [INFO]   2022/12/26 08:36:54.146342 transaction_base.go:439: Query from https://dev.0chain.net/sharder01/v1/block/get?round=216028&content=header
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.209284 transaction_base.go:555: https://dev.0chain.net/sharder01/v1/block/get?round=216028&content=header200 OK
+0chain-core-sdk [DEBUG]  2022/12/26 08:36:54.209394 transaction_base.go:555: https://dev.0chain.net/sharder02/v1/block/get?round=216028&content=header200 OK
+0chain-core-sdk [INFO]   2022/12/26 08:37:00.669327 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:37:00.669460 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:37:00.876781 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:37:01.047695 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}
+0chain-core-sdk [INFO]   2022/12/26 08:37:14.458293 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:37:14.459687 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:37:14.655912 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:37:14.852267 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}
+0chain-core-sdk [INFO]   2022/12/26 08:37:50.031138 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:37:50.031625 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:37:50.234927 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:37:50.414861 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}
+0chain-core-sdk [INFO]   2022/12/26 08:38:34.847710 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:38:34.850329 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:38:35.072729 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:38:35.250776 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner01","https://dev.0chain.net/miner03","https://dev.0chain.net/miner02"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}
+0chain-core-sdk [INFO]   2022/12/26 08:38:45.855069 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:38:45.855198 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:38:46.047550 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:38:46.216091 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}
+0chain-core-sdk [INFO]   2022/12/26 08:39:01.280061 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:39:01.280197 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:39:01.473876 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:39:01.650512 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder02","https://dev.0chain.net/sharder01"]}
+0box-sdk        [INFO]   2022/12/26 08:39:02.053788 chunked_upload.go:410: Completed the upload. Submitting for commit
+0box-sdk        [INFO]   2022/12/26 08:39:02.350970 chunked_upload.go:555: Submitting for commit
+0box-sdk        [INFO]   2022/12/26 08:39:02.352040 chunked_upload_blobber.go:220: received a commit request
+0box-sdk        [INFO]   2022/12/26 08:39:02.352091 chunked_upload_blobber.go:220: received a commit request
+0box-sdk        [INFO]   2022/12/26 08:39:02.352130 chunked_upload_blobber.go:220: received a commit request
+0box-sdk        [INFO]   2022/12/26 08:39:02.352077 chunked_upload_blobber.go:220: received a commit request
+0box-sdk        [INFO]   2022/12/26 08:39:02.416113 chunked_upload_blobber.go:183: Committing to blobber.https://dev.0chain.net/blobber06
+0box-sdk        [INFO]   2022/12/26 08:39:02.416202 chunked_upload_blobber.go:183: Committing to blobber.https://dev.0chain.net/blobber03
+0box-sdk        [INFO]   2022/12/26 08:39:02.420333 chunked_upload_blobber.go:183: Committing to blobber.https://dev.0chain.net/blobber01
+0box-sdk        [INFO]   2022/12/26 08:39:02.430147 chunked_upload_blobber.go:183: Committing to blobber.https://dev.0chain.net/blobber02
+0box-sdk        [INFO]   2022/12/26 08:39:02.483073 chunked_upload_blobber.go:195: https://dev.0chain.net/blobber06zbhYojSWuJWVgKRkQaEYgA committed
+0box-sdk        [INFO]   2022/12/26 08:39:02.483728 chunked_upload_blobber.go:195: https://dev.0chain.net/blobber03zbhYojSWuJWVgKRkQaEYgA committed
+0box-sdk        [INFO]   2022/12/26 08:39:02.488718 chunked_upload_blobber.go:195: https://dev.0chain.net/blobber01zbhYojSWuJWVgKRkQaEYgA committed
+0box-sdk        [INFO]   2022/12/26 08:39:02.501756 chunked_upload_blobber.go:195: https://dev.0chain.net/blobber02zbhYojSWuJWVgKRkQaEYgA committed
+0chain-core-sdk [INFO]   2022/12/26 08:39:22.611193 wallet_base.go:261: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (SetLogFile)
+0box-sdk        [INFO]   2022/12/26 08:39:22.611663 sdk.go:73: ******* Storage SDK Version: v1.8.6-11-g09a231dc-dirty *******
+0chain-core-sdk [INFO]   2022/12/26 08:39:22.817281 transaction.go:1332: ******* Wallet SDK Version:v1.8.6-11-g09a231dc-dirty ******* (InitZCNSDK)
+0box-sdk        [DEBUG]  2022/12/26 08:39:22.998622 networkworker.go:105: Get network result:{"miners":["https://dev.0chain.net/miner03","https://dev.0chain.net/miner02","https://dev.0chain.net/miner01"],"sharders":["https://dev.0chain.net/sharder01","https://dev.0chain.net/sharder02"]}

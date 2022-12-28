@@ -19,7 +19,6 @@ Item {
             Layout.fillWidth: true;
             Layout.preferredHeight: 50;
             Layout.alignment: Qt.AlignCenter
-
         }
 
         Rectangle {

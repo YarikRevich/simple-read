@@ -1,5 +1,4 @@
 #include "pdfwindow.h"
-#include "ui_pdfwindow.h"
 
 void PDFWindow::exec(){
 
