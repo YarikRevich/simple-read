@@ -1,5 +1,4 @@
 #include "qmlwindow.h"
-
 #include <QQuickView>
 
 void QMLWindow::onOpen(const char * path){

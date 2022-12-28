@@ -12,6 +12,7 @@
 #include <QQuickWindow>
 #include <QString>
 #include <QQmlComponent>
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
