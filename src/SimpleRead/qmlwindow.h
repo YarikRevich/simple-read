@@ -8,7 +8,6 @@ class QMLWindow
 {
 public:
 
-
     /*!
      * \brief onOpen a listener for open event
      * \param qmlFilePath a path to a qml file
