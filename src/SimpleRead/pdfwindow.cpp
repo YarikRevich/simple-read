@@ -7,8 +7,10 @@
 using namespace mm;
 void PDFWindow::exec(){
     PdfMemDocument document;
+    PdfPainter painter;
 
     document.Load(this->fileName.toStdString());
+    painter.AddText("it works");
 }
 
 void PDFWindow::onOpen(){

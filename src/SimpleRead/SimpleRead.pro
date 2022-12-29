@@ -108,3 +108,6 @@ else:unix: LIBS += -L$$PWD/../../lib/pdfmm/ -lpdfmm
 
 INCLUDEPATH += $$PWD/../../include/pdfmm
 DEPENDPATH += $$PWD/../../include/pdfmm
+
+INCLUDEPATH += $$PWD/../../include/rapidcsv
+DEPENDPATH += $$PWD/../../include/rapidcsv

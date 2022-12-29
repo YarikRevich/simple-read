@@ -5,17 +5,6 @@
 #include <duckx.hpp>
 #include <iostream>
 
-//DOCXWindow::DOCXWindow(QString fileName, QWidget *parent) :
-//    FileWindow(parent),
-//    ui(new Ui::DOCXWindow)
-//{
-//    this->fileName = fileName;
-//    this->dataView = new DataView(this);
-//    this->process();
-
-//    ui->setupUi(this);
-//}
-
 void DOCXWindow::exec(){
     // Implement parse of docx file here
 
@@ -25,11 +14,29 @@ void DOCXWindow::exec(){
 
 
     std::string src;
+
+    bool i = false;
     for (auto p = doc.paragraphs(); p.has_next(); p.next()) {
+
             for (auto r = p.runs(); r.has_next(); r.next()) {
-                src.append(r.get_text());
+                if (r.get_text() != "hello"){
+                    r.set_text("it works");
+                }
+
+//                r.get_text() += "!";
+//                src.append(r.get_text());
+            }
+            if (!i){
+                auto new_p = p.insert_paragraph_after("hello");
+                /*for (auto r = new_p.runs(); r.has_next(); r.next()){
+                    std::cout << r.get_text() << std::endl;
+
+                }*/
+
+                i = true;
             }
     }
+    doc.save();
 
     std::cout << src << std::endl;
 

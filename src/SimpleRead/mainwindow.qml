@@ -72,6 +72,12 @@ ApplicationWindow {
         }
     }
 
+    Labs.MessageDialog {
+        id: messageDialog
+        title: "Extension error"
+        text: "An extension of the chosen file is not supported yet."
+    }
+
     /*!
       \brief
       \qmltype FileDialog
@@ -89,38 +95,48 @@ ApplicationWindow {
 
         nameFilters: [fileDialogWindow.fileFilter];
         onAccepted: {
-            let selectedFile = fileDialogWindow.selectedFiles.toString();
+            function cleanFilePath(filePath){
+                return filePath.replace("file://", "")
+            }
 
-            let docxFileMatch = selectedFile.match(fileDialogWindow.docxFileMatch);
+            const selectedFile = fileDialogWindow.selectedFiles.toString();
+
+            const docxFileMatch = selectedFile.match(fileDialogWindow.docxFileMatch);
             if (docxFileMatch){
                    DOCXWindow.onOpen();
-                   DOCXWindow.setFileName(docxFileMatch[0].replace("file://", ""));
+                   DOCXWindow.setFileName(cleanFilePath(docxFileMatch[0]));
                    DOCXWindow.exec();
                    return
             };
 
-            let pdfFileMatch = selectedFile.match(fileDialogWindow.pdfFileMatch);
+            const pdfFileMatch = selectedFile.match(fileDialogWindow.pdfFileMatch);
             if (pdfFileMatch){
-                   PDFWindow.onOpen();
+                   messageDialog.open();
 
-                   PDFWindow.setFileName(pdfFileMatch[0].replace("file://", ""));
-                   PDFWindow.exec();
+                   // PDFWindow.onOpen();
+                   // PDFWindow.setFileName(cleanFilePath(pdfFileMatch[0]));
+                   // PDFWindow.exec();
                    return
             };
 
-            let txtFileMatch = selectedFile.match(fileDialogWindow.txtFileMatch);
+            const txtFileMatch = selectedFile.match(fileDialogWindow.txtFileMatch);
             if (txtFileMatch){
-                   TXTWindow.onOpen();
-                   TXTWindow.setFileName(txtFileMatch[0].replace("file://", ""));
-                   TXTWindow.exec();
+                   messageDialog.open();
+
+                   // TXTWindow.onOpen();
+                   // TXTWindow.setFileName(cleanFilePath(txtFileMatch[0]));
+                   // TXTWindow.exec();
                    return
             };
 
-            let csvFileMatch = selectedFile.match(fileDialogWindow.csvFileMatch);
+            const csvFileMatch = selectedFile.match(fileDialogWindow.csvFileMatch);
             if (csvFileMatch){
-                   CSVWindow.onOpen();
-                   CSVWindow.setFileName(csvFileMatch[0].replace("file://", ""));
-                   CSVWindow.exec();
+                   messageDialog.open();
+
+                   // TODO: Fix csv file parser
+                   // CSVWindow.onOpen();
+                   // CSVWindow.setFileName(cleanFilePath(csvFileMatch[0]));
+                   // CSVWindow.exec();
                    return
             };
         }
