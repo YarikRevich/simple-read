@@ -31,3 +31,7 @@ build/
 # Build
 
 src/build-*
+
+# MacOS
+
+.DS_Storage
