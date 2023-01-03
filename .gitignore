@@ -34,4 +34,4 @@ src/build-*
 
 # MacOS
 
-.DS_Storage
+.DS_Store
