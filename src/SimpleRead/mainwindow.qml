@@ -3,6 +3,7 @@ import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Dialogs
 import Qt.labs.platform as Labs
+import "storage.js" as Storage
 
 ApplicationWindow {
     id: root;
@@ -14,7 +15,7 @@ ApplicationWindow {
     maximumHeight: 10 * Screen.desktopAvailableWidth / 100;
     maximumWidth: 40 * Screen.desktopAvailableWidth / 100;
 
-    color: Qt.rgba(Math.random(),Math.random(),Math.random(),1);
+    color: "#B3FAA7";
 
     Labs.MenuBar {
         id: menuBar
@@ -140,5 +141,13 @@ ApplicationWindow {
                    return
             };
         }
+    }
+
+    Binding {
+            target: {
+                TranslatorRegistrator.setLanguage(Storage.getCurrentLanguage());
+            }
+            when: TranslatorRegistrator;
+            delayed: true;
     }
 }

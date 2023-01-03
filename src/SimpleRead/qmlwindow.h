@@ -13,6 +13,8 @@ public:
      * \param qmlFilePath a path to a qml file
      */
     void onOpen(const char * qmlFilePath);
+
+//    void loadContextProperties(QQmlContext* context);
 };
 
 #endif // QMLWINDOW_H

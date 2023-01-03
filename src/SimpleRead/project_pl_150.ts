@@ -2,23 +2,77 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl_150">
 <context>
-    <name>DOCXWindow</name>
+    <name>MainWindow</name>
     <message>
-        <location filename="docxwindow.ui" line="16"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
+        <source>MainWindow</source>
+        <translation type="vanished">Головне меню</translation>
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>mainwindow</name>
     <message>
-        <location filename="mainwindow.ui" line="14"/>
-        <source>MainWindow</source>
-        <translation>Головне меню</translation>
+        <location filename="mainwindow.qml" line="9"/>
+        <source>SimpleRead</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="27"/>
-        <source>PushButton</source>
+        <location filename="mainwindow.qml" line="23"/>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="25"/>
+        <source>&amp;Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="29"/>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="34"/>
+        <source>&amp;Print</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="41"/>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="43"/>
+        <source>&amp;Zoom In</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="47"/>
+        <source>&amp;Zoom Out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="54"/>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="56"/>
+        <source>&amp;About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="66"/>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="70"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="87"/>
+        <source>Please choose a file</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

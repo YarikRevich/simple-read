@@ -4,17 +4,16 @@
 #include <QString>
 #include <QWidget>
 #include <QLabel>
+#include <map>
 
 class DataView
 {
 public:
     DataView(QWidget *parent);
 
-    void addParagraph(QString paragraph);
-
-    void show();
+    void addParagraph(int index, QString paragraph);
 private:
-    QWidget *parent;
+
 };
 
 #endif // DATAVIEW_H

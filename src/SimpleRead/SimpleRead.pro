@@ -1,5 +1,6 @@
 QT       += core gui
 QT += quickwidgets
+QT += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,6 +17,7 @@ SOURCES += \
     dataview.cpp \
     docxwindow.cpp \
     filewindow.cpp \
+    globalqmlengine.cpp \
     logger.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -32,6 +34,7 @@ HEADERS += \
     dataview.h \
     docxwindow.h \
     filewindow.h \
+    globalqmlengine.h \
     logger.h \
     mainwindow.h \
     menubar.h \
@@ -42,13 +45,13 @@ HEADERS += \
     translatorregistrator.h \
     txtwindow.h
 
-ICON = icon.icns
+ICON = images/icon.icns
 QMAKE_INFO_PLIST = Info.plist
 
 TRANSLATIONS += \
-    project_en_150.ts \
-    project_uk_150.ts \
-    project_pl_150.ts
+    project_en.ts \
+    project_uk.ts \
+    project_pl.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
@@ -58,7 +61,14 @@ RESOURCES += \
     docxwindow.qml \
     csvwindow.qml \
     pdfwindow.qml \
-    txtwindow.qml
+    txtwindow.qml \
+    images/united-states.png \
+    images/poland.png \
+    images/ukraine.png \
+    storage.js \
+    project_en.qm \
+    project_pl.qm \
+    project_uk.qm
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -100,6 +110,7 @@ DISTFILES += \
     docxwindow.qml \
     pdfwindow.qml \
     settingswindow.qml \
+    storage.js \
     txtwindow.qml
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/pdfmm/release/ -lpdfmm

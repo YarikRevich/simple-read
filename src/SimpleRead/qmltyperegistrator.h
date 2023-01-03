@@ -8,11 +8,12 @@
 class QMLTypeRegistrator
 {
 public:
-    QMLTypeRegistrator(QQmlContext * context);
+//    QMLTypeRegistrator(QQmlContext * context);
+    QMLTypeRegistrator(QQmlApplicationEngine* engine) : engine{engine}{};
 
     void exec();
 private:
-    QQmlContext* context;
+    QQmlApplicationEngine* engine;
 };
 
 #endif // QMLTYPEREGISTRATOR_H
