@@ -39,13 +39,6 @@ void DOCXWindow::exec(){
     doc.save();
 
     std::cout << src << std::endl;
-
-    /*QLabel *label = new QLabel(QString::fromStdString(src).toUtf8(), this);
-    label->setGeometry(100, 100, 1280, 500);
-    label->show();*/
-
-//    this->dataView->show();
-
 }
 
 void DOCXWindow::onOpen(){

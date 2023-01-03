@@ -20,6 +20,35 @@ Item {
             Layout.fillWidth: true;
             Layout.preferredHeight: 50;
             Layout.alignment: Qt.AlignCenter
+
+            RowLayout {
+                anchors.fill: parent;
+                anchors.margins: 2;
+                spacing: 1;
+
+                Rectangle {
+                    color: "yellow";
+                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
+                    Layout.fillHeight: true;
+                    Layout.alignment: Qt.AlignLeft
+
+                    Button {
+                        Text{
+                            text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
+                            color: "red";
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+
+                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
+                        Layout.fillHeight: true;
+                        Layout.alignment: Qt.AlignRight
+                        onClicked: {
+                            editField.enabled = !editField.enabled;
+                        }
+                    }
+                }
+            }
         }
 
         ScrollView{

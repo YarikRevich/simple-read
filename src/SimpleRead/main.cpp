@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "qmltyperegistrator.h"
-#include "translatorregistrator.h"
 #include "logger.h"
+#include "database.h"
+#include "docxwindow.h"
+#include "settingswindow.h"
+#include "globalqmlengine.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -17,18 +20,18 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
-    QCoreApplication::setApplicationName( QString("My Application") );
+    QCoreApplication::setApplicationName( QString("SimpleRead") );
+    QCoreApplication::setApplicationVersion("1.0");
     QApplication app(argc, argv);
 
     Logger logger;
     qInstallMessageHandler(loggingHandler);
 
-    TranslatorRegistrator translatorRegistrator;
-    translatorRegistrator.exec();
-
+//    QQmlApplicationEngine* engine = QMLEngineWrapper::instance();
     QQmlApplicationEngine engine(QML_MAINWINDOW);
+    GlobalQMLEngine::setEngine(&engine);
 
-    QMLTypeRegistrator qmlTypeRegistrator(engine.rootContext());
+    QMLTypeRegistrator qmlTypeRegistrator(&engine);
     qmlTypeRegistrator.exec();
 
     return app.exec();

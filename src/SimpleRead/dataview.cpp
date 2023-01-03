@@ -1,14 +1,5 @@
 #include "dataview.h"
 
-DataView::DataView(QWidget *parent)
-{
-  this->parent = parent;
-}
+void DataView::addParagraph(int index, QString paragraph){
 
-void DataView::addParagraph(QString paragraph){
-    QLabel label(paragraph, this->parent);
-};
-
-void DataView::show(){
-    this->parent->show();
 };

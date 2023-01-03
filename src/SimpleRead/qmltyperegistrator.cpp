@@ -1,6 +1,7 @@
 #include "docxwindow.h"
 #include "pdfwindow.h"
 #include "csvwindow.h"
+#include <translatorregistrator.h>
 #include "txtwindow.h"
 
 #include "qmltyperegistrator.h"
@@ -9,34 +10,33 @@
 #include <filedialogoptions.h>
 #include <settingswindow.h>
 
-QMLTypeRegistrator::QMLTypeRegistrator(QQmlContext* context){
-    this->context = context;
-}
-
 void QMLTypeRegistrator::exec()
 {
     qInfo("QMLTypeRegistrator is initialized!");
 
+    QQmlContext* context = this->engine->rootContext();
+
     MainWindow *mainWindow = new MainWindow();
-    this->context->setContextProperty("MainWindow", mainWindow);
+    context->setContextProperty("MainWindow", mainWindow);
 
     DOCXWindow *docxWindow = new DOCXWindow();
-    this->context->setContextProperty("DOCXWindow", docxWindow);
+    context->setContextProperty("DOCXWindow", docxWindow);
 
     PDFWindow *pdfWindow = new PDFWindow();
-    this->context->setContextProperty("PDFWindow", pdfWindow);
+    context->setContextProperty("PDFWindow", pdfWindow);
 
     TXTWindow *txtWindow = new TXTWindow();
-    this->context->setContextProperty("TXTWindow", txtWindow);
+    context->setContextProperty("TXTWindow", txtWindow);
 
     CSVWindow *csvWindow = new CSVWindow();
-    this->context->setContextProperty("CSVWindow", csvWindow);
+    context->setContextProperty("CSVWindow", csvWindow);
 
     SettingsWindow *settingsWindow = new SettingsWindow();
-    this->context->setContextProperty("SettingsWindow", settingsWindow);
+    context->setContextProperty("SettingsWindow", settingsWindow);
 
     MenuBar *menuBar = new MenuBar();
-    this->context->setContextProperty("MenuBar", menuBar);
+    context->setContextProperty("MenuBar", menuBar);
 
-
+    TranslatorRegistrator *translatorRegistrator = new TranslatorRegistrator(this->engine);
+    context->setContextProperty("TranslatorRegistrator", translatorRegistrator);
 }

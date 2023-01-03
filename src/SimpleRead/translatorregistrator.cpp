@@ -1,14 +1,15 @@
 #include "translatorregistrator.h"
+#include <iostream>
+#include <QApplication>
+#include <QTranslator>
 
-void TranslatorRegistrator::exec()
-{
+void TranslatorRegistrator::setLanguage(QString language){
     QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "project_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            QApplication::instance()->installTranslator(&translator);
-            break;
-        }
+
+    if (translator.load(":/project_" + language)) {
+        QApplication::instance()->installTranslator(&translator);
+        this->engine->retranslate();
+    }else{
+        qFatal("Failed to load language pack");
     }
 }
