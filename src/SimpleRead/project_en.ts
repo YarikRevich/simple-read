@@ -13,6 +13,11 @@
         <source>Unlock edit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="docxwindow.qml" line="60"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>mainwindow</name>
@@ -22,62 +27,67 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="24"/>
+        <location filename="mainwindow.qml" line="26"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="26"/>
+        <location filename="mainwindow.qml" line="28"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="30"/>
+        <location filename="mainwindow.qml" line="32"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="35"/>
+        <location filename="mainwindow.qml" line="36"/>
+        <source>&amp;Auto save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="41"/>
         <source>&amp;Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="42"/>
+        <location filename="mainwindow.qml" line="48"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="44"/>
+        <location filename="mainwindow.qml" line="50"/>
         <source>&amp;Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="48"/>
+        <location filename="mainwindow.qml" line="54"/>
         <source>&amp;Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="55"/>
+        <location filename="mainwindow.qml" line="61"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="57"/>
+        <location filename="mainwindow.qml" line="63"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="67"/>
+        <location filename="mainwindow.qml" line="73"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="71"/>
+        <location filename="mainwindow.qml" line="77"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="88"/>
+        <location filename="mainwindow.qml" line="94"/>
         <source>Please choose a file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -107,6 +117,11 @@
     <message>
         <location filename="settingswindow.qml" line="112"/>
         <source>Ukrainian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settingswindow.qml" line="120"/>
+        <source>Chosen language</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

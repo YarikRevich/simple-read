@@ -19,6 +19,8 @@
 
 int main(int argc, char *argv[])
 {
+    setlocale(LC_ALL, "en_US.UTF-8");
+
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
     QCoreApplication::setApplicationName( QString("SimpleRead") );
     QCoreApplication::setApplicationVersion("1.0");
@@ -27,7 +29,6 @@ int main(int argc, char *argv[])
     Logger logger;
     qInstallMessageHandler(loggingHandler);
 
-//    QQmlApplicationEngine* engine = QMLEngineWrapper::instance();
     QQmlApplicationEngine engine(QML_MAINWINDOW);
     GlobalQMLEngine::setEngine(&engine);
 

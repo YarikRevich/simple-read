@@ -8,12 +8,27 @@
 
 class DataView
 {
-public:
-    DataView(QWidget *parent);
-
-    void addParagraph(int index, QString paragraph);
 private:
+    DataView* snapshot;
 
+
+protected:
+    std::string text;
+
+    void appendChar(char c);
+
+    char getChar(unsigned int i);
+    bool isCharExistAt(unsigned int i);
+
+    void saveSnapshot();
+
+    bool compareSnapshot(int pIndex, int rIndex, std::string text);
+public:
+    DataView(std::string text);
+
+    DataView() = default;
+
+    QString getTextAsQString();
 };
 
 #endif // DATAVIEW_H

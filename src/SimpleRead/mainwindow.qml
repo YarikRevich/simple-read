@@ -17,6 +17,8 @@ ApplicationWindow {
 
     color: "#B3FAA7";
 
+    property var currentFileWindow;
+
     Labs.MenuBar {
         id: menuBar
         Labs.Menu {
@@ -24,10 +26,14 @@ ApplicationWindow {
               title: qsTr("File")
               Labs.MenuItem {
                   text: qsTr("&Open")
-                  onTriggered: {}
+                  onTriggered: fileDialogWindow.open();
               }
               Labs.MenuItem {
                   text: qsTr("&Save")
+                  onTriggered: currentFileWindow.onSave();
+              }
+              Labs.MenuItem {
+                  text: qsTr("&Auto save")
                   onTriggered: {}
               }
               Labs.MenuSeparator{}
@@ -104,9 +110,11 @@ ApplicationWindow {
 
             const docxFileMatch = selectedFile.match(fileDialogWindow.docxFileMatch);
             if (docxFileMatch){
-                   DOCXWindow.onOpen();
+                   currentFileWindow = DOCXWindow;
+
                    DOCXWindow.setFileName(cleanFilePath(docxFileMatch[0]));
                    DOCXWindow.exec();
+                   DOCXWindow.onOpen();
                    return
             };
 
