@@ -17,6 +17,9 @@ void Logger::writeToFile(const char * msg, const char * data, const char * file,
     std::fprintf(Logger::outputFile, msg, data, file, line, function);
 }
 
+/*
+ * \brief Returns log files location for a specific OS
+ */
 const char * Logger::getLogFilePath(){
 #if defined(Q_OS_LINUX) || defined(Q_OS_MAC)
     return "/usr/local/var/log/simpleread.log";
@@ -31,19 +34,19 @@ void loggingHandler(QtMsgType type, const QMessageLogContext &context, const QSt
     QByteArray localMsg = msg.toLocal8Bit();
     switch (type) {
     case QtDebugMsg:
-        Logger::writeToFile("Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+        Logger::writeToFile("Debug: %s (%s:%u, %s)\n", localMsg, context.file, context.line, context.function);
         break;
     case QtInfoMsg:
-        Logger::writeToFile("Info: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+        Logger::writeToFile("Info: %s (%s:%u, %s)\n", localMsg, context.file, context.line, context.function);
         break;
     case QtWarningMsg:
-        Logger::writeToFile("Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+        Logger::writeToFile("Warning: %s (%s:%u, %s)\n", localMsg, context.file, context.line, context.function);
         break;
     case QtCriticalMsg:
-        Logger::writeToFile("Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+        Logger::writeToFile("Critical: %s (%s:%u, %s)\n", localMsg, context.file, context.line, context.function);
         break;
     case QtFatalMsg:
-        Logger::writeToFile("Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+        Logger::writeToFile("Fatal: %s (%s:%u, %s)\n", localMsg, context.file, context.line, context.function);
         abort();
     }
 };

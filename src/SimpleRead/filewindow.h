@@ -16,7 +16,13 @@ class FileWindow : public QMLWindow{
 public:
        void setFileName(QString);
 protected:
-       virtual void exec() = 0;
+       virtual void onInit() = 0;
+
+       virtual void onSave() = 0;
+
+       virtual void onWriteText(QString) = 0;
+
+       virtual QString onRead() = 0;
 
        QString fileName;
 };

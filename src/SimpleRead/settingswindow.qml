@@ -19,55 +19,43 @@ Item {
         anchors.margins: 2;
         spacing: 1;
 
-        ListModel {
-            id: menuModel;
+        ListView{
+            id: menuList;
+            Layout.fillHeight: true;
+            Layout.preferredWidth: 30 * root.width / 100;
+            model: ListModel {
+                id: menuModel;
 
-            /*!
-              \brief Contains callbacks, which help to open certain menu blocks
-              \qmltype map
-            */
-            property var actions : {
-                    "language": function(){
-                       menuBlock.hideAllMenues();
-                       language.visible = true;
-                    },
-                    "about": function(){
-                        menuBlock.hideAllMenues();
-                        about.visible = true;
-                    }
+                /*!
+                  \brief Contains callbacks, which help to open certain menu blocks
+                  \qmltype map
+                */
+                property var actions : {
+                        "language": function(){
+                           menuBlock.hideAllMenues();
+                           language.visible = true;
+                        },
+                        "about": function(){
+                            menuBlock.hideAllMenues();
+                            about.visible = true;
+                        }
+                }
+                ListElement {
+                    name: QT_TR_NOOP("Languages");
+                    target: "language";
+                }
+                ListElement {
+                    name: QT_TR_NOOP("About");
+                    target: "about";
+                }
             }
-            ListElement {
-                name: qsTr("Languages");
-                target: "language";
-            }
-            ListElement {
-                name: qsTr("About");
-                target: "about";
-            }
-        }
-
-        /*!
-          \brief Delegate component, which helps to manage menu
-          \qmltype Component
-        */
-        Component {
-            id: menuDelegate;
-
-            Button {
-                text: model.name;
+            delegate: Button {
+                text: qsTr(model.name);
                 width: 80 * menuList.width / 100;
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: menuModel.actions[model.target]();
             }
-        }
-
-        ListView{
-            id: menuList;
-            Layout.fillHeight: true;
-            Layout.preferredWidth: 30 * root.width / 100;
-            model: menuModel;
-            delegate: menuDelegate;
             Layout.alignment: Qt.AlignCenter;
         }
 
@@ -99,29 +87,38 @@ Item {
                 model: ListModel {
                         id: model
                         ListElement {
-                            text: qsTr("English");
+                            text: QT_TR_NOOP("English");
                             code: "en";
                             imageSource: "images/united-states.png";
                         }
                         ListElement {
-                            text: qsTr("Polish")
+                            text: QT_TR_NOOP("Polish")
                             code: "pl";
                             imageSource: "images/poland.png";
                         }
                         ListElement {
-                            text: qsTr("Ukrainian");
+                            text: QT_TR_NOOP("Ukrainian");
                             code: "uk";
                             imageSource: "images/ukraine.png";
                         }
                     }
-                delegate: languageDelegate;
-                onCurrentIndexChanged: {
-                    displayText = "Chosen language: " + model.get(currentIndex).text;
+                delegate: Button {
+                    text: " " + qsTr(model.text);
 
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    icon.color: "transparent";
+                    icon.source: model.imageSource;
                 }
+
+                function updateDisplayText(text){
+                    displayText = qsTr("Chosen language") + ": " + text;
+                }
+
                 onActivated: {
                     Storage.setCurrentLanguage(model.get(currentIndex).code);
                     TranslatorRegistrator.setLanguage(model.get(currentIndex).code);
+                    updateDisplayText(qsTr(model.get(currentIndex).text));
                 }
                 Component.onCompleted: {
                     const currentLanguage = Storage.getCurrentLanguage();
@@ -131,62 +128,50 @@ Item {
                             break;
                         }
                     }
+                    updateDisplayText(qsTr(model.get(language.currentIndex).text));
                 }
             }
 
-            Component {
-                id: languageDelegate;
-                Button {
-                    text: " " + model.text;
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-
-                    icon.color: "transparent";
-                    icon.source: model.imageSource;
-                }
-
-            }
-
-            Rectangle {
+            ListView{
                 id: about;
                 visible: false;
-//                width: 80 * menuBlock.width / 100;
+                anchors.fill: parent;
+                anchors.horizontalCenter: parent.horizontalCenter;
 
-                Component {
-                    id: aboutDelegate;
+                model: ListModel {
+                    id: aboutModel;
 
-                    Text {
-                        text: aboutModel.actions[model.key];
-                        width: 100;
-                        anchors.horizontalCenter: parent.horizontalCenter;
+                    property var actions : {
+                        "description": QT_TR_NOOP("SimpleRead is an open-source project"),
+                        "link": QT_TR_NOOP("More information can be find on ") +  '<html><style type="text/css"></style><a href="http://google.com">GitHub</a></html>',
+                        "version": QT_TR_NOOP("Version") + ": " + Application.version,
+                    }
+
+                    ListElement {
+                        key: "description";
+                        link: "";
+                    }
+
+                    ListElement {
+                        key: "link";
+                        link: "https://github.com/YarikRevich/simple-read";
+                    }
+
+                    ListElement {
+                        key: "version";
+                        link: "";
                     }
                 }
-
-                ListView{
+                delegate: Text {
+                    padding: 2;
+                    onLinkActivated: Qt.openUrlExternally(model.link);
+                    text: qsTr(aboutModel.actions[model.key]);
                     anchors.horizontalCenter: parent.horizontalCenter;
-
-                    model: ListModel {
-                        id: aboutModel;
-
-                        property var actions : {
-                            "description": "SimpleRead is an open-source project",
-                            "version": "Version: " + Application.version,
-                        }
-
-                        ListElement {
-                            key: "description";
-                        }
-                        ListElement {
-                            key: "version";
-                        }
-                    }
-                    delegate: aboutDelegate;
-
-                    Layout.fillHeight: true;
-                    Layout.preferredWidth: 80 * menuBlock.width / 100;
-                    Layout.alignment: Qt.AlignCenter;
                 }
 
+                Layout.fillHeight: true;
+                Layout.preferredWidth: 80 * menuBlock.width / 100;
+                Layout.alignment: Qt.AlignCenter;
             }
         }
     }

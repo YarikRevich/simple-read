@@ -13,19 +13,24 @@
 /*!
  * \brief The CSVWindow class used for representation of opened files
  */
-class CSVWindow : public QObject, public FileWindow
+class CSVWindow : public QObject, public DataView, public FileWindow
 {
     Q_OBJECT
 public:
     explicit CSVWindow(QObject* parent = 0) : QObject(parent){};
+
+    // Event callbacks
     Q_INVOKABLE void onOpen();
 
-    Q_INVOKABLE void exec() override;
+    Q_INVOKABLE void onSave() override;
+
+    Q_INVOKABLE void onWriteText(QString) override;
+
+    Q_INVOKABLE QString onRead() override;
+
+    Q_INVOKABLE void onInit() override;
 
     Q_INVOKABLE void setFileName(QString);
-
-private:
-    DataView *dataView;
 };
 
 #endif // CSVWINDOW_H

@@ -1,10 +1,10 @@
-#include "qmltyperegistrator.h"
 #include "qmlwindow.h"
 #include <QQuickView>
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "globalqmlengine.h"
+#include <QTranslator>
 
 void QMLWindow::onOpen(const char * path){
     QQuickView *view = new QQuickView(GlobalQMLEngine::engine, 0);

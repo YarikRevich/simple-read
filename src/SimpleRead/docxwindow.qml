@@ -48,6 +48,29 @@ Item {
                         }
                     }
                 }
+
+                Rectangle {
+                    color: "green";
+                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
+                    Layout.fillHeight: true;
+                    Layout.alignment: Qt.AlignLeft
+
+                    Button {
+                        Text{
+                            text: qsTr("Save");
+                            color: "red";
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+
+                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
+                        Layout.fillHeight: true;
+                        Layout.alignment: Qt.AlignRight
+                        onClicked: {
+                            DOCXWindow.onSave();
+                        }
+                    }
+                }
             }
         }
 
@@ -63,7 +86,7 @@ Item {
             ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
             TextArea {
                 id: editField;
-                text: "it works";
+                text: DOCXWindow.onRead();
                 color: "blue";
                 focus: true;
                 font.pointSize: 24;
@@ -73,6 +96,9 @@ Item {
                 Layout.fillHeight: true;
                 Layout.alignment: Qt.AlignCenter;
                 enabled: true;
+                onTextChanged: {
+                    console.log("Text changed", editField.cursorPosition);
+                }
             }
         }
 
