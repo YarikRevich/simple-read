@@ -16,6 +16,8 @@ Item {
         spacing: 1;
 
         Rectangle {
+            id: barMenu
+
             color: "red";
             Layout.fillWidth: true;
             Layout.preferredHeight: 50;
@@ -26,51 +28,112 @@ Item {
                 anchors.margins: 2;
                 spacing: 1;
 
-                Rectangle {
-                    color: "yellow";
-                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
+                ListView {
+                    orientation: ListView.Horizontal
 
-                    Button {
-                        Text{
-                            text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-                            color: "red";
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
+                    model: ListModel {
+                        id: barModel
+
+                        property var actions: {
+                            "lock_edit": "",
+                            "unlock_edit": "",
+                            "save": ""
                         }
 
-                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignRight
-                        onClicked: {
-                            editField.enabled = !editField.enabled;
+                        ListElement {
+                            name: "lock_edit"
+                            icon: "images/lock_edit.png"
+                            action: "lock_edit"
+                            enabled: true
+                        }
+
+                        ListElement {
+                            name: "unlock_edit"
+                            icon: "images/unlock_edit.png"
+                            action: "unlock_edit"
+                            enabled: true
+                        }
+
+                        ListElement {
+                            name: "save"
+                            icon: "images/unlock_edit.png"
+                            action: "save"
+                            enabled: false
+                        }
+                    }
+
+                    delegate: Rectangle {
+                        anchors.fill: parent;
+
+//                        Layout.preferredWidth: 5 * barMenu.width / 100;
+//                        Layout.fillHeight: true;
+                        Layout.alignment: Qt.AlignLeft
+
+                        Button {
+                            anchors.fill: parent;
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true;
+                            Layout.alignment: Qt.AlignRight
+                            icon.source: model.icon;
+
+                            Text{
+//                                text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
+//                                color: "red";
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+//                            onClicked: {
+//                                editField.enabled = !editField.enabled;
+//                            }
                         }
                     }
                 }
 
-                Rectangle {
-                    color: "green";
-                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
+//                Rectangle {
+//                    color: "yellow";
+//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
+//                    Layout.fillHeight: true;
+//                    Layout.alignment: Qt.AlignLeft
 
-                    Button {
-                        Text{
-                            text: qsTr("Save");
-                            color: "red";
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                        }
+//                    Button {
+//                        Text{
+//                            text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
+//                            color: "red";
+//                            anchors.verticalCenter: parent.verticalCenter
+//                            anchors.horizontalCenter: parent.horizontalCenter
+//                        }
 
-                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignRight
-                        onClicked: {
-                            DOCXWindow.onSave();
-                        }
-                    }
-                }
+//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
+//                        Layout.fillHeight: true;
+//                        Layout.alignment: Qt.AlignRight
+//                        onClicked: {
+//                            editField.enabled = !editField.enabled;
+//                        }
+//                    }
+//                }
+
+//                Rectangle {
+//                    color: "green";
+//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
+//                    Layout.fillHeight: true;
+//                    Layout.alignment: Qt.AlignLeft
+
+//                    Button {
+//                        Text{
+//                            text: qsTr("Save");
+//                            color: "red";
+//                            anchors.verticalCenter: parent.verticalCenter
+//                            anchors.horizontalCenter: parent.horizontalCenter
+//                        }
+
+//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
+//                        Layout.fillHeight: true;
+//                        Layout.alignment: Qt.AlignRight
+//                        onClicked: {
+//                            DOCXWindow.onSave();
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -86,7 +149,7 @@ Item {
             ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
             TextArea {
                 id: editField;
-                text: DOCXWindow.onRead();
+                text: DOCXWindow.onReadText();
                 color: "blue";
                 focus: true;
                 font.pointSize: 24;

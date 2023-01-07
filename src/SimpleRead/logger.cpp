@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <QString>
 
-FILE *Logger::outputFile = nullptr;
+FILE *Logger::outputFile = NULL;
 
 Logger::Logger(){
     FILE *f = fopen(Logger::getLogFilePath(), "wb");
@@ -17,7 +17,7 @@ void Logger::writeToFile(const char * msg, const char * data, const char * file,
     std::fprintf(Logger::outputFile, msg, data, file, line, function);
 }
 
-/*
+/*!
  * \brief Returns log files location for a specific OS
  */
 const char * Logger::getLogFilePath(){

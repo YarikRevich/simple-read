@@ -3,9 +3,9 @@
 
 #include <QQmlApplicationEngine>
 
-/*
- * \brief Global instance of QQmlApplicationEngine for internal usage
-*/
+/*!
+ * \brief The GlobalQMLEngine wrapper of a global QQmlApplicationEngine used for internal usage
+ */
 class GlobalQMLEngine
 {
 

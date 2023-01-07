@@ -27,8 +27,16 @@ void PDFWindow::onWriteText(QString){
 
 };
 
-QString PDFWindow::onRead(){
+QString PDFWindow::onReadText(){
     return NULL;
+};
+
+void PDFWindow::onWriteTable(QHash<QString, void *>){
+
+};
+
+QHash<QString, void *> PDFWindow::onReadTable(){
+    return QHash<QString, void *>();
 };
 
 void PDFWindow::setFileName(QString fileName){

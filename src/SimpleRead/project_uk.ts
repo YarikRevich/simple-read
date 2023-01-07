@@ -23,7 +23,7 @@
     <message>
         <location filename="docxwindow.qml" line="60"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти</translation>
     </message>
 </context>
 <context>
@@ -51,7 +51,7 @@
     <message>
         <location filename="mainwindow.qml" line="36"/>
         <source>&amp;Auto save</source>
-        <translation type="unfinished"></translation>
+        <translation>Автозбереження</translation>
     </message>
     <message>
         <location filename="mainwindow.qml" line="41"/>
@@ -96,7 +96,7 @@
     <message>
         <location filename="mainwindow.qml" line="94"/>
         <source>Please choose a file</source>
-        <translation type="unfinished">Будь ласка виберіть файл</translation>
+        <translation>Будь ласка виберіть файл</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="settingswindow.qml" line="120"/>
         <source>Chosen language</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрана мова</translation>
     </message>
 </context>
 </TS>

@@ -4,6 +4,10 @@
 #include <QtGlobal>
 #include <stdexcept>
 
+/*!
+ * \brief The Logger class is a wrapped logger handler
+ *  of Qt internal logger used for internal application usage
+ */
 class Logger {
 public:
     Logger();

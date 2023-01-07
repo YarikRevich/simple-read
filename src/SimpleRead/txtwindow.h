@@ -29,7 +29,11 @@ public:
 
     Q_INVOKABLE void onWriteText(QString) override;
 
-    Q_INVOKABLE QString onRead() override;
+    Q_INVOKABLE QString onReadText() override;
+
+    Q_INVOKABLE void onWriteTable(QHash<QString, void *>) override;
+
+    Q_INVOKABLE QHash<QString, void *> onReadTable() override;
 
     Q_INVOKABLE void onInit() override;
 

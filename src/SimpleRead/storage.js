@@ -1,6 +1,7 @@
 .import QtQuick.LocalStorage as Storage
 
 const DEFAULT_APPLICATION_LANGUAGE = "en"
+const DEFAULT_AUTO_SAVE_STATE = "false"
 
 // Dials database connection and provides lazy initialization
 function getDatabase(){
@@ -34,3 +35,29 @@ function setCurrentLanguage(language){
             tx.executeSql('INSERT OR REPLACE INTO KeyValue VALUES(?, ?)', [ "language", language ]);
         })
 }
+
+// Returns a state of 'AutoSave' option which is currently used in the application
+function getAutoSave(){
+    const db = getDatabase();
+
+    let result = DEFAULT_AUTO_SAVE_STATE;
+    db.readTransaction(
+        function(tx) {
+            const rs = tx.executeSql('SELECT value FROM KeyValue WHERE key = "autoSave"');
+            if (rs.rows.length !== 0){
+                result = rs.rows.item(0).value;
+            }
+        })
+    return result;
+}
+
+// Sets a state of 'AutoSave' option which is currently used in the application
+function setAutoSave(state){
+    const db = getDatabase();
+    db.transaction(
+        function(tx){
+            tx.executeSql('INSERT OR REPLACE INTO KeyValue VALUES(?, ?)', [ "autoSave", state]);
+        })
+}
+
+
