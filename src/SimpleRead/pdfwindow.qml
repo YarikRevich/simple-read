@@ -8,8 +8,6 @@ Item {
     visible: true;
     height: 80 * Screen.desktopAvailableHeight / 100;
     width: 80 * Screen.desktopAvailableWidth / 100;
-//    minHeight: 10 * Screen.desktopAvailableWidth / 100;
-//    minimumWidth: 40 * Screen.desktopAvailableWidth / 100;
 
     ColumnLayout {
         anchors.fill: parent;

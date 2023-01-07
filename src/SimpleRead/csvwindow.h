@@ -7,15 +7,21 @@
 #include <QWidget>
 #include <QObject>
 #include <QString>
+#include <rapidcsv.h>
 
 #define QML_CSVWINDOW "qrc:/csvwindow.qml"
+
+using namespace rapidcsv;
 
 /*!
  * \brief The CSVWindow class used for representation of opened files
  */
 class CSVWindow : public QObject, public DataView, public FileWindow
 {
+private:
     Q_OBJECT
+
+    Document doc;
 public:
     explicit CSVWindow(QObject* parent = 0) : QObject(parent){};
 
@@ -26,7 +32,11 @@ public:
 
     Q_INVOKABLE void onWriteText(QString) override;
 
-    Q_INVOKABLE QString onRead() override;
+    Q_INVOKABLE QString onReadText() override;
+
+    Q_INVOKABLE void onWriteTable(QHash<QString, void *>) override;
+
+    Q_INVOKABLE QHash<QString, void *> onReadTable() override;
 
     Q_INVOKABLE void onInit() override;
 

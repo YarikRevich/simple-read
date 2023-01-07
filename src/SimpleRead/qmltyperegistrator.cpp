@@ -10,14 +10,11 @@
 #include <filedialogoptions.h>
 #include <settingswindow.h>
 
-void QMLTypeRegistrator::exec()
+void QMLTypeRegistrator::exec() const
 {
     qInfo("QMLTypeRegistrator is initialized!");
 
     QQmlContext* context = this->engine->rootContext();
-
-    MainWindow *mainWindow = new MainWindow();
-    context->setContextProperty("MainWindow", mainWindow);
 
     DOCXWindow *docxWindow = new DOCXWindow();
     context->setContextProperty("DOCXWindow", docxWindow);

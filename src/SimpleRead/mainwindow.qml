@@ -34,7 +34,9 @@ ApplicationWindow {
               }
               Labs.MenuItem {
                   text: qsTr("&Auto save")
-                  onTriggered: {}
+                  checkable: true
+                  checked: Storage.getAutoSave() === "true" ? true : false
+                  onCheckedChanged: checked ? Storage.setAutoSave("true") : Storage.setAutoSave("false")
               }
               Labs.MenuSeparator{}
               Labs.MenuItem {
@@ -61,7 +63,9 @@ ApplicationWindow {
                title: qsTr("Help")
                Labs.MenuItem {
                    text: qsTr("&About")
-                   onTriggered: {}
+                   onTriggered: {
+                        SettingsWindow.onOpen();
+                   }
                }
          }
     }
@@ -113,7 +117,7 @@ ApplicationWindow {
                    currentFileWindow = DOCXWindow;
 
                    DOCXWindow.setFileName(cleanFilePath(docxFileMatch[0]));
-                   DOCXWindow.exec();
+                   DOCXWindow.onInit();
                    DOCXWindow.onOpen();
                    return
             };
@@ -140,7 +144,13 @@ ApplicationWindow {
 
             const csvFileMatch = selectedFile.match(fileDialogWindow.csvFileMatch);
             if (csvFileMatch){
-                   messageDialog.open();
+                    currentFileWindow = CSVWindow;
+
+                    CSVWindow.setFileName(cleanFilePath(csvFileMatch[0]));
+                    CSVWindow.onInit();
+                    CSVWindow.onOpen();
+
+                   // messageDialog.open();
 
                    // TODO: Fix csv file parser
                    // CSVWindow.onOpen();

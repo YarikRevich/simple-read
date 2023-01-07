@@ -1,6 +1,6 @@
-QT       += core gui
-QT += quickwidgets
-QT += sql
+QT += core gui \
+    quickwidgets \
+    sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,8 +20,6 @@ SOURCES += \
     globalqmlengine.cpp \
     logger.cpp \
     main.cpp \
-    mainwindow.cpp \
-    menubar.cpp \
     pdfwindow.cpp \
     qmltyperegistrator.cpp \
     qmlwindow.cpp \
@@ -33,11 +31,11 @@ HEADERS += \
     csvwindow.h \
     dataview.h \
     docxwindow.h \
+    exceptions.h \
     filewindow.h \
     globalqmlengine.h \
     logger.h \
     mainwindow.h \
-    menubar.h \
     pdfwindow.h \
     qmltyperegistrator.h \
     qmlwindow.h \
@@ -46,14 +44,19 @@ HEADERS += \
     txtwindow.h
 
 ICON = images/icon.icns
+
+RC_ICONS = images/icon.ico
+RC_FILE = SimpleRead.rc
+
 QMAKE_INFO_PLIST = Info.plist
 
 TRANSLATIONS += \
     project_en.ts \
     project_uk.ts \
     project_pl.ts
-CONFIG += lrelease
-CONFIG += embed_translations
+
+CONFIG += lrelease \
+    embed_translations
 
 RESOURCES += \
     mainwindow.qml \
@@ -65,6 +68,8 @@ RESOURCES += \
     images/united-states.png \
     images/poland.png \
     images/ukraine.png \
+    images/lock_edit.png \
+    images/unlock_edit.png \
     storage.js \
     project_en.qm \
     project_pl.qm \
@@ -106,6 +111,7 @@ DEPENDPATH += $$PWD/../../include/zip
 
 DISTFILES += \
     Info.plist \
+    SimpleRead.rc \
     csvwindow.qml \
     docxwindow.qml \
     pdfwindow.qml \

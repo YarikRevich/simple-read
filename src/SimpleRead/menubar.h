@@ -8,9 +8,7 @@ class MenuBar : public QObject
 public:
     explicit MenuBar (QObject* parent = 0) : QObject(parent) {}
 
-    Q_INVOKABLE void onFileOpen();
-    Q_INVOKABLE void onFileSave();
-    Q_INVOKABLE void onFilePrint();
+    Q_INVOKABLE void onAutoSave();
 };
 
 #endif // MENUBAR_H

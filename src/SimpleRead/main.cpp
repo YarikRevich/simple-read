@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "qmltyperegistrator.h"
 #include "logger.h"
-#include "database.h"
-#include "docxwindow.h"
-#include "settingswindow.h"
 #include "globalqmlengine.h"
 
 #include <QApplication>
@@ -16,6 +13,7 @@
 #include <QString>
 #include <QQmlComponent>
 #include <QIcon>
+#include <clocale>
 
 int main(int argc, char *argv[])
 {

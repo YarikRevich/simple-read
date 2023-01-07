@@ -23,14 +23,3 @@
 //    return this->menuBar;
 //}
 
-
-
-void MenuBar::onFileOpen(){
-
-};
-void MenuBar::onFileSave(){
-
-};
-void MenuBar::onFilePrint(){
-
-};

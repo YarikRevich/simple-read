@@ -31,8 +31,16 @@ void TXTWindow::onWriteText(QString){
 
 };
 
-QString TXTWindow::onRead(){
+QString TXTWindow::onReadText(){
     return NULL;
+};
+
+void TXTWindow::onWriteTable(QHash<QString, void *>){
+
+};
+
+QHash<QString, void *> TXTWindow::onReadTable(){
+    return QHash<QString, void *>();
 };
 
 void TXTWindow::setFileName(QString fileName){

@@ -5,13 +5,18 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 
+/*!
+ * \brief The QMLTypeRegistrator class is used for QML context property registration
+ */
 class QMLTypeRegistrator
 {
 public:
-//    QMLTypeRegistrator(QQmlContext * context);
     QMLTypeRegistrator(QQmlApplicationEngine* engine) : engine{engine}{};
 
-    void exec();
+    /*!
+     * \brief exec runs a registration process of QML context property
+     */
+    void exec() const;
 private:
     QQmlApplicationEngine* engine;
 };

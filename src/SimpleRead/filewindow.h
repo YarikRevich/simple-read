@@ -8,8 +8,8 @@
 #include <QString>
 
 /*!
- * \brief The FileWindow class is an abstract class used for
- *        the definition of inherited windows to represet different
+ * \brief FileWindow class is an abstract class used for
+ *        inherited windows to represet different
  *        kinds of files
  */
 class FileWindow : public QMLWindow{
@@ -22,7 +22,11 @@ protected:
 
        virtual void onWriteText(QString) = 0;
 
-       virtual QString onRead() = 0;
+       virtual QString onReadText() = 0;
+
+       virtual void onWriteTable(QHash<QString, void *>) = 0;
+
+       virtual QHash<QString, void *> onReadTable() = 0;
 
        QString fileName;
 };
