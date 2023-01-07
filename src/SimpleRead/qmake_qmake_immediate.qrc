@@ -1,0 +1,19 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="mainwindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/mainwindow.qml</file>
+<file alias="settingswindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/settingswindow.qml</file>
+<file alias="docxwindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/docxwindow.qml</file>
+<file alias="csvwindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/csvwindow.qml</file>
+<file alias="pdfwindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/pdfwindow.qml</file>
+<file alias="txtwindow.qml">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/txtwindow.qml</file>
+<file alias="images/united-states.png">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/images/united-states.png</file>
+<file alias="images/poland.png">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/images/poland.png</file>
+<file alias="images/ukraine.png">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/images/ukraine.png</file>
+<file alias="images/lock_edit.png">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/images/lock_edit.png</file>
+<file alias="images/unlock_edit.png">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/images/unlock_edit.png</file>
+<file alias="storage.js">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/storage.js</file>
+<file alias="project_en.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/project_en.qm</file>
+<file alias="project_pl.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/project_pl.qm</file>
+<file alias="project_uk.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/project_uk.qm</file>
+</qresource>
+</RCC>

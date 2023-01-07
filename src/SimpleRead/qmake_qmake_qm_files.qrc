@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="i18n">
+<file alias="project_en.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/.qm/project_en.qm</file>
+<file alias="project_uk.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/.qm/project_uk.qm</file>
+<file alias="project_pl.qm">/Volumes/Files/c/university/SimpleRead/src/SimpleRead/.qm/project_pl.qm</file>
+</qresource>
+</RCC>

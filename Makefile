@@ -9,5 +9,12 @@ help:
 
 .PHONY: build
 build: ## build the project
-	@echo "it works"
+	@cd src && mkdir build && cd build && qmake ../SimpleRead && make
 
+UNAME := $(shell uname)
+
+.PHONY: install
+install: ## install the application
+ifeq ($(UNAME), Darwin)
+	@cp -r src/build/target/SimpleRead.app /Volumes/Data/Applications
+endif
