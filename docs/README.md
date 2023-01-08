@@ -17,7 +17,16 @@ A file reader with a friedly GUI, which supports such formats as:
   - Qt(v6.4)
 
 ## Setup
+Describes setup pipelines for the most popular OS`s
+
 ### MacOS
+```
+# Builds the project
+make build 
+
+# Installs it locally as a native MacOS app and makes it available to be executed via Launchpad 
+make install
+```
 
 ### Linux
 
@@ -28,5 +37,5 @@ This project is stil maintaned
 
 ## Inspiration
 There exist lots of different cross-platform file readers, but as ordinar users
-we noticed, that the first half of them has lots of ads, and the second half costs some money.
+we noticed, that the first half of them has lots of ads, and the second half has a pay-wall.
 That's why we decided to create our own free of charge cross-platform file reader. 
