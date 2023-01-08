@@ -3,6 +3,7 @@
 
 #include "dataview.h"
 #include "filewindow.h"
+#include <sstream>
 
 #include <QWidget>
 #include <QObject>
@@ -18,7 +19,8 @@ class TXTWindow : public QObject, public DataView, public FileWindow
 {
     Q_OBJECT
 
-    std::ifstream file;
+    std::stringstream file_out_buffer;
+    std::stringstream file_in_buffer;
 public:
     explicit TXTWindow(QObject* parent = 0) : QObject(parent){};
 

@@ -59,5 +59,3 @@ function setAutoSave(state){
             tx.executeSql('INSERT OR REPLACE INTO KeyValue VALUES(?, ?)', [ "autoSave", state]);
         })
 }
-
-

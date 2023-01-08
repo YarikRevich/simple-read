@@ -8,7 +8,8 @@
 #include <QString>
 
 /*!
- * \brief FileWindow class is an abstract class used for
+ * \class FileWindow
+ * \brief The FileWindow class is an abstract class used for
  *        inherited windows to represet different
  *        kinds of files
  */

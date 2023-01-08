@@ -1,0 +1,18 @@
+project = SimpleRead
+
+includepaths = . \
+    ../../include/duckx \
+    ../../include/pdfmm \
+    ../../include/pugixml \
+    ../../include/rapidcsv \
+    ../../include/zip \
+    /usr/local/opt/qt/include
+
+headerdirs = .
+sourcedirs = .
+imagedirs = .
+
+headers.fileextensions = "*.h *hpp"
+
+outputformats = HTML
+outputdir = ../../docs/generated

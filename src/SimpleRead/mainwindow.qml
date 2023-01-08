@@ -114,12 +114,12 @@ ApplicationWindow {
 
             const docxFileMatch = selectedFile.match(fileDialogWindow.docxFileMatch);
             if (docxFileMatch){
-                   currentFileWindow = DOCXWindow;
+                    currentFileWindow = DOCXWindow;
 
-                   DOCXWindow.setFileName(cleanFilePath(docxFileMatch[0]));
-                   DOCXWindow.onInit();
-                   DOCXWindow.onOpen();
-                   return
+                    DOCXWindow.setFileName(cleanFilePath(docxFileMatch[0]));
+                    DOCXWindow.onInit();
+                    DOCXWindow.onOpen();
+                    return
             };
 
             const pdfFileMatch = selectedFile.match(fileDialogWindow.pdfFileMatch);
@@ -134,12 +134,12 @@ ApplicationWindow {
 
             const txtFileMatch = selectedFile.match(fileDialogWindow.txtFileMatch);
             if (txtFileMatch){
-                   messageDialog.open();
+                    currentFileWindow = TXTWindow;
 
-                   // TXTWindow.onOpen();
-                   // TXTWindow.setFileName(cleanFilePath(txtFileMatch[0]));
-                   // TXTWindow.exec();
-                   return
+                    TXTWindow.setFileName(cleanFilePath(txtFileMatch[0]));
+                    TXTWindow.onInit();
+                    TXTWindow.onOpen();
+                    return
             };
 
             const csvFileMatch = selectedFile.match(fileDialogWindow.csvFileMatch);
@@ -149,13 +149,6 @@ ApplicationWindow {
                     CSVWindow.setFileName(cleanFilePath(csvFileMatch[0]));
                     CSVWindow.onInit();
                     CSVWindow.onOpen();
-
-                   // messageDialog.open();
-
-                   // TODO: Fix csv file parser
-                   // CSVWindow.onOpen();
-                   // CSVWindow.setFileName(cleanFilePath(csvFileMatch[0]));
-                   // CSVWindow.exec();
                    return
             };
         }

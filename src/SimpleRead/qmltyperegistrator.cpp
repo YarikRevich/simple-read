@@ -1,14 +1,11 @@
 #include "docxwindow.h"
 #include "pdfwindow.h"
 #include "csvwindow.h"
-#include <translatorregistrator.h>
+#include "translatorregistrator.h"
 #include "txtwindow.h"
 
 #include "qmltyperegistrator.h"
-#include <mainwindow.h>
-#include <menubar.h>
-#include <filedialogoptions.h>
-#include <settingswindow.h>
+#include "settingswindow.h"
 
 void QMLTypeRegistrator::exec() const
 {
@@ -30,9 +27,6 @@ void QMLTypeRegistrator::exec() const
 
     SettingsWindow *settingsWindow = new SettingsWindow();
     context->setContextProperty("SettingsWindow", settingsWindow);
-
-    MenuBar *menuBar = new MenuBar();
-    context->setContextProperty("MenuBar", menuBar);
 
     TranslatorRegistrator *translatorRegistrator = new TranslatorRegistrator(this->engine);
     context->setContextProperty("TranslatorRegistrator", translatorRegistrator);
