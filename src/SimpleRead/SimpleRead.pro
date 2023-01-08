@@ -80,8 +80,6 @@ RESOURCES += \
     project_pl.qm \
     project_uk.qm
 
-MY_PKGS = qtquickcontrols2
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

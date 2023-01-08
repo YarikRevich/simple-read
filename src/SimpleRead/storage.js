@@ -2,6 +2,7 @@
 
 const DEFAULT_APPLICATION_LANGUAGE = "en"
 const DEFAULT_AUTO_SAVE_STATE = "false"
+const DEFAULT_INTERFACE_FONT_SIZE = 16
 
 // Dials database connection and provides lazy initialization
 function getDatabase(){
@@ -59,3 +60,40 @@ function setAutoSave(state){
             tx.executeSql('INSERT OR REPLACE INTO KeyValue VALUES(?, ?)', [ "autoSave", state]);
         })
 }
+
+let lastInterfaceFontSize = DEFAULT_INTERFACE_FONT_SIZE;
+
+function isInterfaceFontSizeChanged(){
+    const interfaceFontSize = getInterfaceFontSize();
+    if (lastInterfaceFontSize !== interfaceFontSize){
+        lastInterfaceFontSize = interfaceFontSize;
+        return true
+    }
+    return false
+}
+
+// Returns a state of 'InterfaceFontSize' option which is currently used in the application
+function getInterfaceFontSize(){
+    const db = getDatabase();
+
+    let result = DEFAULT_INTERFACE_FONT_SIZE;
+    db.readTransaction(
+        function(tx) {
+            const rs = tx.executeSql('SELECT value FROM KeyValue WHERE key = "interfaceFontSize"');
+            if (rs.rows.length !== 0){
+                result = rs.rows.item(0).value;
+            }
+        })
+    return parseInt(result);
+}
+
+// Sets a state of 'InterfaceFontSize' option which is currently used in the application
+function setInterfaceFontSize(fontSize){
+    const db = getDatabase();
+    db.transaction(
+        function(tx){
+            tx.executeSql('INSERT OR REPLACE INTO KeyValue VALUES(?, ?)', [ "interfaceFontSize", String(fontSize)]);
+        })
+}
+
+

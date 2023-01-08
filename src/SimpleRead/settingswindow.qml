@@ -21,11 +21,17 @@ Rectangle {
         spacing: 1;
 
         ListView{
-            id: menuList;
+            id: menu;
             Layout.fillHeight: true;
             Layout.preferredWidth: 30 * root.width / 100;
             model: ListModel {
                 id: menuModel;
+
+                function setFontSizeForAllElements(fontSize){
+                    for (let i = 0; i < menuModel.count; i++){
+                        menuModel.get(i).fontSize = fontSize;
+                    }
+                }
 
                 /*!
                   \brief Contains callbacks, which help to open certain menu blocks
@@ -39,20 +45,27 @@ Rectangle {
                         "about": function(){
                             menuBlock.hideAllMenues();
                             about.visible = true;
-                        }
+                        },
+                        "default_font_size": Storage.DEFAULT_INTERFACE_FONT_SIZE,
                 }
                 ListElement {
                     name: QT_TR_NOOP("Languages");
                     target: "language";
+                    fontSize: "default_font_size";
                 }
                 ListElement {
                     name: QT_TR_NOOP("About");
                     target: "about";
+                    fontSize: "default_font_size";
                 }
             }
             delegate: Button {
-                text: qsTr(model.name);
-                width: 80 * menuList.width / 100;
+                width: 80 * menu.width / 100;
+
+                contentItem: Text {
+                    text: qsTr(model.name);
+                    font.pointSize: model.fontSize === "default_font_size" ? menuModel.actions[model.fontSize](): model.fontSize;
+                }
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: menuModel.actions[model.target]();
@@ -144,37 +157,63 @@ Rectangle {
                 model: ListModel {
                     id: aboutModel;
 
+                    function setFontSizeForAllElements(fontSize){
+                        for (let i = 0; i < aboutModel.count; i++){
+                            aboutModel.get(i).fontSize = fontSize;
+                        }
+                    }
+
                     property var actions : {
-                        "description": QT_TR_NOOP("SimpleRead is an open-source project"),
-                        "link": QT_TR_NOOP("More information can be find on") + ' <html><style type="text/css"></style><a href="http://google.com">GitHub</a></html>',
-                        "version": QT_TR_NOOP("Version") + ": " + Application.version,
+                        "link": ' <html><style type="text/css"></style><a href="http://google.com">GitHub</a></html>',
+                        "version": ": " + Application.version,
+                        "default_font_size": Storage.DEFAULT_INTERFACE_FONT_SIZE,
                     }
 
                     ListElement {
-                        key: "description";
-                        link: "";
+                        text: QT_TR_NOOP("SimpleRead is an open-source project")
+                        fontSize: "default_font_size";
                     }
 
                     ListElement {
-                        key: "link";
+                        text: QT_TR_NOOP("More information can be find on");
+                        interactive_text: "link";
                         link: "https://github.com/YarikRevich/simple-read";
+                        fontSize: "default_font_size";
                     }
 
                     ListElement {
-                        key: "version";
-                        link: "";
+                        text: QT_TR_NOOP("Version");
+                        interactive_text: "version";
+                        fontSize: "default_font_size";
                     }
                 }
                 delegate: Text {
                     padding: 2;
                     onLinkActivated: Qt.openUrlExternally(model.link);
-                    text: qsTr(aboutModel.actions[model.key]);
+                    text: qsTr(model.text) + (model.interactive_text ? aboutModel.actions[model.interactive_text] : "");
                     anchors.horizontalCenter: parent.horizontalCenter;
+                    font.pointSize: model.fontSize === "default_font_size" ? aboutModel.actions[model.fontSize](): model.fontSize;
                 }
 
                 Layout.fillHeight: true;
                 Layout.preferredWidth: 80 * menuBlock.width / 100;
                 Layout.alignment: Qt.AlignCenter;
+            }
+        }
+    }
+
+    Timer {
+        interval: 100;
+        running: true;
+        repeat: true;
+        onTriggered: {
+            if (Storage.isInterfaceFontSizeChanged()){
+                const interfaceFontSize = String(Storage.getInterfaceFontSize());
+                aboutModel.setFontSizeForAllElements(interfaceFontSize);
+                about.forceLayout();
+
+                menuModel.setFontSizeForAllElements(interfaceFontSize);
+                menu.forceLayout();
             }
         }
     }
