@@ -37,5 +37,5 @@ This project is stil maintaned
 
 ## Inspiration
 There exist lots of different cross-platform file readers, but as ordinar users
-we noticed, that the first half of them has lots of ads, and the second half has a pay-wall.
-That's why we decided to create our own free of charge cross-platform file reader. 
+we noticed, that the first half of them has lots of ads, and the second half has a pay-wall. By the way a lot of the currently available file readers has a messy design, which is out-of-date and also hard to understand for end-users.
+That's why we decided to create our own free of charge cross-platform file reader with a _*simple*_ design. 
