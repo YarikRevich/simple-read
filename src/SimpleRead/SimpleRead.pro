@@ -72,10 +72,15 @@ RESOURCES += \
     images/ukraine.png \
     images/lock_edit.png \
     images/unlock_edit.png \
+    images/increase_font.png \
+    images/decrease_font.png \
+    images/save.png \
     storage.js \
     project_en.qm \
     project_pl.qm \
     project_uk.qm
+
+MY_PKGS = qtquickcontrols2
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -113,6 +118,7 @@ DEPENDPATH += $$PWD/../../include/zip
 
 DISTFILES += \
     Info.plist \
+    SimpleRead.qdocconf \
     SimpleRead.rc \
     csvwindow.qml \
     docxwindow.qml \

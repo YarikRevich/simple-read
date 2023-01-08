@@ -6,6 +6,11 @@
 #include <QLabel>
 #include <map>
 
+/*!
+ * \page test-tutorial.html tutorial
+ * \class DataView
+ * \brief The DataView class
+ */
 class DataView
 {
 private:

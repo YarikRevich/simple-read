@@ -93,7 +93,6 @@ Item {
                 rowSpacing: 1
                 clip: true
 
-                property int height: 100;
                 property bool loaded: false;
 
                 model: TableModel {
@@ -125,7 +124,7 @@ Item {
 
                 delegate: Rectangle {
                             implicitWidth: 100
-                            implicitHeight: height
+                            implicitHeight: 100
                             border.width: 1
 
                             TextEdit {

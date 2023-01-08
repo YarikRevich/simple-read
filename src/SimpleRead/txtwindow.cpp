@@ -1,46 +1,43 @@
 #include "txtwindow.h"
+#include "exceptions.h"
 #include <fstream>
 #include <sstream>
 
 void TXTWindow::onInit(){
-    // Implement parse of txt file here
-
-    std::ifstream file(this->fileName.toStdString());
-    if (!file.is_open()){
-        qFatal("Couldn't open txt file");
+    std::ifstream file_in(this->fileName.toStdString(), std::ios_base::in);
+    if (!file_in.is_open()){
+        qFatal("Couldn't open txt file for input");
     }
-    std::stringstream data;
-    data << file.rdbuf();
-    file.close();
-
-    for (auto const& d : data.str()){
-
-    }
+    this->file_in_buffer << file_in.rdbuf();
 }
 
 void TXTWindow::onOpen(){
     QMLWindow::onOpen(QML_TXTWINDOW);
 }
 
-
 void TXTWindow::onSave(){
-
+    std::ofstream file_out(this->fileName.toStdString(), std::ios_base::out | std::ios_base::trunc);
+    if (!file_out.is_open()){
+        qFatal("Couldn't open txt file for output");
+    }
+    file_out << this->file_out_buffer.str();
 };
 
-void TXTWindow::onWriteText(QString){
-
+void TXTWindow::onWriteText(QString text){
+    this->file_out_buffer.str(std::string());
+    this->file_out_buffer << text.toStdString();
 };
 
 QString TXTWindow::onReadText(){
-    return NULL;
+    return QString::fromStdString(this->file_in_buffer.str());
 };
 
 void TXTWindow::onWriteTable(QHash<QString, void *>){
-
+    throw Exceptions::NotImplementedLogic();
 };
 
 QHash<QString, void *> TXTWindow::onReadTable(){
-    return QHash<QString, void *>();
+    throw Exceptions::NotImplementedLogic();
 };
 
 void TXTWindow::setFileName(QString fileName){

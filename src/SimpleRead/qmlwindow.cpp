@@ -1,9 +1,10 @@
 #include "qmlwindow.h"
+#include "globalqmlengine.h"
+
 #include <QQuickView>
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "globalqmlengine.h"
 #include <QTranslator>
 
 void QMLWindow::onOpen(const char * path){

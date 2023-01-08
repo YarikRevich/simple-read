@@ -6,14 +6,15 @@
 /*!
  * \brief Exceptions namespace contains custom exceptions used for internal application usage
  */
-namespace Exceptions
+class Exceptions
 {
+public:
     class NotImplementedLogic : public std::exception{
     public:
         const char * what() const throw() {
             return "This logic seems to be not implemented";
         }
     };
-}
+};
 
 #endif // EXCEPTIONS_H

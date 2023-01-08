@@ -18,18 +18,18 @@ Item {
         Rectangle {
             id: barMenu
 
-            color: "red";
+            color: "#D9D9D9";
             Layout.fillWidth: true;
             Layout.preferredHeight: 50;
             Layout.alignment: Qt.AlignCenter
 
             RowLayout {
                 anchors.fill: parent;
-                anchors.margins: 2;
+//                anchors.margins: 2;
                 spacing: 1;
 
                 ListView {
-                    orientation: ListView.Horizontal
+//                    orientation: ListView.Horizontal
 
                     model: ListModel {
                         id: barModel
@@ -62,31 +62,33 @@ Item {
                         }
                     }
 
-                    delegate: Rectangle {
-                        anchors.fill: parent;
+                    delegate:
+
 
 //                        Layout.preferredWidth: 5 * barMenu.width / 100;
 //                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignLeft
+//                        Layout.alignment: Qt.AlignLeft
 
                         Button {
-                            anchors.fill: parent;
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
+//                            anchors.fill: parent;
+//                            anchors.fill: parent;
+//                            Layout.fillWidth: true
+//                            Layout.fillHeight: true;
+//                            Layout.alignment: Qt.AlignRight
                             icon.source: model.icon;
 
                             Text{
 //                                text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
 //                                color: "red";
+                                text: ""
                                 anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
+//                                anchors.horizontalCenter: parent.horizontalCenter
                             }
 //                            onClicked: {
 //                                editField.enabled = !editField.enabled;
 //                            }
                         }
-                    }
+
                 }
 
 //                Rectangle {
@@ -137,33 +139,83 @@ Item {
             }
         }
 
-        ScrollView{
-            Layout.fillWidth: true;
+        Rectangle {
+            color: "#B3FAA7";
+            radius: 15;
+
+            border.width: 1
+            border.color: "black"
+
+//            CustomBorder
+//                    {
+//                        commonBorder: false
+//                        lBorderwidth: 0
+//                        rBorderwidth: 0
+//                        tBorderwidth: 10
+//                        bBorderwidth: 10
+//                        borderColor: "black"
+//                    }
+
+            width: 90 * root.width / 100;
+
             Layout.fillHeight: true;
-            clip: true;
+            Layout.alignment: Qt.AlignCenter
 
-            ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
-            ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
+            RowLayout {
+                ListView {
+                    spacing: 8
+                    Layout.preferredWidth: 20;
+                    Layout.fillHeight: true;
+                    model: ListModel {
+                        ListElement {
+                            count: 1;
+                        }
 
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
-            ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
-            TextArea {
-                id: editField;
-                text: DOCXWindow.onReadText();
-                color: "blue";
-                focus: true;
-                font.pointSize: 24;
-                wrapMode: TextEdit.WrapAnywhere;
-                selectByMouse: true;
-                Layout.fillWidth: true;
-                Layout.fillHeight: true;
-                Layout.alignment: Qt.AlignCenter;
-                enabled: true;
-                onTextChanged: {
-                    console.log("Text changed", editField.cursorPosition);
+                        ListElement {
+                            count: 2;
+                        }
+                    }
+
+                    delegate:
+                        Text {
+                            text: model.count;
+                        }
+                }
+
+                ScrollView{
+//                    padding: 15;
+                    Layout.preferredWidth: 200;
+//                    Layout.fillWidth: true;
+                    Layout.fillHeight: true;
+                    clip: true;
+
+                    ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
+
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
+                    TextArea {
+                        id: editField;
+                        text: DOCXWindow.onReadText();
+                        color: "blue";
+                        focus: true;
+                        font.pointSize: 24;
+                        wrapMode: TextEdit.WrapAnywhere;
+                        selectByMouse: true;
+                        Layout.fillWidth: true;
+                        Layout.fillHeight: true;
+                        Layout.alignment: Qt.AlignCenter;
+                        enabled: true;
+                        onTextChanged: {
+                            console.log(editField.contentHeight, editField.lineCount)
+                            console.log("Text changed", editField.cursorPosition);
+                        }
+                    }
                 }
             }
+
         }
+
 
         Rectangle {
             id: bottomMenu;
@@ -177,7 +229,7 @@ Item {
                 spacing: 1;
 
                 Rectangle {
-                    color: "yellow";
+                    color: "#D9D9D9";
                     Layout.preferredWidth: 50 * bottomMenu.width / 100;
                     Layout.fillHeight: true;
                     Layout.alignment: Qt.AlignLeft

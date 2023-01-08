@@ -10,6 +10,7 @@
 #define QML_DOCXWINDOW "qrc:/docxwindow.qml"
 
 /*!
+ * \class DOCXWindow
  * \brief The DOCXWindow class used for representation of opened files
  */
 class DOCXWindow : public QObject, public DataView, public FileWindow
