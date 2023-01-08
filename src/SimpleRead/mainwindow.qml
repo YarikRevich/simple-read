@@ -50,11 +50,15 @@ ApplicationWindow {
               title: qsTr("&View")
               Labs.MenuItem {
                   text: qsTr("&Zoom In")
-                  onTriggered: {}
+                  onTriggered: {
+                      Storage.setInterfaceFontSize(Storage.getInterfaceFontSize() + 1);
+                  }
               }
               Labs.MenuItem {
                   text: qsTr("&Zoom Out")
-                  onTriggered: {}
+                  onTriggered: {
+                      Storage.setInterfaceFontSize(Storage.getInterfaceFontSize() - 1);
+                  }
               }
         }
 
@@ -74,11 +78,21 @@ ApplicationWindow {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.horizontalCenter: parent.horizontalCenter;
         Button{
-            text: qsTr("Open file");
+            contentItem: Text {
+                id: openFileButtonContent;
+                text: qsTr("Open file");
+                font.pointSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
+            }
+
             onClicked: fileDialogWindow.open();
         }
         Button {
-            text: qsTr("Settings");
+            contentItem: Text {
+                id: settingsButtonContent;
+                text: qsTr("Settings");
+                font.pointSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
+            }
+
             onClicked: SettingsWindow.onOpen();
         }
     }
@@ -151,6 +165,19 @@ ApplicationWindow {
                     CSVWindow.onOpen();
                    return
             };
+        }
+    }
+
+    Timer {
+        interval: 100;
+        running: true;
+        repeat: true;
+        onTriggered: {
+            if (Storage.isInterfaceFontSizeChanged()){
+                const interfaceFontSize = String(Storage.getInterfaceFontSize());
+                openFileButtonContent.font.pointSize = interfaceFontSize;
+                settingsButtonContent.font.pointSize = interfaceFontSize;
+            }
         }
     }
 
