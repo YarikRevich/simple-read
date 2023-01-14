@@ -3,7 +3,8 @@ import QtQuick 2.15
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
-import Qt.labs.qmlmodels 1.0
+import Qt.labs.qmlmodels
+import "storage.js" as Storage
 
 Item {
     id: root;
@@ -17,222 +18,331 @@ Item {
         spacing: 1;
 
         Rectangle {
-            color: "red";
+            id: barMenu
+
+            color: "#D9D9D9";
             Layout.fillWidth: true;
-            Layout.preferredHeight: 50;
-            Layout.alignment: Qt.AlignCenter
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
 
-            RowLayout {
+            ListView {
                 anchors.fill: parent;
-                anchors.margins: 2;
+                orientation: ListView.Horizontal;
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+
                 spacing: 1;
+                clip: true;
 
-                Rectangle {
-                    color: "yellow";
-                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
+                model: ListModel {
+                    id: barModel;
 
-                    Button {
-                        Text{
-                            text: tableField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-                            color: "red";
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
+                    function getElementByName(name){
+                        for (let i = 0; i < barModel.count; i++){
+                            const barModelElement = barModel.get(i)
+                            if (barModelElement.name === name){
+                                return barModelElement
+                            }
                         }
+                    }
 
-                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignRight
-                        onClicked: {
-                            editField.enabled = !editField.enabled;
+                    property var actions: {
+                        "lock_unlock_edit": function(){
+                            const barModelElement = barModel.getElementByName("lock_unlock_edit")
+                            if (barModelElement.checked){
+                                barModelElement.checked = false;
+                                editField.enabled = true;
+                            } else{
+                                barModelElement.checked = true;
+                                editField.enabled = false;
+                            }
+                        },
+                        "save": function(){
+                            CSVWindow.onSave();
                         }
+                    }
+
+                    ListElement {
+                        name: "lock_unlock_edit"
+                        icon: "images/lock_edit.png"
+                        alter_icon: "images/unlock_edit.png"
+                        action: "lock_unlock_edit"
+                                toolip: "Locks edit field"
+                                alter_toolip: "Unlocks edit field"
+                        checked: false
+                    }
+
+                    ListElement {
+                        name: "save"
+                        icon: "images/save.png"
+                        action: "save"
+                        enabled: true
                     }
                 }
 
-                Rectangle {
-                    color: "green";
-                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
+                delegate: Button {
+                        icon.source: model.checked ? model.alter_icon : model.icon;
+//                        title: model.checked ? model.alter_tooltip : model.alter_tooltip;
 
-                    Button {
+                        anchors.verticalCenter: parent.verticalCenter;
+
+//                        ToolTip.visible: true;
+//                        ToolTip.text: "it works";
+
+//                        onHoveredChanged: {
+//                            console.log("it w", ToolTip.visible);
+//                        }
+
                         Text{
-                            text: qsTr("Save");
-                            color: "red";
+                            text: ""
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
-
-                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignRight
                         onClicked: {
-                            DOCXWindow.onSave();
+                            barModel.actions[model.action]()
                         }
                     }
-                }
             }
         }
 
-        ScrollView{
-            Layout.fillWidth: true;
+        Rectangle {
             Layout.fillHeight: true;
-            clip: true;
+            Layout.fillWidth: true;
 
-            ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
-            ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
+            Rectangle{
+                id: scrollBody;
+                width: 95 * parent.width / 100;
+                height: 90 * parent.height / 100;
 
-            ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
-            ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
-            TableView {
-                id: tableField;
-                anchors.fill: parent
-                columnSpacing: 1
-                rowSpacing: 1
-                clip: true
+                ScrollView{
+                    id: lineScroll;
+                    anchors.fill: parent;
+                    focus: true;
+                    clip: true;
 
-                property bool loaded: false;
+                    ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
 
-                model: TableModel {
-                    id: tableModel;
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
 
-                    TableModelColumn {
-                        display: "name"
+                    Rectangle {
+                        id: lineCounter;
+                        implicitWidth: 3 * scrollBody.width / 100;
+                        color: "#B3FAA7";
+                        border.width: 1;
+
+                        function reloadHeight(){
+                            if (editField.height > scrollBody.height){
+                                lineCounter.height = editField.height;
+                            }else{
+                                lineCounter.height = scrollBody.height
+                            }
+                        }
+
+                        function reloadLines(){
+                            if (lineCounterModel.count > tableModel.rowCount){
+                                for (var a = lineCounterModel.count; a >= tableModel.rowCount; a--){
+                                    lineCounterModel.remove(a);
+                                }
+                            }else{
+                                for (let a = lineCounterModel.count; a < tableModel.rowCount; a++){
+                                    lineCounterModel.set(a, {count: a+1});
+                                }
+                            }
+                        }
+
+                        ListView {
+                            id: lineCounterList;
+                            anchors.fill: parent;
+                            anchors.topMargin: 5;
+                            anchors.horizontalCenter: parent.horizontalCenter;
+
+                            function setFontSizeByIncreament(increament){
+                                lineCounterList.actions["fontSize"] += increament;
+                            }
+
+                            property var actions : {
+                                "fontSize": Storage.DEFAULT_INTERFACE_FONT_SIZE,
+                            }
+
+                            model: ListModel {
+                                id: lineCounterModel;
+
+                                ListElement {
+                                    count: 1;
+                                }
+                            }
+
+                            delegate: Text {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    text: model.count;
+                                    color: "gray";
+                                    font.pixelSize: lineCounterList.actions["fontSize"];
+                            }
+                        }
                     }
 
-                    TableModelColumn {
-                        display: "color"
-                    }
 
-//                    rows: [
-//                        {
-//                            "name": "cat",
-//                            "color": "black"
-//                        },
-//                        {
-//                            "name": "dog",
-//                            "color": "brown"
-//                        },
-//                        {
-//                            "name": "bird",
-//                            "color": "white"
-//                        }
-//                    ]
-                }
+                    TableView {
+                        id: editField;
+                        anchors.fill: parent
+                        columnSpacing: 1
+                        rowSpacing: 1
+                        clip: true
 
-                delegate: Rectangle {
-                            implicitWidth: 100
-                            implicitHeight: 100
+                        function setFontSizeByIncreament(increament){
+                            editField.actions["fontSize"] += increament;
+                        }
+
+                        property var actions : {
+                            "fontSize": Storage.DEFAULT_INTERFACE_FONT_SIZE,
+                        }
+
+                        property bool loaded: false;
+
+                        columnWidthProvider: function(column) {
+                            return editField.actions["fontSize"] * 10;
+                        };
+
+                        rowHeightProvider: function(row){
+                            return editField.actions["fontSize"] * 7;
+                        }
+
+                        model: TableModel {
+                            id: tableModel;
+
+                            TableModelColumn {
+                                display: "stub"
+                            }
+
+
+//                            Tab {
+//                                display: "name"
+//                            }
+
+//                            TableModelColumn {
+//                                display: "color"
+//                            }
+                        }
+
+                        delegate: Rectangle {
+                            color: "#B3FAA7";
                             border.width: 1
 
                             TextEdit {
                                 text: display
+                                clip: true;
+                                font.pixelSize: editField.actions["fontSize"];
+                                wrapMode: TextEdit.WrapAnywhere;
                                 anchors.centerIn: parent
                                 onTextChanged: {
-                                    if (tableField.loaded){
-                                        const ix = tableModel.index(0, 0);
-                                        tableModel.setData(ix, "display", "Yaroslav")
-//                                        console.log(display);
-
-//                                        console.log(TextEdit.text);
+                                    if (editField.loaded){
+//                                        const ix = tableModel.index(0, 0);
+//                                        tableModel.setData(ix, "display", "Yaroslav")
                                     }
                                 }
                             }
-                }
-
-                Component.onCompleted: {
-                    tableField.loaded = true;
-
-//                    tableModel.insertColumn("name");
-//                    tableModel.insertColumn("color");
-                    tableModel.appendRow({
-                                             "name": "Yaroslav",
-                                             "color": "Jjjk",
-                                         })
-                }
-            }
-//            TextArea {
-//                id: editField;
-//                text: CSVWindow.onReadText();
-//                color: "blue";
-//                focus: true;
-//                font.pointSize: 24;
-//                wrapMode: TextEdit.WrapAnywhere;
-//                selectByMouse: true;
-//                Layout.fillWidth: true;
-//                Layout.fillHeight: true;
-//                Layout.alignment: Qt.AlignCenter;
-//                enabled: true;
-
-//            }
-        }
-
-        Rectangle {
-            id: bottomMenu;
-            Layout.fillWidth: true;
-            Layout.preferredHeight: 35;
-            Layout.alignment: Qt.AlignCenter
-
-            RowLayout {
-                anchors.fill: parent;
-                anchors.margins: 2;
-                spacing: 1;
-
-                Rectangle {
-                    color: "yellow";
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
-                }
-
-                Rectangle {
-                    id: scaleMenu;
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
-
-                    RowLayout {
-                        anchors.fill: parent;
-                        anchors.margins: 2;
-                        spacing: 1;
-
-                        Button {
-                            Text{
-                                text: "-";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-//                                tableField.font.pointSize -= 1;
-                                tableField.height -= 1;
-                            }
                         }
 
-                        Button {
-                            Text{
-                                text: "+";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
+                        Component.onCompleted: {
+                            editField.loaded = true;
+                            tableModel.removeColumn("stub");
+                            tableModel.insertColumn({"display": "Name"});
+//                            tableModel.setData("Name", "display", "it works");
+//                            tableModel.appendRow({"Name": "it works"})
 
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-                                tableField.height += 1;
-//                                tableField.font.pointSize += 1;
-                            }
+//                            const data = CSVWindow.onReadTable();
+//                            for (let column in data){
+
+
+//                                const row = data[column];
+//                                for (let i = 0; i < row.length; i++){
+//                                    tableModel.appendRow({Name: row[i]})
+//                                }
+//                            }
+
+
+//                            tableModel.insertColumn("Yaroslav")
+//                            tableModel.appendRow({
+//                                                     "name": "Yaroslav",
+//                                                     "color": "Jjjk",
+//                                                 })
                         }
                     }
                 }
+            }
+        }
+
+
+        Rectangle {
+            id: bottomMenu;
+            color: "#D9D9D9";
+            Layout.fillWidth: true;
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
+
+            ListView {
+                anchors.fill: parent;
+                orientation: ListView.Horizontal;
+                anchors.bottom: parent.bottom
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+                Layout.alignment: Qt.AlignRight;
+                spacing: 1;
+
+                model: ListModel {
+                    id: bottomModel
+
+                    property var actions: {
+                        "increase_font": function(){
+                            lineCounterList.setFontSizeByIncreament(-1)
+                            lineCounterList.forceLayout()
+
+                            editField.setFontSizeByIncreament(1)
+                            editField.forceLayout()
+//                            editField.font.pixelSize += 1;
+                            editField.anchors.leftMargin += 0.08;
+                            lineCounter.implicitWidth += 0.2;
+                        },
+                        "decrease_font": function(){
+                            lineCounterList.setFontSizeByIncreament(-1)
+                            lineCounterList.forceLayout()
+
+                            editField.setFontSizeByIncreament(-1)
+                            editField.forceLayout()
+//                            editField.font.pixelSize -= 1;
+                            editField.anchors.leftMargin -= 0.08;
+                            lineCounter.implicitWidth -= 0.2;
+
+                        },
+                    }
+
+                    ListElement {
+                        icon: "images/decrease_font.png"
+                        action: "decrease_font"
+                    }
+
+                    ListElement {
+                        icon: "images/increase_font.png"
+                        action: "increase_font"
+                    }
+                }
+
+                delegate: Button {
+                        Layout.alignment: Qt.AlignRight;
+                        anchors.verticalCenter: parent.verticalCenter;
+                        icon.source: model.icon;
+
+                        Text{
+                            text: ""
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        onClicked: bottomModel.actions[model.action]()
+                    }
             }
         }
     }

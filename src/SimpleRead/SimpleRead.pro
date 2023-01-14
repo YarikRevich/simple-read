@@ -1,6 +1,4 @@
-QT += core gui \
-    quickwidgets \
-    sql
+QT += core gui quickwidgets sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,10 +13,10 @@ DESTDIR = target
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    basewindow.cpp \
     csvwindow.cpp \
-    dataview.cpp \
     docxwindow.cpp \
-    filewindow.cpp \
+    exceptions.cpp \
     globalqmlengine.cpp \
     logger.cpp \
     main.cpp \
@@ -26,15 +24,15 @@ SOURCES += \
     qmltyperegistrator.cpp \
     qmlwindow.cpp \
     settingswindow.cpp \
+    timer.cpp \
     translatorregistrator.cpp \
     txtwindow.cpp
 
 HEADERS += \
+    basewindow.h \
     csvwindow.h \
-    dataview.h \
     docxwindow.h \
     exceptions.h \
-    filewindow.h \
     globalqmlengine.h \
     logger.h \
     mainwindow.h \
@@ -42,6 +40,9 @@ HEADERS += \
     qmltyperegistrator.h \
     qmlwindow.h \
     settingswindow.h \
+    tablewindow.h \
+    textwindow.h \
+    timer.h \
     translatorregistrator.h \
     txtwindow.h
 
@@ -67,6 +68,7 @@ RESOURCES += \
     csvwindow.qml \
     pdfwindow.qml \
     txtwindow.qml \
+    utils.qml \
     images/united-states.png \
     images/poland.png \
     images/ukraine.png \
@@ -75,6 +77,7 @@ RESOURCES += \
     images/increase_font.png \
     images/decrease_font.png \
     images/save.png \
+    images/information.png \
     storage.js \
     project_en.qm \
     project_pl.qm \
@@ -120,6 +123,7 @@ DISTFILES += \
     SimpleRead.rc \
     csvwindow.qml \
     docxwindow.qml \
+    logger.qdoc \
     pdfwindow.qml \
     settingswindow.qml \
     storage.js \

@@ -7,95 +7,42 @@
 #include <duckx.hpp>
 #include <iostream>
 #include <stdio.h>
+#include "exceptions.h"
 
 void DOCXWindow::onInit(){
     this->doc = duckx::Document(this->fileName.toStdString());
     this->doc.open();
-
-    for (auto p = this->doc.tables(); p.has_next(); p.next()){
-        for (auto r = p.rows(); r.has_next(); r.next()){
-            for (auto c = r.cells(); c.has_next(); c.next()){
-                for (auto w = c.paragraphs(); w.has_next(); w.next()){
-                    for (auto q = w.runs(); q.has_next(); q.next()) {
-                        qInfo() << q.get_text().c_str();
-                    }
-                }
-            }
-        }
-    }
-
-    for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
-        for (auto r = p.runs(); r.has_next(); r.next()) {
-            for (auto const& text : r.get_text()){
-                this->appendChar(text);
-            }
-        }
-        this->appendChar('\n');
-    }
-//    qInfo() << this->text.c_str();
-    this->saveSnapshot();
 }
 
 void DOCXWindow::onOpen(){
     QMLWindow::onOpen(QML_DOCXWINDOW);
 }
 
-//void DOCXWindow::onSave(){
-//}
-
-void DOCXWindow::onWriteText(QString text) {
-
+void DOCXWindow::onWriteText(QString, int, int) {
+    throw Exceptions::NotImplementedLogic();
 }
 
-QString DOCXWindow::onReadText(){
-    return DataView::getTextAsQString();
-}
+QString DOCXWindow::onReadText(int start, int end){
+    std::string result;
 
-void DOCXWindow::onWriteTable(QHash<QString, void *>){
-
-};
-
-QHash<QString, void *> DOCXWindow::onReadTable(){
-    return QHash<QString, void *>();
-};
-
-void DOCXWindow::onSave(){
-    int rIndex = 0;
-//    for (auto p = this->doc.tables(); p.has_next(); p.next()){
-//        for (auto r = p.rows(); r.has_next(); r.next()){
-//            for (auto c = r.cells(); r.has_next(); r.next()){
-//                for (auto w = c.paragraphs(); c.has_next(); c.next()){
-//                    for (auto q = w.runs(); w.has_next(); w.next()) {
-//                        qInfo() << q.get_text().c_str();
-//                    }
-//                }
-//            }
-//        }
-//    }
     for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
         for (auto r = p.runs(); r.has_next(); r.next()) {
-
-//            const std::string src = r.get_text();
             for (auto const& text : r.get_text()){
-//                qInfo() << text << " " << rIndex << " " << this->text.length();
-                rIndex++;
+                result += text;
             }
-//            qInfo() << r.get_text().at(125);
-
-//                wprintf(L"%ls\n", wtext);
-//                  qInfo() << this->isCharExistAt(rIndex);
-//                this->getChar(rIndex);
-//                qInfo(wtext);
-
-
-//            qInfo() << rIndex << "TU";
-//            rIndex++;
         }
-        rIndex++;
+        result += "\n";
     }
-    this->doc.save();
+    return QString::fromStdString(result);
+}
+
+int DOCXWindow::getContentSize(){
+    return 0;
+}
+
+void DOCXWindow::onSave(){
 }
 
 void DOCXWindow::setFileName(QString fileName){
-    FileWindow::setFileName(fileName);
+    BaseWindow::setFileName(fileName);
 }

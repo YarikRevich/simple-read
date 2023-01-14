@@ -56,8 +56,13 @@ Item {
                                 editField.enabled = false;
                             }
                         },
+
                         "save": function(){
                             TXTWindow.onSave();
+                        },
+
+                        "information": function(){
+                            console.log("Information button pressed");
                         }
                     }
 
@@ -77,6 +82,13 @@ Item {
                         action: "save"
                         enabled: true
                     }
+
+                    ListElement {
+                        name: "information"
+                        icon: "images/information.png"
+                        action: "information"
+                        enabled: true
+                    }
                 }
 
                 delegate: Button {
@@ -85,12 +97,12 @@ Item {
 
                         anchors.verticalCenter: parent.verticalCenter;
 
-                        ToolTip.visible: true;
-                        ToolTip.text: "it works";
+//                        ToolTip.visible: true;
+//                        ToolTip.text: "it works";
 
-                        onHoveredChanged: {
-                            console.log("it w", ToolTip.visible);
-                        }
+//                        onHoveredChanged: {
+//                            console.log("it w", ToolTip.visible);
+//                        }
 
                         Text{
                             text: ""
@@ -104,50 +116,20 @@ Item {
             }
         }
 
-//        Rectangle {
-//            color: "#B3FAA7";
-//            radius: 15;
-//            border.width: 1
-//            border.color: "black"
-
-//            width: 90 * root.width / 100;
-
-//            Layout.fillHeight: true;
-//            Layout.alignment: Qt.AlignCenter
-
-//            RowLayout {
-//                ListView {
-//                    spacing: 8
-//                    Layout.preferredWidth: 20;
-//                    Layout.fillHeight: true;
-//                    model: ListModel {
-//                        ListElement {
-//                            count: 1;
-//                        }
-
-//                        ListElement {
-//                            count: 2;
-//                        }
-//                    }
-
-//                    delegate:
-//                        Text {
-//                            text: model.count;
-//                        }
-//                }
-
         Rectangle {
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-           Rectangle{
-               width: 95 * parent.width / 100;
-               height: 90 * parent.height / 100;
+            Rectangle{
+                id: scrollBody;
+                width: 95 * parent.width / 100;
+                height: 90 * parent.height / 100;
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 ScrollView{
+                    id: lineScroll;
                     anchors.fill: parent;
                     clip: true;
 
@@ -157,23 +139,78 @@ Item {
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
                     ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
 
+
+                    onContentHeightChanged: {
+                        console.log(lineScroll.contentHeight, "CHANGED");
+                    }
+
+
+                    Rectangle {
+                        id: lineCounter;
+                        color: "#B3FAA7";
+                        implicitWidth: 3 * scrollBody.width / 100;
+                        border.width: 1;
+
+                        function reloadHeight(){
+                            if (editField.height > scrollBody.height){
+                                lineCounter.height = editField.height;
+                            }else{
+                                lineCounter.height = scrollBody.height
+                            }
+                        }
+
+                        function reloadLines(){
+                            if (lineCounterModel.count > editField.lineCount){
+                                for (var a = lineCounterModel.count; a >= editField.lineCount; a--){
+                                    lineCounterModel.remove(a);
+                                }
+                            }else{
+                                for (let a = lineCounterModel.count; a < editField.lineCount; a++){
+                                    lineCounterModel.set(a, {count: a+1});
+                                }
+                            }
+                        }
+
+                        ListView {
+                            id: lineCounterList;
+                            anchors.fill: parent;
+                            anchors.topMargin: 5;
+                            anchors.horizontalCenter: parent.horizontalCenter;
+
+                            model: ListModel {
+                                id: lineCounterModel;
+
+                                ListElement {
+                                    count: 1;
+                                }
+                            }
+
+                            delegate: Text {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    text: model.count;
+                                    color: "gray";
+                                    font.pixelSize: editField.font.pixelSize;
+                            }
+                        }
+                    }
+
                     TextArea {
                         id: editField;
-
-                        Layout.fillWidth: true;
-                        Layout.fillHeight: true;
+                        anchors.fill: parent;
+                        anchors.leftMargin: 3 * scrollBody.width / 100;
                         Layout.alignment: Qt.AlignCenter;
 
                         enabled: true;
                         color: "black";
                         focus: true;
-                        text: TXTWindow.onReadText();
+                        renderType: Text.NativeRendering;
 
                         font.pointSize: 24;
                         wrapMode: TextEdit.WrapAnywhere;
                         selectByMouse: true;
 
-                        background: Rectangle {
+                        background:
+                            Rectangle {
                             color: "#B3FAA7";
                             radius: 10;
                             border.width: 1;
@@ -181,16 +218,42 @@ Item {
                         }
 
                         onTextChanged: {
-                            console.log(editField.contentHeight, editField.lineCount)
-                            TXTWindow.onWriteText(editField.text);
+//                            console.log(editField.lineCount, editField.text.length, editField.width, editField.font.pointSize, editField.width / editField.font.pixelSize);
+//                            TXTWindow.onWriteText(editField.text);
                             if (Storage.getAutoSave() === "true"){
-                                TXTWindow.onSave();
+//                                TXTWindow.onSave();
                             }
                         }
+                        onLineCountChanged: {
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
+
+                            console.log(lineScroll.contentHeight, lineScroll.height);
+//                            console.log(editField.text.length, editField.y, editField.font.pixelSize, editField.contentWidth, editField.font.letterSpacing, lineScroll.contentHeight);
+//                            console.log(lineScroll.height, editField.text.length, lineScroll.font.pixelSize, editField.width, lineScroll.contentHeight, editField.lineCount);
+                        }
+
+                        Component.onCompleted: {
+//                            const contentSize = TXTWindow.getContentSize()
+//                            console.log((contentSize - lineScroll.height) < 0);
+//                            if ((contentSize - lineScroll.height) < 0){
+//                                text = TXTWindow.onReadText(0, -1);
+//                            }else{
+//                                const shiftLineNumber = parseInt((contentSize - lineScroll.height) / editField.font.pixelSize);
+//                                console.log(shiftLineNumber, contentSize, lineScroll.height, editField.font.pixelSize);
+//                            }
+
+                            text = TXTWindow.onReadText(0, -1);
+
+
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
+                        }
                     }
-           }
-           }
+                }
+            }
         }
+
 
         Rectangle {
             id: bottomMenu;
@@ -213,10 +276,14 @@ Item {
 
                     property var actions: {
                         "increase_font": function(){
-                            editField.font.pointSize += 1;
+                            editField.font.pixelSize += 1;
+                            editField.anchors.leftMargin += 0.08;
+                            lineCounter.implicitWidth += 0.2;
                         },
                         "decrease_font": function(){
-                            editField.font.pointSize -= 1;
+                            editField.font.pixelSize -= 1;
+                            editField.anchors.leftMargin -= 0.08;
+                            lineCounter.implicitWidth -= 0.2;
                         },
                     }
 
@@ -243,6 +310,36 @@ Item {
                         onClicked: bottomModel.actions[model.action]()
                     }
             }
+
+//            Rectangle {
+//                width: 20 * bottomMenu.width / 100;
+//                height: 80 * bottomMenu.height / 100;
+
+//                color: "#B3FAA7";
+//                radius: 15;
+//                border.width: 1;
+
+//                anchors.verticalCenter: parent.verticalCenter;
+//                anchors.horizontalCenter: parent.horizontalCenter;
+
+//                ListView {
+//                    anchors.fill: parent;
+//                    orientation: ListView.Horizontal;
+//                    anchors.bottom: parent.bottom
+//                    anchors.verticalCenter: parent.verticalCenter;
+//                    anchors.horizontalCenter: parent.horizontalCenter;
+//                    Layout.alignment: Qt.AlignRight;
+//                    spacing: 1;
+
+//                }
+//            }
+        }
+    }
+
+    Connections {
+        target: Exceptions
+        function onError(msg){
+            console.log(msg);
         }
     }
 }

@@ -3,6 +3,7 @@
 
 #include "dataview.h"
 #include "filewindow.h"
+#include "textwindow.h"
 #include <sstream>
 
 #include <QWidget>
@@ -15,7 +16,7 @@
 /*!
  * \brief The TXTWindow class used for representation of opened files
  */
-class TXTWindow : public QObject, public DataView, public FileWindow
+class TXTWindow : public QObject, public TextWindow, public QMLWindow
 {
     Q_OBJECT
 
@@ -27,17 +28,15 @@ public:
     // Event callbacks
     Q_INVOKABLE void onOpen();
 
+    Q_INVOKABLE void onInit() override;
+
     Q_INVOKABLE void onSave() override;
 
-    Q_INVOKABLE void onWriteText(QString) override;
+    Q_INVOKABLE void onWriteText(QString, int start, int end) override;
 
-    Q_INVOKABLE QString onReadText() override;
+    Q_INVOKABLE QString onReadText(int start, int end) override;
 
-    Q_INVOKABLE void onWriteTable(QHash<QString, void *>) override;
-
-    Q_INVOKABLE QHash<QString, void *> onReadTable() override;
-
-    Q_INVOKABLE void onInit() override;
+    Q_INVOKABLE int getContentSize() override;
 
     Q_INVOKABLE void setFileName(QString);
 };

@@ -4,6 +4,7 @@
 #include "translatorregistrator.h"
 #include "txtwindow.h"
 
+#include "exceptions.h"
 #include "qmltyperegistrator.h"
 #include "settingswindow.h"
 
@@ -27,6 +28,9 @@ void QMLTypeRegistrator::exec() const
 
     SettingsWindow *settingsWindow = new SettingsWindow();
     context->setContextProperty("SettingsWindow", settingsWindow);
+
+    Exceptions *exceptions = Exceptions::getInstance();
+    context->setContextProperty("Exceptions", exceptions);
 
     TranslatorRegistrator *translatorRegistrator = new TranslatorRegistrator(this->engine);
     context->setContextProperty("TranslatorRegistrator", translatorRegistrator);

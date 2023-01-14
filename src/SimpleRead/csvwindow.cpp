@@ -1,51 +1,58 @@
 #include "csvwindow.h"
-#include "exceptions.h"
 #include <rapidcsv.h>
+#include <QVariantMap>
 
 using namespace rapidcsv;
 
 void CSVWindow::onInit(){
+    qInfo("CSVWindow is initialized");
+
     this->doc = Document(this->fileName.toStdString(), rapidcsv::LabelParams(0, -1));
+
+    QVariantMap result;
+
+    for(int cIndex = 0;;cIndex++){
+        std::vector<std::string> rawColumnData;
+        try{
+            rawColumnData = this->doc.GetColumn<std::string>(cIndex);
+        } catch (std::out_of_range& e){
+            break;
+        }
+        std::string columnName = this->doc.GetColumnName(cIndex);
+        QList<QString> columnData;
+        for (auto const& element : rawColumnData){
+            columnData.append(QString::fromStdString(element));
+        }
+        result[QString::fromStdString(columnName)] = columnData;
+    }
+
+    this->file_in_buffer = result;
 }
 
-void CSVWindow::onOpen(){
+void CSVWindow::onOpen() {
+    qInfo("CSVWindow is opened");
+
     QMLWindow::onOpen(QML_CSVWINDOW);
 }
 
 void CSVWindow::onSave(){
+    qInfo("CSVWindow save event happened");
 
-};
+}
 
-void CSVWindow::onWriteText(QString){
-    throw Exceptions::NotImplementedLogic();
-};
+void CSVWindow::onWriteTable(QVariantMap table){
+    qInfo("CSVWindow write table event happened");
 
-QString CSVWindow::onReadText(){
-    throw Exceptions::NotImplementedLogic();
-};
+    this->file_out_buffer = table;
+}
 
-void CSVWindow::onWriteTable(QHash<QString, void *>){
+QVariantMap CSVWindow::onReadTable() const{
+    qInfo("CSVWindow read table event happened");
 
-};
-
-QHash<QString, void *> CSVWindow::onReadTable(){
-    for(int cIndex = 0;;cIndex++){
-        std::vector<std::string> result;
-        try{
-            result = this->doc.GetColumn<std::string>(cIndex);
-        } catch (std::out_of_range& e){
-            break;
-        }
-        for (auto const& element : result){
-            qInfo()  << element.c_str();
-        }
-
-    }
-
-    return QHash<QString, void *>();
-};
+    return this->file_in_buffer;
+}
 
 void CSVWindow::setFileName(QString fileName){
-    FileWindow::setFileName(fileName);
+    BaseWindow::setFileName(fileName);
 }
 

@@ -10,9 +10,7 @@ void PDFWindow::onInit(){
     PdfPainter painter;
 
     document.Load(this->fileName.toStdString());
-    painter.AddText("it works");
-
-
+    document.GetPages();
 }
 
 void PDFWindow::onOpen(){
@@ -20,26 +18,21 @@ void PDFWindow::onOpen(){
 }
 
 void PDFWindow::onSave(){
+};
+
+void PDFWindow::onWriteText(QString, int, int){
 
 };
 
-void PDFWindow::onWriteText(QString){
-
-};
-
-QString PDFWindow::onReadText(){
+QString PDFWindow::onReadText(int, int){
     return NULL;
 };
 
-void PDFWindow::onWriteTable(QHash<QString, void *>){
-
-};
-
-QHash<QString, void *> PDFWindow::onReadTable(){
-    return QHash<QString, void *>();
-};
+int PDFWindow::getContentSize(){
+    return 0;
+}
 
 void PDFWindow::setFileName(QString fileName){
-    FileWindow::setFileName(fileName);
+    BaseWindow::setFileName(fileName);
 }
 

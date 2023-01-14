@@ -2,10 +2,11 @@
 #define DOCXWINDOW_H
 
 #include "dataview.h"
-#include "filewindow.h"
+#include "qmlwindow.h"
 #include <QObject>
 #include <QString>
 #include <duckx.hpp>
+#include "textwindow.h"
 
 #define QML_DOCXWINDOW "qrc:/docxwindow.qml"
 
@@ -13,7 +14,7 @@
  * \class DOCXWindow
  * \brief The DOCXWindow class used for representation of opened files
  */
-class DOCXWindow : public QObject, public DataView, public FileWindow
+class DOCXWindow : public QObject, public TextWindow, public QMLWindow
 {
 private:
     Q_OBJECT
@@ -22,22 +23,21 @@ private:
 public:
     explicit DOCXWindow(QObject* parent = 0) : QObject(parent){};
 
-    // Event callbacks
+    // Custom overrides
     Q_INVOKABLE void onOpen();
 
-    Q_INVOKABLE void onSave() override;
+    Q_INVOKABLE void setFileName(QString);
 
-    Q_INVOKABLE void onWriteText(QString) override;
-
-    Q_INVOKABLE QString onReadText() override;
-
-    Q_INVOKABLE void onWriteTable(QHash<QString, void *>) override;
-
-    Q_INVOKABLE QHash<QString, void *> onReadTable() override;
 
     Q_INVOKABLE void onInit() override;
 
-    Q_INVOKABLE void setFileName(QString);
+    Q_INVOKABLE void onSave() override;
+
+    Q_INVOKABLE void onWriteText(QString, int start, int end) override;
+
+    Q_INVOKABLE QString onReadText(int start, int end) override;
+
+    Q_INVOKABLE int getContentSize() override;
 };
 
 #endif // DOCXWINDOW_H

@@ -3,12 +3,20 @@ import QtQuick 2.15
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
+import Qt.labs.platform as Labs
+import "storage.js" as Storage
 
 Item {
     id: root;
     visible: true;
     height: 80 * Screen.desktopAvailableHeight / 100;
     width: 80 * Screen.desktopAvailableWidth / 100;
+
+    Labs.MessageDialog {
+        id: unlockEditError
+        title: "Function error"
+        text: "DOCX files are available only for reading"
+    }
 
     ColumnLayout {
         anchors.fill: parent;
@@ -20,265 +28,232 @@ Item {
 
             color: "#D9D9D9";
             Layout.fillWidth: true;
-            Layout.preferredHeight: 50;
-            Layout.alignment: Qt.AlignCenter
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
 
-            RowLayout {
+            ListView {
                 anchors.fill: parent;
-//                anchors.margins: 2;
+                orientation: ListView.Horizontal;
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+
                 spacing: 1;
+                clip: true;
 
-                ListView {
-//                    orientation: ListView.Horizontal
+                model: ListModel {
+                    id: barModel;
 
-                    model: ListModel {
-                        id: barModel
-
-                        property var actions: {
-                            "lock_edit": "",
-                            "unlock_edit": "",
-                            "save": ""
-                        }
-
-                        ListElement {
-                            name: "lock_edit"
-                            icon: "images/lock_edit.png"
-                            action: "lock_edit"
-                            enabled: true
-                        }
-
-                        ListElement {
-                            name: "unlock_edit"
-                            icon: "images/unlock_edit.png"
-                            action: "unlock_edit"
-                            enabled: true
-                        }
-
-                        ListElement {
-                            name: "save"
-                            icon: "images/unlock_edit.png"
-                            action: "save"
-                            enabled: false
+                    function getElementByName(name){
+                        for (let i = 0; i < barModel.count; i++){
+                            const barModelElement = barModel.get(i)
+                            if (barModelElement.name === name){
+                                return barModelElement
+                            }
                         }
                     }
 
-                    delegate:
+                    property var actions: {
+                        "lock_unlock_edit": function(){
+                            unlockEditError.open();
+                        },
+                    }
 
-
-//                        Layout.preferredWidth: 5 * barMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignLeft
-
-                        Button {
-//                            anchors.fill: parent;
-//                            anchors.fill: parent;
-//                            Layout.fillWidth: true
-//                            Layout.fillHeight: true;
-//                            Layout.alignment: Qt.AlignRight
-                            icon.source: model.icon;
-
-                            Text{
-//                                text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-//                                color: "red";
-                                text: ""
-                                anchors.verticalCenter: parent.verticalCenter
-//                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-//                            onClicked: {
-//                                editField.enabled = !editField.enabled;
-//                            }
-                        }
-
+                    ListElement {
+                        name: "lock_unlock_edit"
+                        icon: "images/lock_edit.png"
+                        alter_icon: "images/unlock_edit.png"
+                        action: "lock_unlock_edit"
+                        checked: false
+                    }
                 }
 
-//                Rectangle {
-//                    color: "yellow";
-//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-//                    Layout.fillHeight: true;
-//                    Layout.alignment: Qt.AlignLeft
+                delegate: Button {
+                        icon.source: model.checked ? model.alter_icon : model.icon;
 
-//                    Button {
-//                        Text{
-//                            text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-//                            color: "red";
-//                            anchors.verticalCenter: parent.verticalCenter
-//                            anchors.horizontalCenter: parent.horizontalCenter
-//                        }
+                        anchors.verticalCenter: parent.verticalCenter;
 
-//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignRight
-//                        onClicked: {
-//                            editField.enabled = !editField.enabled;
-//                        }
-//                    }
-//                }
-
-//                Rectangle {
-//                    color: "green";
-//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-//                    Layout.fillHeight: true;
-//                    Layout.alignment: Qt.AlignLeft
-
-//                    Button {
-//                        Text{
-//                            text: qsTr("Save");
-//                            color: "red";
-//                            anchors.verticalCenter: parent.verticalCenter
-//                            anchors.horizontalCenter: parent.horizontalCenter
-//                        }
-
-//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignRight
-//                        onClicked: {
-//                            DOCXWindow.onSave();
-//                        }
-//                    }
-//                }
+                        Text{
+                            text: ""
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+                        onClicked: {
+                            barModel.actions[model.action]()
+                        }
+                    }
             }
         }
 
         Rectangle {
-            color: "#B3FAA7";
-            radius: 15;
-
-            border.width: 1
-            border.color: "black"
-
-//            CustomBorder
-//                    {
-//                        commonBorder: false
-//                        lBorderwidth: 0
-//                        rBorderwidth: 0
-//                        tBorderwidth: 10
-//                        bBorderwidth: 10
-//                        borderColor: "black"
-//                    }
-
-            width: 90 * root.width / 100;
-
             Layout.fillHeight: true;
-            Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true;
 
-            RowLayout {
-                ListView {
-                    spacing: 8
-                    Layout.preferredWidth: 20;
-                    Layout.fillHeight: true;
-                    model: ListModel {
-                        ListElement {
-                            count: 1;
-                        }
+           Rectangle{
+               id: scrollBody;
+               width: 95 * parent.width / 100;
+               height: 90 * parent.height / 100;
 
-                        ListElement {
-                            count: 2;
-                        }
-                    }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
-                    delegate:
-                        Text {
-                            text: model.count;
-                        }
-                }
-
-                ScrollView{
-//                    padding: 15;
-                    Layout.preferredWidth: 200;
-//                    Layout.fillWidth: true;
-                    Layout.fillHeight: true;
-                    clip: true;
-
-                    ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
-                    ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
-
-                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
-                    ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
-                    TextArea {
-                        id: editField;
-                        text: DOCXWindow.onReadText();
-                        color: "blue";
+                    ScrollView{
+                        anchors.fill: parent;
                         focus: true;
-                        font.pointSize: 24;
-                        wrapMode: TextEdit.WrapAnywhere;
-                        selectByMouse: true;
-                        Layout.fillWidth: true;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignCenter;
-                        enabled: true;
-                        onTextChanged: {
-                            console.log(editField.contentHeight, editField.lineCount)
-                            console.log("Text changed", editField.cursorPosition);
+                        clip: true;
+
+                        ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
+                        ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
+
+                        ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
+                        ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
+
+                        Rectangle {
+                            id: lineCounter;
+                            implicitWidth: 3 * scrollBody.width / 100;
+                            color: "#B3FAA7";
+                            border.width: 1;
+
+                            function reloadHeight(){
+                                if (editField.height > scrollBody.height){
+                                    lineCounter.height = editField.height;
+                                }else{
+                                    lineCounter.height = scrollBody.height
+                                }
+                            }
+
+                            function reloadLines(){
+                                if (lineCounterModel.count > editField.lineCount){
+                                    for (var a = lineCounterModel.count; a >= editField.lineCount; a--){
+                                        lineCounterModel.remove(a);
+                                    }
+                                }else{
+                                    for (let a = lineCounterModel.count; a < editField.lineCount; a++){
+                                        lineCounterModel.set(a, {count: a+1});
+                                    }
+                                }
+                            }
+
+                            ListView {
+                                id: lineCounterList;
+                                anchors.fill: parent;
+                                anchors.topMargin: 5;
+                                anchors.horizontalCenter: parent.horizontalCenter;
+
+                                model: ListModel {
+                                    id: lineCounterModel;
+
+                                    ListElement {
+                                        count: 1;
+                                    }
+                                }
+
+                                delegate: Text {
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        text: model.count;
+                                        color: "gray";
+                                        font.pixelSize: editField.font.pixelSize;
+                                }
+                            }
+                        }
+
+                        TextArea {
+                            id: editField;
+                            anchors.fill: parent;
+                            anchors.leftMargin: 3 * scrollBody.width / 100;
+                            Layout.alignment: Qt.AlignCenter;
+
+                            enabled: false;
+                            color: "black";
+                            focus: true;
+                            text: DOCXWindow.onReadText();
+
+                            font.pointSize: 24;
+                            wrapMode: TextEdit.WrapAnywhere;
+                            selectByMouse: true;
+
+                            background:
+                                Rectangle {
+                                color: "#B3FAA7";
+                                radius: 10;
+                                border.width: 1;
+                                border.color: "black";
+                            }
+
+                            onTextChanged: {
+                                DOCXWindow.onWriteText(editField.text);
+                                if (Storage.getAutoSave() === "true"){
+                                    DOCXWindow.onSave();
+                                }
+                            }
+                            onLineCountChanged: {
+                                lineCounter.reloadHeight();
+                                lineCounter.reloadLines();
+                            }
+
+                            Component.onCompleted: {
+                                lineCounter.reloadHeight();
+                                lineCounter.reloadLines();
+                            }
                         }
                     }
                 }
-            }
-
-        }
+           }
 
 
         Rectangle {
             id: bottomMenu;
+            color: "#D9D9D9";
             Layout.fillWidth: true;
-            Layout.preferredHeight: 35;
-            Layout.alignment: Qt.AlignCenter
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
 
-            RowLayout {
+            ListView {
                 anchors.fill: parent;
-                anchors.margins: 2;
+                orientation: ListView.Horizontal;
+                anchors.bottom: parent.bottom
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+                Layout.alignment: Qt.AlignRight;
                 spacing: 1;
 
-                Rectangle {
-                    color: "#D9D9D9";
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
-                }
+                model: ListModel {
+                    id: bottomModel
 
-                Rectangle {
-                    id: scaleMenu;
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
+                    property var actions: {
+                        "increase_font": function(){
+                            editField.font.pixelSize += 1;
+                            editField.anchors.leftMargin += 0.08;
+                            lineCounter.implicitWidth += 0.2;
+                        },
+                        "decrease_font": function(){
+                            editField.font.pixelSize -= 1;
+                            editField.anchors.leftMargin -= 0.08;
+                            lineCounter.implicitWidth -= 0.2;
+                        },
+                    }
 
-                    RowLayout {
-                        anchors.fill: parent;
-                        anchors.margins: 2;
-                        spacing: 1;
+                    ListElement {
+                        icon: "images/decrease_font.png"
+                        action: "decrease_font"
+                    }
 
-                        Button {
-                            Text{
-                                text: "-";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-                                editField.font.pointSize -= 1;
-                            }
-                        }
-
-                        Button {
-                            Text{
-                                text: "+";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-                                editField.font.pointSize += 1;
-                            }
-                        }
+                    ListElement {
+                        icon: "images/increase_font.png"
+                        action: "increase_font"
                     }
                 }
+
+                delegate: Button {
+                        Layout.alignment: Qt.AlignRight;
+                        anchors.verticalCenter: parent.verticalCenter;
+                        icon.source: model.icon;
+
+                        Text{
+                            text: ""
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        onClicked: bottomModel.actions[model.action]()
+                    }
             }
         }
     }

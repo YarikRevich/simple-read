@@ -62,10 +62,8 @@ Rectangle {
             delegate: Button {
                 width: 80 * menu.width / 100;
 
-                contentItem: Text {
-                    text: qsTr(model.name);
-                    font.pointSize: model.fontSize === "default_font_size" ? menuModel.actions[model.fontSize](): model.fontSize;
-                }
+                text: qsTr(model.name);
+                font.pixelSize: model.fontSize === "default_font_size" ? menuModel.actions[model.fontSize](): model.fontSize;
 
                 anchors.horizontalCenter: parent.horizontalCenter
                 onClicked: menuModel.actions[model.target]();
@@ -80,6 +78,7 @@ Rectangle {
             Layout.fillHeight: true;
             Layout.alignment: Qt.AlignCenter
 
+            border.width: 1;
             radius: 10;
 
             /*!
@@ -101,27 +100,44 @@ Rectangle {
                 anchors.horizontalCenter: parent.horizontalCenter;
 
                 model: ListModel {
-                        id: model
+                        id: languageModel
+
+                        function setFontSizeForAllElements(fontSize){
+                            for (let i = 0; i < languageModel.count; i++){
+                                languageModel.get(i).fontSize = fontSize;
+                            }
+                        }
+
+                        property var actions : {
+                            "default_font_size": Storage.DEFAULT_INTERFACE_FONT_SIZE,
+                        }
+
                         ListElement {
                             text: QT_TR_NOOP("English");
                             code: "en";
                             imageSource: "images/united-states.png";
+                            fontSize: "default_font_size";
                         }
                         ListElement {
                             text: QT_TR_NOOP("Polish")
                             code: "pl";
                             imageSource: "images/poland.png";
+                            fontSize: "default_font_size";
                         }
                         ListElement {
                             text: QT_TR_NOOP("Ukrainian");
                             code: "uk";
                             imageSource: "images/ukraine.png";
+                            fontSize: "default_font_size";
                         }
                     }
                 delegate: Button {
-                    text: " " + qsTr(model.text);
+
 
                     anchors.horizontalCenter: parent.horizontalCenter
+                    text: " " + qsTr(model.text);
+
+                    font.pixelSize: model.fontSize === "default_font_size" ? languageModel.actions[model.fontSize](): model.fontSize;
 
                     icon.color: "transparent";
                     icon.source: model.imageSource;
@@ -132,14 +148,14 @@ Rectangle {
                 }
 
                 onActivated: {
-                    Storage.setCurrentLanguage(model.get(currentIndex).code);
-                    TranslatorRegistrator.setLanguage(model.get(currentIndex).code);
-                    updateDisplayText(qsTr(model.get(currentIndex).text));
+                    Storage.setCurrentLanguage(languageModel.get(currentIndex).code);
+                    TranslatorRegistrator.setLanguage(languageModel.get(currentIndex).code);
+                    updateDisplayText(qsTr(languageModel.get(currentIndex).text));
                 }
                 Component.onCompleted: {
                     const currentLanguage = Storage.getCurrentLanguage();
-                    for( var i = 0; i < model.rowCount(); i++ ) {
-                        if (currentLanguage === model.get(i).code){
+                    for( let i = 0; i < languageModel.rowCount(); i++ ) {
+                        if (currentLanguage === languageModel.get(i).code){
                             language.currentIndex = i;
                             break;
                         }
@@ -192,7 +208,7 @@ Rectangle {
                     onLinkActivated: Qt.openUrlExternally(model.link);
                     text: qsTr(model.text) + (model.interactive_text ? aboutModel.actions[model.interactive_text] : "");
                     anchors.horizontalCenter: parent.horizontalCenter;
-                    font.pointSize: model.fontSize === "default_font_size" ? aboutModel.actions[model.fontSize](): model.fontSize;
+                    font.pixelSize: model.fontSize === "default_font_size" ? aboutModel.actions[model.fontSize](): model.fontSize;
                 }
 
                 Layout.fillHeight: true;
@@ -214,6 +230,9 @@ Rectangle {
 
                 menuModel.setFontSizeForAllElements(interfaceFontSize);
                 menu.forceLayout();
+
+                languageModel.setFontSizeForAllElements(interfaceFontSize);
+                language.font.pixelSize = interfaceFontSize;
             }
         }
     }

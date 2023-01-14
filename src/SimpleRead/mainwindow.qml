@@ -78,29 +78,21 @@ ApplicationWindow {
         anchors.verticalCenter: parent.verticalCenter;
         anchors.horizontalCenter: parent.horizontalCenter;
         Button{
-            contentItem: Text {
-                id: openFileButtonContent;
-                text: qsTr("Open file");
-                font.pointSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
-            }
+            id: openFileButton;
+
+            text: qsTr("Open file");
+            font.pixelSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
 
             onClicked: fileDialogWindow.open();
         }
         Button {
-            contentItem: Text {
-                id: settingsButtonContent;
-                text: qsTr("Settings");
-                font.pointSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
-            }
+            id: settingsButton;
+
+            text: qsTr("Settings");
+            font.pixelSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
 
             onClicked: SettingsWindow.onOpen();
         }
-    }
-
-    Labs.MessageDialog {
-        id: messageDialog
-        title: "Extension error"
-        text: "An extension of the chosen file is not supported yet."
     }
 
     /*!
@@ -138,12 +130,12 @@ ApplicationWindow {
 
             const pdfFileMatch = selectedFile.match(fileDialogWindow.pdfFileMatch);
             if (pdfFileMatch){
-                   messageDialog.open();
+                    currentFileWindow = PDFWindow;
 
-                   // PDFWindow.onOpen();
-                   // PDFWindow.setFileName(cleanFilePath(pdfFileMatch[0]));
-                   // PDFWindow.exec();
-                   return
+                    PDFWindow.setFileName(cleanFilePath(pdfFileMatch[0]));
+                    PDFWindow.onInit();
+                    PDFWindow.onOpen();
+                    return
             };
 
             const txtFileMatch = selectedFile.match(fileDialogWindow.txtFileMatch);
@@ -175,8 +167,8 @@ ApplicationWindow {
         onTriggered: {
             if (Storage.isInterfaceFontSizeChanged()){
                 const interfaceFontSize = String(Storage.getInterfaceFontSize());
-                openFileButtonContent.font.pointSize = interfaceFontSize;
-                settingsButtonContent.font.pointSize = interfaceFontSize;
+                openFileButton.font.pixelSize = interfaceFontSize;
+                settingsButton.font.pixelSize = interfaceFontSize;
             }
         }
     }
