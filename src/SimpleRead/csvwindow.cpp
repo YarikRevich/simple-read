@@ -53,6 +53,6 @@ QVariantMap CSVWindow::onReadTable() const{
 }
 
 void CSVWindow::setFileName(QString fileName){
-    BaseWindow::setFileName(fileName);
+    QMLWindow::setFileName(fileName);
 }
 

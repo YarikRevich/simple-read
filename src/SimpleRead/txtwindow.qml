@@ -3,7 +3,8 @@ import QtQuick 2.15
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
-import "storage.js" as Storage
+import Qt.labs.platform as Labs
+//import "storage.js" as Storage
 
 Item {
     id: root;
@@ -209,6 +210,8 @@ Item {
                         wrapMode: TextEdit.WrapAnywhere;
                         selectByMouse: true;
 
+                        property bool loaded: false;
+
                         background:
                             Rectangle {
                             color: "#B3FAA7";
@@ -228,12 +231,13 @@ Item {
                             lineCounter.reloadHeight();
                             lineCounter.reloadLines();
 
-                            console.log(lineScroll.contentHeight, lineScroll.height);
+//                            console.log(lineScroll.contentHeight, lineScroll.height);
 //                            console.log(editField.text.length, editField.y, editField.font.pixelSize, editField.contentWidth, editField.font.letterSpacing, lineScroll.contentHeight);
 //                            console.log(lineScroll.height, editField.text.length, lineScroll.font.pixelSize, editField.width, lineScroll.contentHeight, editField.lineCount);
                         }
 
                         Component.onCompleted: {
+                            editField.loaded = true;
 //                            const contentSize = TXTWindow.getContentSize()
 //                            console.log((contentSize - lineScroll.height) < 0);
 //                            if ((contentSize - lineScroll.height) < 0){
@@ -244,7 +248,6 @@ Item {
 //                            }
 
                             text = TXTWindow.onReadText(0, -1);
-
 
                             lineCounter.reloadHeight();
                             lineCounter.reloadLines();
@@ -310,36 +313,34 @@ Item {
                         onClicked: bottomModel.actions[model.action]()
                     }
             }
-
-//            Rectangle {
-//                width: 20 * bottomMenu.width / 100;
-//                height: 80 * bottomMenu.height / 100;
-
-//                color: "#B3FAA7";
-//                radius: 15;
-//                border.width: 1;
-
-//                anchors.verticalCenter: parent.verticalCenter;
-//                anchors.horizontalCenter: parent.horizontalCenter;
-
-//                ListView {
-//                    anchors.fill: parent;
-//                    orientation: ListView.Horizontal;
-//                    anchors.bottom: parent.bottom
-//                    anchors.verticalCenter: parent.verticalCenter;
-//                    anchors.horizontalCenter: parent.horizontalCenter;
-//                    Layout.alignment: Qt.AlignRight;
-//                    spacing: 1;
-
-//                }
-//            }
         }
     }
 
+    Labs.MessageDialog {
+        id: messageDialog
+        title: "Extension error"
+        text: "An extension of the chosen file is not supported yet."
+    }
+
+    Binding {
+        target: {
+            messageDialog.open()
+        }
+        when: editField.loaded;
+        delayed: true;
+    }
+
     Connections {
-        target: Exceptions
+        id: exceptionsConnection
+        target: Exceptions;
+
+        property bool loaded: false;
         function onError(msg){
-            console.log(msg);
+            showErrorDialogWindow()
+        }
+
+        function onWarning(msg){
+            showWarningDialogWindow()
         }
     }
 }

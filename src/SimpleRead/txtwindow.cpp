@@ -48,5 +48,5 @@ int TXTWindow::getContentSize() {
 }
 
 void TXTWindow::setFileName(QString fileName){
-    BaseWindow::setFileName(fileName);
+    QMLWindow::setFileName(fileName);
 }

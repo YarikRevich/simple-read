@@ -11,13 +11,14 @@
 #include <rapidcsv.h>
 #include "qmlwindow.h"
 #include "tablewindow.h"
+#include <QAbstractTableModel>
 
 #define QML_CSVWINDOW "qrc:/csvwindow.qml"
 
 using namespace rapidcsv;
 
 /*!
- * \brief The CSVWindow class used for representation of opened files
+ * \brief The CSVWindow class used for representation of CSV files
  */
 class CSVWindow : public QObject, public TableWindow, public QMLWindow
 {
@@ -29,7 +30,7 @@ private:
 
     Document doc;
 public:
-    explicit CSVWindow(QObject* parent = 0) : QObject(parent){};
+    explicit CSVWindow(QObject* parent = 0) {};
 
     // Custom overrides
     Q_INVOKABLE void onOpen();

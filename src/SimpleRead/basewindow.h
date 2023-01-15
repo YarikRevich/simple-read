@@ -10,15 +10,12 @@
  */
 class BaseWindow
 {
-protected:
-    QString fileName;
-
 public:
+    virtual void onOpen(const char *) const = 0;
+
     virtual void onInit() = 0;
 
-    virtual void onSave() = 0;
-
-    void setFileName(QString);
+    virtual void onSave();
 };
 
 #endif // BASEWINDOW_H

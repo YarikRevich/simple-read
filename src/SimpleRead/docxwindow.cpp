@@ -12,6 +12,15 @@
 void DOCXWindow::onInit(){
     this->doc = duckx::Document(this->fileName.toStdString());
     this->doc.open();
+
+    for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
+        for (auto r = p.runs(); r.has_next(); r.next()) {
+            for (auto const& text : r.get_text()){
+                this->file_in_buffer += text;
+            }
+        }
+        this->file_in_buffer += "\n";
+    }
 }
 
 void DOCXWindow::onOpen(){
@@ -19,21 +28,11 @@ void DOCXWindow::onOpen(){
 }
 
 void DOCXWindow::onWriteText(QString, int, int) {
-    throw Exceptions::NotImplementedLogic();
+    throw Exceptions::NotImplementedLogic(true);
 }
 
 QString DOCXWindow::onReadText(int start, int end){
-    std::string result;
-
-    for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
-        for (auto r = p.runs(); r.has_next(); r.next()) {
-            for (auto const& text : r.get_text()){
-                result += text;
-            }
-        }
-        result += "\n";
-    }
-    return QString::fromStdString(result);
+    return QString::fromStdString(this->file_in_buffer);
 }
 
 int DOCXWindow::getContentSize(){
@@ -44,5 +43,5 @@ void DOCXWindow::onSave(){
 }
 
 void DOCXWindow::setFileName(QString fileName){
-    BaseWindow::setFileName(fileName);
+    QMLWindow::setFileName(fileName);
 }

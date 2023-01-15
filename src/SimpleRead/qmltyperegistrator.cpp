@@ -4,6 +4,7 @@
 #include "translatorregistrator.h"
 #include "txtwindow.h"
 
+#include "csvwindowmodel.h"
 #include "exceptions.h"
 #include "qmltyperegistrator.h"
 #include "settingswindow.h"
@@ -25,6 +26,9 @@ void QMLTypeRegistrator::exec() const
 
     CSVWindow *csvWindow = new CSVWindow();
     context->setContextProperty("CSVWindow", csvWindow);
+
+    CSVWindowModel *csvWindowModel = new CSVWindowModel(csvWindow);
+    context->setContextProperty("CSVWindowModel", csvWindowModel);
 
     SettingsWindow *settingsWindow = new SettingsWindow();
     context->setContextProperty("SettingsWindow", settingsWindow);

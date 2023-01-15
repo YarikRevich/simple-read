@@ -16,7 +16,10 @@
  */
 class PDFWindow : public QObject, public TextWindow, public QMLWindow
 {
+private:
     Q_OBJECT
+
+    std::string file_in_buffer;
 public:
     explicit PDFWindow(QObject* parent = 0) : QObject(parent){};
 

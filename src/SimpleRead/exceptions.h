@@ -23,12 +23,21 @@ public:
 
     class NotImplementedLogic : public std::exception {
     public:
+        constexpr static char * msg = "This logic seems to be not implemented";
+
+        NotImplementedLogic(bool showToUser = false){
+            if (showToUser){
+                Exceptions::getInstance()->error(NotImplementedLogic::msg);
+            }
+        }
+
         const char * what() const throw() {
-            return "This logic seems to be not implemented";
+            return NotImplementedLogic::msg;
         }
     };
     Q_SIGNALS:
         void error(const QString &msg);
+        void warning(const QString &msg);
 };
 
 #endif // EXCEPTIONS_H

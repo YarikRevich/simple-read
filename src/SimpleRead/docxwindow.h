@@ -19,6 +19,7 @@ class DOCXWindow : public QObject, public TextWindow, public QMLWindow
 private:
     Q_OBJECT
 
+    std::string file_in_buffer;
     duckx::Document doc;
 public:
     explicit DOCXWindow(QObject* parent = 0) : QObject(parent){};

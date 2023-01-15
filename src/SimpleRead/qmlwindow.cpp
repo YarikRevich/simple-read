@@ -7,7 +7,7 @@
 #include <QQmlContext>
 #include <QTranslator>
 
-void QMLWindow::onOpen(const char * path){
+void QMLWindow::onOpen(const char * path) const {
     QQuickView *view = new QQuickView(GlobalQMLEngine::engine, 0);
 
     view->setSource(QUrl(path));
@@ -21,3 +21,7 @@ void QMLWindow::onOpen(const char * path){
 
     view->show();
 };
+
+void QMLWindow::setFileName(QString fileName){
+    this->fileName = fileName;
+}

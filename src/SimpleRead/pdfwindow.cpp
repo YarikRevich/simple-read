@@ -7,10 +7,16 @@
 using namespace mm;
 void PDFWindow::onInit(){
     PdfMemDocument document;
-    PdfPainter painter;
 
     document.Load(this->fileName.toStdString());
-    document.GetPages();
+
+    for (unsigned int i = 0; i < document.GetPages().GetCount(); i++){
+        std::vector<PdfTextEntry> entries;
+        document.GetPages().GetPageAt(i).ExtractTextTo(entries);
+        for (PdfTextEntry entry : entries){
+            this->file_in_buffer += entry.Text;
+        };
+    };
 }
 
 void PDFWindow::onOpen(){
@@ -25,7 +31,7 @@ void PDFWindow::onWriteText(QString, int, int){
 };
 
 QString PDFWindow::onReadText(int, int){
-    return NULL;
+    return QString::fromStdString(this->file_in_buffer);
 };
 
 int PDFWindow::getContentSize(){
@@ -33,6 +39,6 @@ int PDFWindow::getContentSize(){
 }
 
 void PDFWindow::setFileName(QString fileName){
-    BaseWindow::setFileName(fileName);
+    QMLWindow::setFileName(fileName);
 }
 
