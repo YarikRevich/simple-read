@@ -93,31 +93,6 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-LIBS += -L$$PWD/../../lib/duckx/ -lduckx
-
-INCLUDEPATH += $$PWD/../../include/duckx
-DEPENDPATH += $$PWD/../../include/duckx
-
-PRE_TARGETDEPS += $$PWD/../../lib/duckx/libduckx.a
-
-LIBS += -L$$PWD/../../lib/pugixml/ -lpugixml
-
-INCLUDEPATH += $$PWD/../../include/pugixml
-DEPENDPATH += $$PWD/../../include/pugixml
-
-PRE_TARGETDEPS += $$PWD/../../lib/pugixml/libpugixml.a
-
-INCLUDEPATH += $$PWD/../../include/zip
-DEPENDPATH += $$PWD/../../include/zip
-
-LIBS += -L$$PWD/../../lib/pdfmm/ -lpdfmm
-
-INCLUDEPATH += $$PWD/../../include/pdfmm
-DEPENDPATH += $$PWD/../../include/pdfmm
-
-INCLUDEPATH += $$PWD/../../include/rapidcsv
-DEPENDPATH += $$PWD/../../include/rapidcsv
-
 DISTFILES += \
     Info.plist \
     SimpleRead.qdocconf \
@@ -129,3 +104,30 @@ DISTFILES += \
     settingswindow.qml \
     storage.js \
     txtwindow.qml
+
+INCLUDEPATH += $$PWD/../../include/zip
+DEPENDPATH += $$PWD/../../include/zip
+
+INCLUDEPATH += $$PWD/../../include/rapidcsv
+DEPENDPATH += $$PWD/../../include/rapidcsv
+
+unix|win32: LIBS += -L$$PWD/../../lib/pdfmm/ -lpdfmm
+
+INCLUDEPATH += $$PWD/../../include/pdfmm
+DEPENDPATH += $$PWD/../../include/pdfmm
+
+unix|win32: LIBS += -L$$PWD/../../lib/pugixml/ -lpugixml
+
+INCLUDEPATH += $$PWD/../../include/pugixml
+DEPENDPATH += $$PWD/../../include/pugixml
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/pugixml.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/libpugixml.a
+
+unix|win32: LIBS += -L$$PWD/../../lib/duckx/ -lduckx
+
+INCLUDEPATH += $$PWD/../../include/duckx
+DEPENDPATH += $$PWD/../../include/duckx
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/duckx/duckx.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/duckx/libduckx.a

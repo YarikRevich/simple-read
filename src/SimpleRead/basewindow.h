@@ -15,7 +15,7 @@ public:
 
     virtual void onInit() = 0;
 
-    virtual void onSave();
+    virtual void onSave(){};
 };
 
 #endif // BASEWINDOW_H
