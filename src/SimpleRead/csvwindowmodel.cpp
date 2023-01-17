@@ -1,5 +1,7 @@
 #include "csvwindowmodel.h"
 
+#include <QModelIndex>
+
 int CSVWindowModel::rowCount(const QModelIndex &parent) const {
     QVariantMap table = this->csvWindow->onReadTable();
     return table.value(table.keys()[0]).toList().length() + 1;
@@ -24,24 +26,27 @@ QVariant CSVWindowModel::data(const QModelIndex &index, int role) const {
 
 bool CSVWindowModel::setData(const QModelIndex &index, const QVariant &value, int role)
     {
-        if (index.isValid() && role == Qt::EditRole) {
+        if (index.isValid()) {
             QVariantMap table = this->csvWindow->onReadTable();
             QList<QString> values = table[table.keys()[index.row()]].toStringList();
-
-            qInfo() << table;
 
             values[index.column()-1] = value.toString();
             table[table.keys()[index.row()]] = values;
 
-            qInfo() << table;
-
             this->csvWindow->onWriteTable(table);
 
-            emit dataChanged(index, index);
             return true;
         }
         return false;
     }
+
+Qt::ItemFlags CSVWindowModel::flags(const QModelIndex &index) const{
+    return Qt::ItemIsEditable;
+};
+
+QModelIndex CSVWindowModel::index(int row, int column, const QModelIndex &parent) const{
+    return createIndex(row, column);
+};
 
 QVariant CSVWindowModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if (role != Qt::DisplayRole || orientation != Qt::Horizontal)
