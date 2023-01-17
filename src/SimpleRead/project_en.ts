@@ -4,12 +4,12 @@
 <context>
     <name>csvwindow</name>
     <message>
-        <location filename="csvwindow.qml" line="411"/>
+        <location filename="csvwindow.qml" line="368"/>
         <source>Decreases font of the viewport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="420"/>
+        <location filename="csvwindow.qml" line="377"/>
         <source>Increases font of the viewport</source>
         <translation type="unfinished"></translation>
     </message>
@@ -55,37 +55,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="42"/>
-        <source>&amp;Preferences</source>
+        <location filename="mainwindow.qml" line="45"/>
+        <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="49"/>
+        <location filename="mainwindow.qml" line="48"/>
+        <source>Go to settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="55"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="51"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="57"/>
+        <location filename="mainwindow.qml" line="63"/>
         <source>&amp;Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="71"/>
+        <location filename="mainwindow.qml" line="77"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="79"/>
+        <location filename="mainwindow.qml" line="85"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="88"/>
+        <location filename="mainwindow.qml" line="94"/>
         <source>Please choose a file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,12 +159,12 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="51"/>
+        <location filename="statisticswindow.qml" line="52"/>
         <source>Load time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="statisticswindow.qml" line="57"/>
+        <location filename="statisticswindow.qml" line="58"/>
         <source>File size</source>
         <translation type="unfinished"></translation>
     </message>

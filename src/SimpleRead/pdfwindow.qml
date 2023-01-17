@@ -186,7 +186,7 @@ Item {
                         anchors.leftMargin: 3 * scrollBody.width / 100;
                         Layout.alignment: Qt.AlignCenter;
 
-                        enabled: false;
+                        readOnly: true;
                         color: "black";
                         focus: true;
                         renderType: Text.NativeRendering;

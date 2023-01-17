@@ -16,30 +16,18 @@
         <translation type="vanished">Zapisać</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="411"/>
+        <location filename="csvwindow.qml" line="368"/>
         <source>Decreases font of the viewport</source>
         <translation>Zmniejsza czcionkę rzutni</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="420"/>
+        <location filename="csvwindow.qml" line="377"/>
         <source>Increases font of the viewport</source>
         <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 <context>
     <name>docxwindow</name>
-    <message>
-        <source>Lock edit</source>
-        <translation type="vanished">Zablokować edycję</translation>
-    </message>
-    <message>
-        <source>Unlock edit</source>
-        <translation type="vanished">Odblokować edycję</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Zapisać</translation>
-    </message>
     <message>
         <location filename="docxwindow.qml" line="270"/>
         <source>Decreases font of the viewport</source>
@@ -79,37 +67,42 @@
         <translation>Automatyczne zapisywanie</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="42"/>
-        <source>&amp;Preferences</source>
-        <translation>Ustawienia</translation>
+        <location filename="mainwindow.qml" line="45"/>
+        <source>Actions</source>
+        <translation>Działania</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="49"/>
+        <location filename="mainwindow.qml" line="48"/>
+        <source>Go to settings</source>
+        <translation>Przejdź do ustawień</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="55"/>
         <source>&amp;View</source>
         <translation>Pogląd</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="51"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom In</source>
         <translation>Powiększyć czcionkę</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="57"/>
+        <location filename="mainwindow.qml" line="63"/>
         <source>&amp;Zoom Out</source>
         <translation>Pomniejszyć czcionkę</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="71"/>
+        <location filename="mainwindow.qml" line="77"/>
         <source>Open file</source>
         <translation>Otwórz plik</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="79"/>
+        <location filename="mainwindow.qml" line="85"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="88"/>
+        <location filename="mainwindow.qml" line="94"/>
         <source>Please choose a file</source>
         <translation>Proszę wybrać plik</translation>
     </message>
@@ -178,12 +171,12 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="51"/>
+        <location filename="statisticswindow.qml" line="52"/>
         <source>Load time</source>
         <translation>Czas ładowania</translation>
     </message>
     <message>
-        <location filename="statisticswindow.qml" line="57"/>
+        <location filename="statisticswindow.qml" line="58"/>
         <source>File size</source>
         <translation>Rozmiar pliku</translation>
     </message>

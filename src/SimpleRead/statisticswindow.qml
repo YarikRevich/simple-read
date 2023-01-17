@@ -41,7 +41,6 @@ Rectangle {
                         },
 
                         "fileSize": function(){
-                            console.log(StatisticsWindow.getFileSize())
                             return StatisticsWindow.getFileSize()
                         },
 
