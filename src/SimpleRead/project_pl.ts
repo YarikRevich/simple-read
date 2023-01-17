@@ -2,21 +2,53 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pl">
 <context>
+    <name>csvwindow</name>
+    <message>
+        <source>Lock edit</source>
+        <translation type="vanished">Zablokować edycję</translation>
+    </message>
+    <message>
+        <source>Unlock edit</source>
+        <translation type="vanished">Odblokować edycję</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">Zapisać</translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="411"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="420"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
+    </message>
+</context>
+<context>
     <name>docxwindow</name>
     <message>
-        <location filename="docxwindow.qml" line="37"/>
         <source>Lock edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zablokować edycję</translation>
     </message>
     <message>
-        <location filename="docxwindow.qml" line="37"/>
         <source>Unlock edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Odblokować edycję</translation>
     </message>
     <message>
-        <location filename="docxwindow.qml" line="60"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zapisać</translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 <context>
@@ -34,95 +66,159 @@
     <message>
         <location filename="mainwindow.qml" line="28"/>
         <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <location filename="mainwindow.qml" line="32"/>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisać</translation>
     </message>
     <message>
         <location filename="mainwindow.qml" line="36"/>
         <source>&amp;Auto save</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczne zapisywanie</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="41"/>
-        <source>&amp;Print</source>
-        <translation>Wydrukować</translation>
+        <location filename="mainwindow.qml" line="42"/>
+        <source>&amp;Preferences</source>
+        <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="48"/>
+        <location filename="mainwindow.qml" line="49"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogląd</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="50"/>
+        <location filename="mainwindow.qml" line="51"/>
         <source>&amp;Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Powiększyć czcionkę</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="54"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomniejszyć czcionkę</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="61"/>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="63"/>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="73"/>
+        <location filename="mainwindow.qml" line="71"/>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz plik</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="77"/>
+        <location filename="mainwindow.qml" line="79"/>
         <source>Settings</source>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="94"/>
+        <location filename="mainwindow.qml" line="88"/>
         <source>Please choose a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać plik</translation>
+    </message>
+</context>
+<context>
+    <name>pdfwindow</name>
+    <message>
+        <location filename="pdfwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="pdfwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 <context>
     <name>settingswindow</name>
     <message>
-        <location filename="settingswindow.qml" line="40"/>
+        <location filename="settingswindow.qml" line="52"/>
         <source>Languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Języki</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="44"/>
+        <location filename="settingswindow.qml" line="57"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O aplikacji</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="102"/>
+        <location filename="settingswindow.qml" line="116"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Angielski</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="107"/>
+        <location filename="settingswindow.qml" line="122"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Polski</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="112"/>
+        <location filename="settingswindow.qml" line="128"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukraiński</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="120"/>
+        <location filename="settingswindow.qml" line="145"/>
         <source>Chosen language</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybrany język</translation>
+    </message>
+    <message>
+        <location filename="settingswindow.qml" line="187"/>
+        <source>SimpleRead is an open-source project</source>
+        <translation>SimpleRead - to open-source projekt</translation>
+    </message>
+    <message>
+        <location filename="settingswindow.qml" line="192"/>
+        <source>More information can be find on</source>
+        <translation>Więcej informacji można znaleźć na</translation>
+    </message>
+    <message>
+        <location filename="settingswindow.qml" line="199"/>
+        <source>Version</source>
+        <translation>Wersja</translation>
+    </message>
+</context>
+<context>
+    <name>statisticswindow</name>
+    <message>
+        <location filename="statisticswindow.qml" line="51"/>
+        <source>Load time</source>
+        <translation>Czas ładowania</translation>
+    </message>
+    <message>
+        <location filename="statisticswindow.qml" line="57"/>
+        <source>File size</source>
+        <translation>Rozmiar pliku</translation>
+    </message>
+</context>
+<context>
+    <name>txtwindow</name>
+    <message>
+        <location filename="txtwindow.qml" line="77"/>
+        <source>Locks edit field</source>
+        <translation>Blokuje pole edycyjne</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="78"/>
+        <source>Unlocks edit field</source>
+        <translation>Unlocks edit field</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="88"/>
+        <source>Saves the file</source>
+        <translation>Zapisuje plik</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="99"/>
+        <source>Shows detailed information about the file</source>
+        <translation>Wyświetla szczegółowe informacje o pliku</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="315"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="324"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 </TS>

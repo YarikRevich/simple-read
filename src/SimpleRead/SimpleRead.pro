@@ -1,10 +1,8 @@
-QT += core gui \
-    quickwidgets \
-    sql
+QT += core gui quickwidgets sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++17
+CONFIG += c++20
 
 TARGET = SimpleRead
 
@@ -16,9 +14,9 @@ DESTDIR = target
 
 SOURCES += \
     csvwindow.cpp \
-    dataview.cpp \
+    csvwindowmodel.cpp \
     docxwindow.cpp \
-    filewindow.cpp \
+    exceptions.cpp \
     globalqmlengine.cpp \
     logger.cpp \
     main.cpp \
@@ -26,15 +24,18 @@ SOURCES += \
     qmltyperegistrator.cpp \
     qmlwindow.cpp \
     settingswindow.cpp \
+    statistics.cpp \
+    statisticswindow.cpp \
+    timer.cpp \
     translatorregistrator.cpp \
     txtwindow.cpp
 
 HEADERS += \
+    basewindow.h \
     csvwindow.h \
-    dataview.h \
+    csvwindowmodel.h \
     docxwindow.h \
     exceptions.h \
-    filewindow.h \
     globalqmlengine.h \
     logger.h \
     mainwindow.h \
@@ -42,6 +43,13 @@ HEADERS += \
     qmltyperegistrator.h \
     qmlwindow.h \
     settingswindow.h \
+    statistics.h \
+    statisticswindow.h \
+    tablewindow.h \
+    textwindow.h \
+    textwindowread.h \
+    textwindowwrite.h \
+    timer.h \
     translatorregistrator.h \
     txtwindow.h
 
@@ -63,6 +71,7 @@ CONFIG += lrelease \
 RESOURCES += \
     mainwindow.qml \
     settingswindow.qml \
+    statisticswindow.qml \
     docxwindow.qml \
     csvwindow.qml \
     pdfwindow.qml \
@@ -75,46 +84,16 @@ RESOURCES += \
     images/increase_font.png \
     images/decrease_font.png \
     images/save.png \
+    images/information.png \
     storage.js \
     project_en.qm \
     project_pl.qm \
     project_uk.qm
 
-MY_PKGS = qtquickcontrols2
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/duckx/release/ -lduckx
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/duckx/debug/ -lduckx
-else:unix: LIBS += -L$$PWD/../../lib/duckx/ -lduckx
-
-INCLUDEPATH += $$PWD/../../include/duckx
-DEPENDPATH += $$PWD/../../include/duckx
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/duckx/release/libduckx.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/duckx/debug/libduckx.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/duckx/release/duckx.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/duckx/debug/duckx.lib
-else:unix: PRE_TARGETDEPS += $$PWD/../../lib/duckx/libduckx.a
-
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/pugixml/release/ -lpugixml
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/pugixml/debug/ -lpugixml
-else:unix: LIBS += -L$$PWD/../../lib/pugixml/ -lpugixml
-
-INCLUDEPATH += $$PWD/../../include/pugixml
-DEPENDPATH += $$PWD/../../include/pugixml
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/pugixml/release/libpugixml.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/pugixml/debug/libpugixml.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/pugixml/release/pugixml.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../lib/pugixml/debug/pugixml.lib
-else:unix: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/libpugixml.a
-
-INCLUDEPATH += $$PWD/../../include/zip
-DEPENDPATH += $$PWD/../../include/zip
 
 DISTFILES += \
     Info.plist \
@@ -122,17 +101,36 @@ DISTFILES += \
     SimpleRead.rc \
     csvwindow.qml \
     docxwindow.qml \
+    logger.qdoc \
     pdfwindow.qml \
     settingswindow.qml \
+    statisticswindow.qml \
     storage.js \
     txtwindow.qml
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../lib/pdfmm/release/ -lpdfmm
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../lib/pdfmm/debug/ -lpdfmm
-else:unix: LIBS += -L$$PWD/../../lib/pdfmm/ -lpdfmm
+INCLUDEPATH += $$PWD/../../include/zip
+DEPENDPATH += $$PWD/../../include/zip
+
+INCLUDEPATH += $$PWD/../../include/rapidcsv
+DEPENDPATH += $$PWD/../../include/rapidcsv
+
+unix|win32: LIBS += -L$$PWD/../../lib/pdfmm/ -lpdfmm
 
 INCLUDEPATH += $$PWD/../../include/pdfmm
 DEPENDPATH += $$PWD/../../include/pdfmm
 
-INCLUDEPATH += $$PWD/../../include/rapidcsv
-DEPENDPATH += $$PWD/../../include/rapidcsv
+unix|win32: LIBS += -L$$PWD/../../lib/pugixml/ -lpugixml
+
+INCLUDEPATH += $$PWD/../../include/pugixml
+DEPENDPATH += $$PWD/../../include/pugixml
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/pugixml.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/pugixml/libpugixml.a
+
+unix|win32: LIBS += -L$$PWD/../../lib/duckx/ -lduckx
+
+INCLUDEPATH += $$PWD/../../include/duckx
+DEPENDPATH += $$PWD/../../include/duckx
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/duckx/duckx.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$PWD/../../lib/duckx/libduckx.a

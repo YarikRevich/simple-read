@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     setlocale(LC_ALL, "en_US.UTF-8");
 
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
-    QCoreApplication::setApplicationName( QString("SimpleRead") );
+    QCoreApplication::setApplicationName( QString("SimpleRead"));
     QCoreApplication::setApplicationVersion("1.0");
     QApplication app(argc, argv);
 

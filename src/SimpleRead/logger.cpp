@@ -1,4 +1,5 @@
 #include "logger.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <QString>
@@ -6,7 +7,7 @@
 FILE *Logger::outputFile = NULL;
 
 Logger::Logger(){
-    FILE *f = fopen(Logger::getLogFilePath(), "wb");
+    FILE *f = fopen(Logger::getLogFilePath(), "a");
     if (!f)
        throw std::invalid_argument("error happened during the initialization of log file");
     this->outputFile = f;
@@ -27,7 +28,7 @@ const char * Logger::getLogFilePath(){
     // FIX: find a correct path for Windows
     return "";
 #endif
-    return "";
+    return NULL;
 };
 
 void loggingHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg){

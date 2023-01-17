@@ -2,7 +2,10 @@
 #define DOCXWINDOW_H
 
 #include "dataview.h"
-#include "filewindow.h"
+#include "qmlwindow.h"
+#include "statistics.h"
+#include "textwindowread.h"
+
 #include <QObject>
 #include <QString>
 #include <duckx.hpp>
@@ -13,31 +16,28 @@
  * \class DOCXWindow
  * \brief The DOCXWindow class used for representation of opened files
  */
-class DOCXWindow : public QObject, public DataView, public FileWindow
+class DOCXWindow : public QObject, public TextWindowRead, public QMLWindow, public Statistics
 {
 private:
     Q_OBJECT
 
+    std::string file_in_buffer;
     duckx::Document doc;
 public:
-    explicit DOCXWindow(QObject* parent = 0) : QObject(parent){};
+    Q_INVOKABLE void setFileName(QString);
 
-    // Event callbacks
+    // Custom overrides
     Q_INVOKABLE void onOpen();
 
-    Q_INVOKABLE void onSave() override;
-
-    Q_INVOKABLE void onWriteText(QString) override;
-
-    Q_INVOKABLE QString onReadText() override;
-
-    Q_INVOKABLE void onWriteTable(QHash<QString, void *>) override;
-
-    Q_INVOKABLE QHash<QString, void *> onReadTable() override;
+    Q_INVOKABLE void onClose();
 
     Q_INVOKABLE void onInit() override;
 
-    Q_INVOKABLE void setFileName(QString);
+    Q_INVOKABLE QString onReadText(int start, int end) override;
+
+    Q_INVOKABLE int getContentSize() override;
+
+    Q_INVOKABLE Statistics* getStatistics();
 };
 
 #endif // DOCXWINDOW_H

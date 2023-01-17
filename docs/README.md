@@ -30,10 +30,14 @@ make install
 
 ### Linux
 
+Prepared to be published
+
 ### Windows
 
+Prepared to be published
+
 ## Status
-This project is stil maintaned
+This project is in active development
 
 ## Inspiration
 There exist lots of different cross-platform file readers, but as ordinar users

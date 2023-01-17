@@ -3,6 +3,8 @@ import QtQuick 2.15
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
+import Qt.labs.platform as Labs
+import "storage.js" as Storage
 
 Item {
     id: root;
@@ -20,173 +22,107 @@ Item {
 
             color: "#D9D9D9";
             Layout.fillWidth: true;
-            Layout.preferredHeight: 50;
-            Layout.alignment: Qt.AlignCenter
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
 
-            RowLayout {
+            ListView {
                 anchors.fill: parent;
-//                anchors.margins: 2;
+                orientation: ListView.Horizontal;
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+
                 spacing: 1;
+                clip: true;
 
-                ListView {
-//                    orientation: ListView.Horizontal
+                model: ListModel {
+                    id: barModel;
 
-                    model: ListModel {
-                        id: barModel
-
-                        property var actions: {
-                            "lock_edit": "",
-                            "unlock_edit": "",
-                            "save": ""
-                        }
-
-                        ListElement {
-                            name: "lock_edit"
-                            icon: "images/lock_edit.png"
-                            action: "lock_edit"
-                            enabled: true
-                        }
-
-                        ListElement {
-                            name: "unlock_edit"
-                            icon: "images/unlock_edit.png"
-                            action: "unlock_edit"
-                            enabled: true
-                        }
-
-                        ListElement {
-                            name: "save"
-                            icon: "images/unlock_edit.png"
-                            action: "save"
-                            enabled: false
+                    function getElementByName(name){
+                        for (let i = 0; i < barModel.count; i++){
+                            const barModelElement = barModel.get(i)
+                            if (barModelElement.name === name){
+                                return barModelElement
+                            }
                         }
                     }
 
-                    delegate:
-
-
-//                        Layout.preferredWidth: 5 * barMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignLeft
-
-                        Button {
-//                            anchors.fill: parent;
-//                            anchors.fill: parent;
-//                            Layout.fillWidth: true
-//                            Layout.fillHeight: true;
-//                            Layout.alignment: Qt.AlignRight
-                            icon.source: model.icon;
-
-                            Text{
-//                                text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-//                                color: "red";
-                                text: ""
-                                anchors.verticalCenter: parent.verticalCenter
-//                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-//                            onClicked: {
-//                                editField.enabled = !editField.enabled;
-//                            }
+                    property var actions: {
+                        "information": function(){
+                            StatisticsWindow.setStatistics(DOCXWindow.getStatistics());
+                            StatisticsWindow.onInit();
+                            StatisticsWindow.onOpen();
                         }
+                    }
 
+                    ListElement {
+                        name: "information"
+                        icon: "images/information.png"
+                        action: "information"
+                        tooltip: "Shows detailed information about the file"
+                        tooltip_visible: false
+                        hovered: false;
+                        enabled: true
+                    }
                 }
 
-//                Rectangle {
-//                    color: "yellow";
-//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-//                    Layout.fillHeight: true;
-//                    Layout.alignment: Qt.AlignLeft
+                delegate: Button {
+                        Text{
+                            text: ""
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
 
-//                    Button {
-//                        Text{
-//                            text: editField.enabled ? qsTr("Lock edit") : qsTr("Unlock edit");
-//                            color: "red";
-//                            anchors.verticalCenter: parent.verticalCenter
-//                            anchors.horizontalCenter: parent.horizontalCenter
-//                        }
+                        icon.source: model.checked ? model.alter_icon : model.icon;
+                        anchors.verticalCenter: parent.verticalCenter;
 
-//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignRight
-//                        onClicked: {
-//                            editField.enabled = !editField.enabled;
-//                        }
-//                    }
-//                }
+                        ToolTip {
+                            text: model.tooltip;
+                            visible: model.tooltip_visible
+                        }
 
-//                Rectangle {
-//                    color: "green";
-//                    Layout.preferredWidth: 5 * bottomMenu.width / 100;
-//                    Layout.fillHeight: true;
-//                    Layout.alignment: Qt.AlignLeft
+                        onClicked: {
+                            barModel.actions[model.action]()
+                        }
 
-//                    Button {
-//                        Text{
-//                            text: qsTr("Save");
-//                            color: "red";
-//                            anchors.verticalCenter: parent.verticalCenter
-//                            anchors.horizontalCenter: parent.horizontalCenter
-//                        }
+                        onHoveredChanged: {
+                            if (!barModel.getElementByName(model.name).hovered){
+                                toolTipTimerTopBar.start();
+                                barModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerTopBar.stop();
+                                barModel.getElementByName(model.name).tooltip_visible = false;
+                                barModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
 
-//                        Layout.preferredWidth: 10 * scaleMenu.width / 100;
-//                        Layout.fillHeight: true;
-//                        Layout.alignment: Qt.AlignRight
-//                        onClicked: {
-//                            DOCXWindow.onSave();
-//                        }
-//                    }
-//                }
+                        Timer {
+                            id: toolTipTimerTopBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                barModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
+                    }
             }
         }
 
         Rectangle {
-            color: "#B3FAA7";
-            radius: 15;
-
-            border.width: 1
-            border.color: "black"
-
-//            CustomBorder
-//                    {
-//                        commonBorder: false
-//                        lBorderwidth: 0
-//                        rBorderwidth: 0
-//                        tBorderwidth: 10
-//                        bBorderwidth: 10
-//                        borderColor: "black"
-//                    }
-
-            width: 90 * root.width / 100;
-
             Layout.fillHeight: true;
-            Layout.alignment: Qt.AlignCenter
+            Layout.fillWidth: true;
 
-            RowLayout {
-                ListView {
-                    spacing: 8
-                    Layout.preferredWidth: 20;
-                    Layout.fillHeight: true;
-                    model: ListModel {
-                        ListElement {
-                            count: 1;
-                        }
+            Rectangle{
+                id: scrollBody;
+                width: 95 * parent.width / 100;
+                height: 90 * parent.height / 100;
 
-                        ListElement {
-                            count: 2;
-                        }
-                    }
-
-                    delegate:
-                        Text {
-                            text: model.count;
-                        }
-                }
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 ScrollView{
-//                    padding: 15;
-                    Layout.preferredWidth: 200;
-//                    Layout.fillWidth: true;
-                    Layout.fillHeight: true;
+                    id: lineScroll;
+                    anchors.fill: parent;
                     clip: true;
 
                     ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
@@ -194,92 +130,231 @@ Item {
 
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
                     ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
+
+                    Rectangle {
+                        id: lineCounter;
+                        color: "#B3FAA7";
+                        implicitWidth: 3 * scrollBody.width / 100;
+                        border.width: 1;
+
+                        function reloadHeight(){
+                            if (editField.height > scrollBody.height){
+                                lineCounter.height = editField.height;
+                            }else{
+                                lineCounter.height = scrollBody.height
+                            }
+                        }
+
+                        function reloadLines(){
+                            if (lineCounterModel.count > editField.lineCount){
+                                for (var a = lineCounterModel.count; a >= editField.lineCount; a--){
+                                    lineCounterModel.remove(a);
+                                }
+                            }else{
+                                for (let a = lineCounterModel.count; a < editField.lineCount; a++){
+                                    lineCounterModel.set(a, {count: a+1});
+                                }
+                            }
+                        }
+
+                        ListView {
+                            id: lineCounterList;
+                            anchors.fill: parent;
+                            anchors.topMargin: 5;
+                            anchors.horizontalCenter: parent.horizontalCenter;
+
+                            model: ListModel {
+                                id: lineCounterModel;
+
+                                ListElement {
+                                    count: 1;
+                                }
+                            }
+
+                            delegate: Text {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    text: model.count;
+                                    color: "gray";
+                                    font.pixelSize: editField.font.pixelSize;
+                            }
+                        }
+                    }
+
                     TextArea {
                         id: editField;
-                        text: DOCXWindow.onReadText();
-                        color: "blue";
+                        anchors.fill: parent;
+                        anchors.leftMargin: 3 * scrollBody.width / 100;
+                        Layout.alignment: Qt.AlignCenter;
+
+                        enabled: false;
+                        color: "black";
                         focus: true;
+                        renderType: Text.NativeRendering;
+
                         font.pointSize: 24;
                         wrapMode: TextEdit.WrapAnywhere;
                         selectByMouse: true;
-                        Layout.fillWidth: true;
-                        Layout.fillHeight: true;
-                        Layout.alignment: Qt.AlignCenter;
-                        enabled: true;
-                        onTextChanged: {
-                            console.log(editField.contentHeight, editField.lineCount)
-                            console.log("Text changed", editField.cursorPosition);
+
+                        property bool loaded: false;
+
+                        background:
+                            Rectangle {
+                            color: "#B3FAA7";
+                            radius: 10;
+                            border.width: 1;
+                            border.color: "black";
+                        }
+
+                        onLineCountChanged: {
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
+                        }
+
+                        Component.onCompleted: {
+                            editField.loaded = true;
+                            text = DOCXWindow.onReadText(0, -1);
+
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
                         }
                     }
                 }
             }
-
         }
-
 
         Rectangle {
             id: bottomMenu;
+            color: "#D9D9D9";
             Layout.fillWidth: true;
-            Layout.preferredHeight: 35;
-            Layout.alignment: Qt.AlignCenter
+            Layout.preferredHeight: 10 * parent.height / 100;
+            Layout.alignment: Qt.AlignCenter;
 
-            RowLayout {
+            ListView {
                 anchors.fill: parent;
-                anchors.margins: 2;
+                orientation: ListView.Horizontal;
+                anchors.bottom: parent.bottom
+                anchors.verticalCenter: parent.verticalCenter;
+                anchors.horizontalCenter: parent.horizontalCenter;
+                Layout.alignment: Qt.AlignRight;
                 spacing: 1;
 
-                Rectangle {
-                    color: "#D9D9D9";
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
-                }
+                model: ListModel {
+                    id: bottomModel
 
-                Rectangle {
-                    id: scaleMenu;
-                    Layout.preferredWidth: 50 * bottomMenu.width / 100;
-                    Layout.fillHeight: true;
-                    Layout.alignment: Qt.AlignLeft
-
-                    RowLayout {
-                        anchors.fill: parent;
-                        anchors.margins: 2;
-                        spacing: 1;
-
-                        Button {
-                            Text{
-                                text: "-";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-                                editField.font.pointSize -= 1;
-                            }
-                        }
-
-                        Button {
-                            Text{
-                                text: "+";
-                                color: "red";
-                                anchors.verticalCenter: parent.verticalCenter
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Layout.preferredWidth: 10 * scaleMenu.width / 100;
-                            Layout.fillHeight: true;
-                            Layout.alignment: Qt.AlignRight
-                            onClicked: {
-                                editField.font.pointSize += 1;
+                    function getElementByName(name){
+                        for (let i = 0; i < bottomModel.count; i++){
+                            const bottomModelElement = bottomModel.get(i)
+                            if (bottomModelElement.name === name){
+                                return bottomModelElement
                             }
                         }
                     }
+
+                    property var actions: {
+                        "increase_font": function(){
+                            editField.font.pixelSize += 1;
+                            editField.anchors.leftMargin += 0.08;
+                            lineCounter.implicitWidth += 0.2;
+                        },
+                        "decrease_font": function(){
+                            editField.font.pixelSize -= 1;
+                            editField.anchors.leftMargin -= 0.08;
+                            lineCounter.implicitWidth -= 0.2;
+                        },
+                    }
+
+                    ListElement {
+                        name: "decrease_font"
+                        icon: "images/decrease_font.png"
+                        action: "decrease_font"
+                        tooltip: QT_TR_NOOP("Decreases font of the viewport")
+                        tooltip_visible: false
+                        hovered: false;
+                    }
+
+                    ListElement {
+                        name: "increase_font"
+                        icon: "images/increase_font.png"
+                        action: "increase_font"
+                        tooltip: QT_TR_NOOP("Increases font of the viewport")
+                        tooltip_visible: false
+                        hovered: false;
+                    }
                 }
+
+                delegate: Button {
+                        Layout.alignment: Qt.AlignRight;
+                        anchors.verticalCenter: parent.verticalCenter;
+                        icon.source: model.icon;
+
+                        Text{
+                            text: ""
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+
+                        ToolTip {
+                            text: qsTr(model.tooltip);
+                            visible: model.tooltip_visible
+                        }
+
+                        onClicked: bottomModel.actions[model.action]()
+
+                        onHoveredChanged: {
+                            if (!bottomModel.getElementByName(model.name).hovered){
+                                toolTipTimerBottomBar.start();
+                                bottomModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerBottomBar.stop();
+                                bottomModel.getElementByName(model.name).tooltip_visible = false;
+                                bottomModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
+
+                        Timer {
+                            id: toolTipTimerBottomBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                bottomModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
+                    }
             }
+        }
+    }
+
+    Labs.MessageDialog {
+        id: errorDialogWindow
+        title: "Error";
+    }
+
+    function showErrorDialogWindow(msg){
+        errorDialogWindow.text = msg;
+        errorDialogWindow.open()
+    }
+
+    Labs.MessageDialog {
+        id: warningDialogWindow
+        title: "Warning";
+    }
+
+    function showWarningDialogWindow(msg){
+        warningDialogWindow.text = msg;
+        warningDialogWindow.open()
+    }
+
+    Connections {
+        id: exceptionsConnection
+        target: Exceptions;
+
+        property bool loaded: false;
+        function onError(msg){
+            showErrorDialogWindow(msg)
+        }
+
+        function onWarning(msg){
+            showWarningDialogWindow(msg)
         }
     }
 }

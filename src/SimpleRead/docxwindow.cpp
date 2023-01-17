@@ -1,101 +1,66 @@
 #include "docxwindow.h"
+#include "exceptions.h"
+#include "timer.h"
+
+#include <duckx.hpp>
+#include <iostream>
+#include <stdio.h>
+#include <fstream>
 #include <QHash>
 #include <QLabel>
 #include <QScrollArea>
 #include <QString>
 #include <QString>
-#include <duckx.hpp>
-#include <iostream>
-#include <stdio.h>
 
 void DOCXWindow::onInit(){
-    this->doc = duckx::Document(this->fileName.toStdString());
-    this->doc.open();
+    {
+        Timer timer;
+        this->doc = duckx::Document(this->fileName.toStdString());
+        this->doc.open();
 
-    for (auto p = this->doc.tables(); p.has_next(); p.next()){
-        for (auto r = p.rows(); r.has_next(); r.next()){
-            for (auto c = r.cells(); c.has_next(); c.next()){
-                for (auto w = c.paragraphs(); w.has_next(); w.next()){
-                    for (auto q = w.runs(); q.has_next(); q.next()) {
-                        qInfo() << q.get_text().c_str();
-                    }
+        for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
+            for (auto r = p.runs(); r.has_next(); r.next()) {
+                for (auto const& text : r.get_text()){
+                    this->file_in_buffer += text;
                 }
             }
+            this->file_in_buffer += "\n";
         }
     }
+    this->setLoadTime(Timer::time);
 
-    for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
-        for (auto r = p.runs(); r.has_next(); r.next()) {
-            for (auto const& text : r.get_text()){
-                this->appendChar(text);
-            }
-        }
-        this->appendChar('\n');
-    }
-//    qInfo() << this->text.c_str();
-    this->saveSnapshot();
+    std::ifstream file(this->fileName.toStdString(), std::ios::in);
+    file.seekg(0, std::ios_base::end);
+    double size = file.tellg();
+    double megabytes = size / (1024.0 * 1024.0);
+
+    this->setFileSize(std::to_string(megabytes) + " MB");
+
+    Exceptions::LimitedFunctionality(true);
 }
 
 void DOCXWindow::onOpen(){
     QMLWindow::onOpen(QML_DOCXWINDOW);
 }
 
-//void DOCXWindow::onSave(){
-//}
+void DOCXWindow::onClose() {
+    qInfo("DOCXWindow was closed");
 
-void DOCXWindow::onWriteText(QString text) {
-
+    QMLWindow::onClose();
 }
 
-QString DOCXWindow::onReadText(){
-    return DataView::getTextAsQString();
+QString DOCXWindow::onReadText(int start, int end){
+    return QString::fromStdString(this->file_in_buffer);
 }
 
-void DOCXWindow::onWriteTable(QHash<QString, void *>){
-
-};
-
-QHash<QString, void *> DOCXWindow::onReadTable(){
-    return QHash<QString, void *>();
-};
-
-void DOCXWindow::onSave(){
-    int rIndex = 0;
-//    for (auto p = this->doc.tables(); p.has_next(); p.next()){
-//        for (auto r = p.rows(); r.has_next(); r.next()){
-//            for (auto c = r.cells(); r.has_next(); r.next()){
-//                for (auto w = c.paragraphs(); c.has_next(); c.next()){
-//                    for (auto q = w.runs(); w.has_next(); w.next()) {
-//                        qInfo() << q.get_text().c_str();
-//                    }
-//                }
-//            }
-//        }
-//    }
-    for (auto p = this->doc.paragraphs(); p.has_next(); p.next()) {
-        for (auto r = p.runs(); r.has_next(); r.next()) {
-
-//            const std::string src = r.get_text();
-            for (auto const& text : r.get_text()){
-//                qInfo() << text << " " << rIndex << " " << this->text.length();
-                rIndex++;
-            }
-//            qInfo() << r.get_text().at(125);
-
-//                wprintf(L"%ls\n", wtext);
-//                  qInfo() << this->isCharExistAt(rIndex);
-//                this->getChar(rIndex);
-//                qInfo(wtext);
-
-
-//            qInfo() << rIndex << "TU";
-//            rIndex++;
-        }
-        rIndex++;
-    }
-    this->doc.save();
+int DOCXWindow::getContentSize(){
+    return this->file_in_buffer.length();
 }
 
 void DOCXWindow::setFileName(QString fileName){
-    FileWindow::setFileName(fileName);
+    QMLWindow::setFileName(fileName);
 }
+
+Statistics* DOCXWindow::getStatistics(){
+    return this;
+};

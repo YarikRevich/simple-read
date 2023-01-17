@@ -38,10 +38,9 @@ ApplicationWindow {
                   checked: Storage.getAutoSave() === "true" ? true : false
                   onCheckedChanged: checked ? Storage.setAutoSave("true") : Storage.setAutoSave("false")
               }
-              Labs.MenuSeparator{}
               Labs.MenuItem {
-                  text: qsTr("&Print")
-                  onTriggered: {}
+                  text: qsTr("&Preferences")
+                  onTriggered: SettingsWindow.onOpen();
               }
         }
 
@@ -50,49 +49,40 @@ ApplicationWindow {
               title: qsTr("&View")
               Labs.MenuItem {
                   text: qsTr("&Zoom In")
-                  onTriggered: {}
+                  onTriggered: {
+                      Storage.setInterfaceFontSize(Storage.getInterfaceFontSize() + 1);
+                  }
               }
               Labs.MenuItem {
                   text: qsTr("&Zoom Out")
-                  onTriggered: {}
+                  onTriggered: {
+                      Storage.setInterfaceFontSize(Storage.getInterfaceFontSize() - 1);
+                  }
               }
         }
-
-        Labs.Menu {
-               id: helpMenu
-               title: qsTr("Help")
-               Labs.MenuItem {
-                   text: qsTr("&About")
-                   onTriggered: {
-                        SettingsWindow.onOpen();
-                   }
-               }
-         }
     }
 
     Row{
         anchors.verticalCenter: parent.verticalCenter;
         anchors.horizontalCenter: parent.horizontalCenter;
         Button{
+            id: openFileButton;
+
             text: qsTr("Open file");
+            font.pixelSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
+
             onClicked: fileDialogWindow.open();
         }
         Button {
+            id: settingsButton;
+
             text: qsTr("Settings");
+            font.pixelSize: Storage.DEFAULT_INTERFACE_FONT_SIZE;
+
             onClicked: SettingsWindow.onOpen();
         }
     }
 
-    Labs.MessageDialog {
-        id: messageDialog
-        title: "Extension error"
-        text: "An extension of the chosen file is not supported yet."
-    }
-
-    /*!
-      \brief
-      \qmltype FileDialog
-    */
     FileDialog {
         id: fileDialogWindow;
         title: qsTr("Please choose a file");
@@ -124,12 +114,12 @@ ApplicationWindow {
 
             const pdfFileMatch = selectedFile.match(fileDialogWindow.pdfFileMatch);
             if (pdfFileMatch){
-                   messageDialog.open();
+                    currentFileWindow = PDFWindow;
 
-                   // PDFWindow.onOpen();
-                   // PDFWindow.setFileName(cleanFilePath(pdfFileMatch[0]));
-                   // PDFWindow.exec();
-                   return
+                    PDFWindow.setFileName(cleanFilePath(pdfFileMatch[0]));
+                    PDFWindow.onInit();
+                    PDFWindow.onOpen();
+                    return
             };
 
             const txtFileMatch = selectedFile.match(fileDialogWindow.txtFileMatch);
@@ -151,6 +141,19 @@ ApplicationWindow {
                     CSVWindow.onOpen();
                    return
             };
+        }
+    }
+
+    Timer {
+        interval: 100;
+        running: true;
+        repeat: true;
+        onTriggered: {
+            if (Storage.isInterfaceFontSizeChanged()){
+                const interfaceFontSize = String(Storage.getInterfaceFontSize());
+                openFileButton.font.pixelSize = interfaceFontSize;
+                settingsButton.font.pixelSize = interfaceFontSize;
+            }
         }
     }
 

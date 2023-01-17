@@ -18,3 +18,6 @@ install: ## install the application
 ifeq ($(UNAME), Darwin)
 	@cp -r src/build/target/SimpleRead.app /Volumes/Data/Applications
 endif
+
+docs: ## generate documentation
+
