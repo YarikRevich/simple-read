@@ -19,20 +19,24 @@ QVariant CSVWindowModel::data(const QModelIndex &index, int role) const {
         return table.keys()[index.column()];
     }
 
-    return  table.value(table.keys()[index.column()]).toList()[index.row() - 1];
+    return  table.value(table.keys()[index.column()]).toList()[index.row() - 1].toString();
 }
 
 bool CSVWindowModel::setData(const QModelIndex &index, const QVariant &value, int role)
     {
         if (index.isValid() && role == Qt::EditRole) {
-            qInfo() << index.row() << index.column();
-
             QVariantMap table = this->csvWindow->onReadTable();
-            QList<QVariant> values = table[table.keys()[index.row()]].toList();
-            values[index.column()] = value;
+            QList<QString> values = table[table.keys()[index.row()]].toStringList();
+
+            qInfo() << table;
+
+            values[index.column()-1] = value.toString();
             table[table.keys()[index.row()]] = values;
 
+            qInfo() << table;
+
             this->csvWindow->onWriteTable(table);
+
             emit dataChanged(index, index);
             return true;
         }

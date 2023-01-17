@@ -7,8 +7,6 @@
 
 class TextWindow : public TextWindowRead, public TextWindowWrite
 {
-public:
-    virtual int getContentSize() = 0;
 };
 
 #endif // TEXTWINDOW_H

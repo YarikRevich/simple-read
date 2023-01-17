@@ -2,8 +2,9 @@
 #define PDFWINDOW_H
 
 #include "dataview.h"
-#include "filewindow.h"
-#include "textwindow.h"
+#include "textwindowread.h"
+#include "statistics.h"
+#include "qmlwindow.h"
 
 #include <QWidget>
 #include <QObject>
@@ -14,7 +15,7 @@
 /*!
  * \brief The PDFWindow class used for representation of opened files
  */
-class PDFWindow : public QObject, public TextWindow, public QMLWindow
+class PDFWindow : public QObject, public TextWindowRead, public QMLWindow, public Statistics
 {
 private:
     Q_OBJECT
@@ -32,13 +33,11 @@ public:
 
     Q_INVOKABLE void onInit() override;
 
-    Q_INVOKABLE void onSave() override;
-
-    Q_INVOKABLE void onWriteText(QString, int start, int end) override;
-
     Q_INVOKABLE QString onReadText(int start, int end) override;
 
     Q_INVOKABLE int getContentSize() override;
+
+    Q_INVOKABLE Statistics* getStatistics();
 };
 
 #endif // PDFWINDOW_H

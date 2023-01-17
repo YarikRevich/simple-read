@@ -16,6 +16,10 @@ QString StatisticsWindow::getLoadTime() const{
     return QString::fromStdString(this->statistics->getLoadTime());
 }
 
+QString StatisticsWindow::getFileSize() const{
+    return QString::fromStdString(this->statistics->getFileSize());
+}
+
 
 
 

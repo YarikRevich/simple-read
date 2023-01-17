@@ -3,7 +3,6 @@
 
 #include "qmlwindow.h"
 #include "statistics.h"
-#include "textwindowread.h"
 #include <QObject>
 
 #define QML_STATISTICSWINDOW "qrc:/statisticswindow.qml"
@@ -24,6 +23,8 @@ public:
     Q_INVOKABLE void onInit() override;
 
     Q_INVOKABLE QString getLoadTime() const;
+
+    Q_INVOKABLE QString getFileSize() const;
 };
 
 #endif // STATISTICSWINDOW_H

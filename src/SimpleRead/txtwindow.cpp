@@ -12,10 +12,15 @@ void TXTWindow::onInit(){
         Timer timer;
         char buf[1024 * 1024];
         this->file_in_buffer << file_in.rdbuf()->pubsetbuf(buf, 256 * 1024);
-
     }
 
     this->setLoadTime(Timer::time);
+
+    double size = file_in.tellg();
+    double megabytes = size / (1024.0 * 1024.0);
+
+    this->setFileSize(std::to_string(megabytes));
+
     qInfo("txt file is read");
 }
 

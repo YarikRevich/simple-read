@@ -40,20 +40,12 @@ void DOCXWindow::onClose() {
     QMLWindow::onClose();
 }
 
-void DOCXWindow::onWriteText(QString, int, int) {
-    throw Exceptions::NotImplementedLogic(true);
-}
-
 QString DOCXWindow::onReadText(int start, int end){
     return QString::fromStdString(this->file_in_buffer);
 }
 
 int DOCXWindow::getContentSize(){
-    throw Exceptions::NotImplementedLogic();
-}
-
-void DOCXWindow::onSave(){
-    throw Exceptions::NotImplementedLogic();
+    return this->file_in_buffer.length();
 }
 
 void DOCXWindow::setFileName(QString fileName){

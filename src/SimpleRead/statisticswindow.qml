@@ -38,12 +38,24 @@ Rectangle {
                         "loadTime": function(){
                             return StatisticsWindow.getLoadTime()
                         },
+
+                        "fileSize": function(){
+                            console.log(StatisticsWindow.getFileSize())
+                            return StatisticsWindow.getFileSize()
+                        },
+
                         "default_font_size": Storage.DEFAULT_INTERFACE_FONT_SIZE,
                     }
 
                     ListElement {
                         text: QT_TR_NOOP("Load time")
                         action: "loadTime"
+                        fontSize: "default_font_size"
+                    }
+
+                    ListElement {
+                        text: QT_TR_NOOP("File size")
+                        action: "fileSize"
                         fontSize: "default_font_size"
                     }
                 }

@@ -53,6 +53,15 @@ void CSVWindow::onClose() {
 void CSVWindow::onSave(){
     qInfo("CSVWindow save event happened");
 
+    for (auto column : this->file_out_buffer.keys()){
+        int rowIndex = 0;
+        for (auto row : this->file_out_buffer[column].toList()){
+//            qInfo() << this->doc.GetColumnIdx(column.toStdString()) << rowIndex << row.toString().toStdString().c_str();
+            this->doc.SetCell(this->doc.GetColumnIdx(column.toStdString()), rowIndex, row.toString().toStdString());
+            rowIndex++;
+        }
+    }
+//    qInfo() << this->doc.GetCell<std::string>(0, 0).c_str();
     this->doc.Save();
 }
 

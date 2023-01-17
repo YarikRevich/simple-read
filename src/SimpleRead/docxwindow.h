@@ -7,7 +7,7 @@
 #include <QString>
 #include <duckx.hpp>
 #include "statistics.h"
-#include "textwindow.h"
+#include "textwindowread.h"
 
 #define QML_DOCXWINDOW "qrc:/docxwindow.qml"
 
@@ -15,7 +15,7 @@
  * \class DOCXWindow
  * \brief The DOCXWindow class used for representation of opened files
  */
-class DOCXWindow : public QObject, public TextWindow, public QMLWindow, public Statistics
+class DOCXWindow : public QObject, public TextWindowRead, public QMLWindow, public Statistics
 {
 private:
     Q_OBJECT
@@ -33,10 +33,6 @@ public:
     Q_INVOKABLE void onClose();
 
     Q_INVOKABLE void onInit() override;
-
-    Q_INVOKABLE void onSave() override;
-
-    Q_INVOKABLE void onWriteText(QString, int start, int end) override;
 
     Q_INVOKABLE QString onReadText(int start, int end) override;
 

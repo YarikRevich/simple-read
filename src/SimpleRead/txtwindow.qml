@@ -74,8 +74,8 @@ Item {
                         icon: "images/lock_edit.png"
                         alter_icon: "images/unlock_edit.png"
                         action: "lock_unlock_edit"
-                        tooltip: "Locks edit field"
-                        alter_tooltip: "Unlocks edit field"
+                        tooltip: QT_TR_NOOP("Locks edit field")
+                        alter_tooltip: QT_TR_NOOP("Unlocks edit field")
                         tooltip_visible: false
                         hovered: false;
                         checked: false
@@ -85,7 +85,7 @@ Item {
                         name: "save"
                         icon: "images/save.png"
                         action: "save"
-                        tooltip: "Saves the file"
+                        tooltip: QT_TR_NOOP("Saves the file")
                         tooltip_visible: false
                         hovered: false;
                         enabled: true
@@ -96,7 +96,7 @@ Item {
                         name: "information"
                         icon: "images/information.png"
                         action: "information"
-                        tooltip: "Shows detailed information about the file"
+                        tooltip: QT_TR_NOOP("Shows detailed information about the file")
                         tooltip_visible: false
                         hovered: false;
                         enabled: true
@@ -114,7 +114,7 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter;
 
                         ToolTip {
-                            text: model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip
+                            text: qsTr(model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip)
                             visible: model.tooltip_visible
                         }
 
@@ -312,7 +312,7 @@ Item {
                         name: "decrease_font"
                         icon: "images/decrease_font.png"
                         action: "decrease_font"
-                        tooltip: "Decreases font of the viewport"
+                        tooltip: QT_TR_NOOP("Decreases font of the viewport")
                         tooltip_visible: false
                         hovered: false;
                     }
@@ -321,7 +321,7 @@ Item {
                         name: "increase_font"
                         icon: "images/increase_font.png"
                         action: "increase_font"
-                        tooltip: "Increases font of the viewport"
+                        tooltip: QT_TR_NOOP("Increases font of the viewport")
                         tooltip_visible: false
                         hovered: false;
                     }
@@ -338,7 +338,7 @@ Item {
                         }
 
                         ToolTip {
-                            text:  model.tooltip;
+                            text: qsTr(model.tooltip);
                             visible: model.tooltip_visible
                         }
 

@@ -7,17 +7,16 @@ class Statistics
 {
 private:
     std::string loadTime;
-
+    std::string fileSize;
 public:
-    Statistics();
+    std::string getLoadTime() const;
 
-    std::string getLoadTime() const {
-        return this->loadTime;
-    }
+    std::string getFileSize() const;
+
 protected:
-    void setLoadTime(std::string loadTime){
-        this->loadTime = loadTime;
-    }
+    void setLoadTime(std::string loadTime);
+
+    void setFileSize(std::string fileSize);
 };
 
 #endif // STATISTICS_H
