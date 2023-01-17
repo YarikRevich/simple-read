@@ -1,7 +1,9 @@
 #include "txtwindow.h"
+#include "timer.h"
+
 #include <fstream>
 #include <sstream>
-#include "timer.h"
+
 
 void TXTWindow::onInit(){
     std::ifstream file_in(this->fileName.toStdString(), std::ios_base::in);

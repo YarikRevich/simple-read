@@ -3,6 +3,7 @@
 
 #include "qmlwindow.h"
 #include "statistics.h"
+
 #include <QObject>
 
 #define QML_STATISTICSWINDOW "qrc:/statisticswindow.qml"

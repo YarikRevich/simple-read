@@ -1,15 +1,16 @@
 #include "docxwindow.h"
+#include "exceptions.h"
+#include "timer.h"
+
+#include <duckx.hpp>
+#include <iostream>
+#include <stdio.h>
+#include <fstream>
 #include <QHash>
 #include <QLabel>
 #include <QScrollArea>
 #include <QString>
 #include <QString>
-#include <duckx.hpp>
-#include <iostream>
-#include <stdio.h>
-#include "exceptions.h"
-#include "timer.h"
-#include <fstream>
 
 void DOCXWindow::onInit(){
     {

@@ -4,7 +4,6 @@
 #include "translatorregistrator.h"
 #include "txtwindow.h"
 #include "statisticswindow.h"
-
 #include "csvwindowmodel.h"
 #include "exceptions.h"
 #include "qmltyperegistrator.h"

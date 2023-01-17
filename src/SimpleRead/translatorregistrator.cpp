@@ -1,4 +1,5 @@
 #include "translatorregistrator.h"
+
 #include <QApplication>
 #include <QTranslator>
 

@@ -1,10 +1,11 @@
 #ifndef QMLWINDOW_H
 #define QMLWINDOW_H
 
+#include "basewindow.h"
+
 #include <QObject>
 #include <QQuickWidget>
 #include <QQuickView>
-#include "basewindow.h"
 
 class QMLWindow : public BaseWindow
 {

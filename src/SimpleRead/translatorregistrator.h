@@ -1,8 +1,6 @@
 #ifndef TRANSLATORREGISTRATOR_H
 #define TRANSLATORREGISTRATOR_H
 
-//#include <QApplication>
-//#include <QTranslator>
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QTranslator>

@@ -2,6 +2,7 @@
 #define CSVWINDOWMODEL_H
 
 #include "csvwindow.h"
+
 #include <QAbstractTableModel>
 
 /*!

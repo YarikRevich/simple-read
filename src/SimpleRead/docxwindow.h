@@ -3,11 +3,12 @@
 
 #include "dataview.h"
 #include "qmlwindow.h"
+#include "statistics.h"
+#include "textwindowread.h"
+
 #include <QObject>
 #include <QString>
 #include <duckx.hpp>
-#include "statistics.h"
-#include "textwindowread.h"
 
 #define QML_DOCXWINDOW "qrc:/docxwindow.qml"
 
@@ -23,8 +24,6 @@ private:
     std::string file_in_buffer;
     duckx::Document doc;
 public:
-    explicit DOCXWindow(QObject* parent = 0) : QObject(parent){}
-
     Q_INVOKABLE void setFileName(QString);
 
     // Custom overrides

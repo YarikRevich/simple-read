@@ -2,11 +2,11 @@
 #define TXTWINDOW_H
 
 #include "dataview.h"
-#include "filewindow.h"
 #include "textwindow.h"
 #include "statistics.h"
-#include <sstream>
+#include "qmlwindow.h"
 
+#include <sstream>
 #include <QWidget>
 #include <QObject>
 #include <QString>
@@ -24,8 +24,6 @@ class TXTWindow : public QObject, public TextWindow, public QMLWindow, public St
     std::stringstream file_out_buffer;
     std::stringstream file_in_buffer;
 public:
-    explicit TXTWindow(QObject* parent = 0) : QObject(parent){}
-
     // Event callbacks
     Q_INVOKABLE void onOpen();
 

@@ -22,8 +22,6 @@ private:
 
     std::string file_in_buffer;
 public:
-    explicit PDFWindow(QObject* parent = 0) : QObject(parent){}
-
     Q_INVOKABLE void setFileName(QString);
 
     // Event callbacks

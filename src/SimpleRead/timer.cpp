@@ -1,4 +1,5 @@
 #include "timer.h"
+
 #include <sstream>
 #include <iomanip>
 #include <QObject>

@@ -2,16 +2,15 @@
 #define CSVWINDOW_H
 
 #include "dataview.h"
-#include "filewindow.h"
 #include "statistics.h"
+#include "qmlwindow.h"
+#include "tablewindow.h"
 
 #include <QWidget>
 #include <QObject>
 #include <QString>
 #include <QList>
 #include <rapidcsv.h>
-#include "qmlwindow.h"
-#include "tablewindow.h"
 #include <QAbstractTableModel>
 
 #define QML_CSVWINDOW "qrc:/csvwindow.qml"
@@ -31,8 +30,6 @@ private:
 
     Document doc;
 public:
-    explicit CSVWindow(QObject* parent = 0) {}
-
     Q_INVOKABLE void setFileName(QString);
 
     // Custom overrides

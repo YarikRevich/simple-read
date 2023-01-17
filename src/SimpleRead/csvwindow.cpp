@@ -1,7 +1,8 @@
 #include "csvwindow.h"
+#include "timer.h"
+
 #include <rapidcsv.h>
 #include <QVariantMap>
-#include "timer.h"
 #include <fstream>
 
 using namespace rapidcsv;

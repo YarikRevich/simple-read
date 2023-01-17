@@ -1,6 +1,7 @@
 #include "settingswindow.h"
-#include <QQmlContext>
 #include "exceptions.h"
+
+#include <QQmlContext>
 
 void SettingsWindow::onOpen(){
     QMLWindow::onOpen(QML_SETTINGSWINDOW);

@@ -1,11 +1,11 @@
 #include "pdfwindow.h"
+#include "timer.h"
 
 #define PDFMM_SHARED true
 
 #include <pdfmm/pdfmm.h>
 #include <iostream>
 #include <fstream>
-#include "timer.h"
 
 using namespace mm;
 void PDFWindow::onInit(){
