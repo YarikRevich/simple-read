@@ -254,8 +254,7 @@ Item {
 
                         model: CSVWindowModel
 
-                        delegate:
-                            ScrollView {
+                        delegate: ScrollView {
                             clip: true;
 
                             ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
@@ -265,7 +264,6 @@ Item {
 
                             TextArea {
                                 anchors.fill: parent;
-
                                 padding: 10;
                                 text: model.display;
                                 clip: true;
@@ -273,7 +271,7 @@ Item {
                                 enabled: (((model.index % CSVWindowModel.rowCount())) > 0);
                                 font.bold: Number.isInteger(model.index / CSVWindowModel.rowCount());
                                 color: "black"
-                                font.pixelSize: editField.actions["fontSize"];
+                                font.pointSize: 20;
                                 wrapMode: TextEdit.Wrap;
                                 anchors.centerIn: parent;
 
@@ -299,6 +297,10 @@ Item {
                                             CSVWindow.onSave();
                                         }
                                     }
+                                }
+
+                                Component.onCompleted: {
+                                    console.log(editField.actions["fontSize"]);
                                 }
                             }
                         }

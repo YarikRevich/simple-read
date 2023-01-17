@@ -104,45 +104,45 @@ Item {
                 }
 
                 delegate: Button {
-                        Text{
-                            text: ""
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
+                    Text{
+                        text: ""
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+
+                    icon.source: model.checked ? model.alter_icon : model.icon;
+                    anchors.verticalCenter: parent.verticalCenter;
+
+                    ToolTip {
+                        text: qsTr(model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip)
+                        visible: model.tooltip_visible
+                    }
+
+                    onClicked: {
+                        barModel.actions[model.action]()
+                    }
+
+                    onHoveredChanged: {
+                        if (!barModel.getElementByName(model.name).hovered){
+                            toolTipTimerTopBar.start();
+                            barModel.getElementByName(model.name).hovered = true;
+                        }else{
+                            toolTipTimerTopBar.stop();
+                            barModel.getElementByName(model.name).tooltip_visible = false;
+                            barModel.getElementByName(model.name).hovered = false;
                         }
 
-                        icon.source: model.checked ? model.alter_icon : model.icon;
-                        anchors.verticalCenter: parent.verticalCenter;
+                    }
 
-                        ToolTip {
-                            text: qsTr(model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip)
-                            visible: model.tooltip_visible
+                    Timer {
+                        id: toolTipTimerTopBar
+                        interval: 2000
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            barModel.getElementByName(model.name).tooltip_visible = true;
                         }
-
-                        onClicked: {
-                            barModel.actions[model.action]()
-                        }
-
-                        onHoveredChanged: {
-                            if (!barModel.getElementByName(model.name).hovered){
-                                toolTipTimerTopBar.start();
-                                barModel.getElementByName(model.name).hovered = true;
-                            }else{
-                                toolTipTimerTopBar.stop();
-                                barModel.getElementByName(model.name).tooltip_visible = false;
-                                barModel.getElementByName(model.name).hovered = false;
-                            }
-
-                        }
-
-                        Timer {
-                            id: toolTipTimerTopBar
-                            interval: 2000
-                            running: false
-                            repeat: false
-                            onTriggered: {
-                                barModel.getElementByName(model.name).tooltip_visible = true;
-                            }
-                        }
+                    }
                 }
             }
         }
@@ -211,10 +211,10 @@ Item {
                             }
 
                             delegate: Text {
-                                    anchors.horizontalCenter: parent.horizontalCenter
-                                    text: model.count;
-                                    color: "gray";
-                                    font.pixelSize: editField.font.pixelSize;
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                text: model.count;
+                                color: "gray";
+                                font.pixelSize: editField.font.pixelSize;
                             }
                         }
                     }
@@ -328,43 +328,43 @@ Item {
                 }
 
                 delegate: Button {
-                        Layout.alignment: Qt.AlignRight;
-                        anchors.verticalCenter: parent.verticalCenter;
-                        icon.source: model.icon;
+                    Layout.alignment: Qt.AlignRight;
+                    anchors.verticalCenter: parent.verticalCenter;
+                    icon.source: model.icon;
 
-                        Text{
-                            text: ""
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
+                    Text{
+                        text: ""
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
 
-                        ToolTip {
-                            text: qsTr(model.tooltip);
-                            visible: model.tooltip_visible
-                        }
+                    ToolTip {
+                        text: qsTr(model.tooltip);
+                        visible: model.tooltip_visible
+                    }
 
-                        onClicked: bottomModel.actions[model.action]()
+                    onClicked: bottomModel.actions[model.action]()
 
-                        onHoveredChanged: {
-                            if (!bottomModel.getElementByName(model.name).hovered){
-                                toolTipTimerBottomBar.start();
-                                bottomModel.getElementByName(model.name).hovered = true;
-                            }else{
-                                toolTipTimerBottomBar.stop();
-                                bottomModel.getElementByName(model.name).tooltip_visible = false;
-                                bottomModel.getElementByName(model.name).hovered = false;
-                            }
-                        }
-
-                        Timer {
-                            id: toolTipTimerBottomBar
-                            interval: 2000
-                            running: false
-                            repeat: false
-                            onTriggered: {
-                                bottomModel.getElementByName(model.name).tooltip_visible = true;
-                            }
+                    onHoveredChanged: {
+                        if (!bottomModel.getElementByName(model.name).hovered){
+                            toolTipTimerBottomBar.start();
+                            bottomModel.getElementByName(model.name).hovered = true;
+                        }else{
+                            toolTipTimerBottomBar.stop();
+                            bottomModel.getElementByName(model.name).tooltip_visible = false;
+                            bottomModel.getElementByName(model.name).hovered = false;
                         }
                     }
+
+                    Timer {
+                        id: toolTipTimerBottomBar
+                        interval: 2000
+                        running: false
+                        repeat: false
+                        onTriggered: {
+                            bottomModel.getElementByName(model.name).tooltip_visible = true;
+                        }
+                    }
+                }
             }
         }
     }
