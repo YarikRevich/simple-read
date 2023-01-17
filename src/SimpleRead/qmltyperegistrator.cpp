@@ -3,6 +3,7 @@
 #include "csvwindow.h"
 #include "translatorregistrator.h"
 #include "txtwindow.h"
+#include "statisticswindow.h"
 
 #include "csvwindowmodel.h"
 #include "exceptions.h"
@@ -32,6 +33,9 @@ void QMLTypeRegistrator::exec() const
 
     SettingsWindow *settingsWindow = new SettingsWindow();
     context->setContextProperty("SettingsWindow", settingsWindow);
+
+    StatisticsWindow *statisticsWindow = new StatisticsWindow();
+    context->setContextProperty("StatisticsWindow", statisticsWindow);
 
     Exceptions *exceptions = Exceptions::getInstance();
     context->setContextProperty("Exceptions", exceptions);

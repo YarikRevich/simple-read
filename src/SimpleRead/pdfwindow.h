@@ -21,11 +21,14 @@ private:
 
     std::string file_in_buffer;
 public:
-    explicit PDFWindow(QObject* parent = 0) : QObject(parent){};
+    explicit PDFWindow(QObject* parent = 0) : QObject(parent){}
+
+    Q_INVOKABLE void setFileName(QString);
 
     // Event callbacks
     Q_INVOKABLE void onOpen();
 
+    Q_INVOKABLE void onClose();
 
     Q_INVOKABLE void onInit() override;
 
@@ -36,9 +39,6 @@ public:
     Q_INVOKABLE QString onReadText(int start, int end) override;
 
     Q_INVOKABLE int getContentSize() override;
-
-
-    Q_INVOKABLE void setFileName(QString);
 };
 
 #endif // PDFWINDOW_H

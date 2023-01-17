@@ -57,8 +57,15 @@ Item {
                                 editField.enabled = false;
                             }
                         },
+
                         "save": function(){
                             CSVWindow.onSave();
+                        },
+
+                        "information": function(){
+                            StatisticsWindow.setStatistics(CSVWindow.getStatistics());
+                            StatisticsWindow.onInit();
+                            StatisticsWindow.onOpen();
                         }
                     }
 
@@ -67,8 +74,10 @@ Item {
                         icon: "images/lock_edit.png"
                         alter_icon: "images/unlock_edit.png"
                         action: "lock_unlock_edit"
-                                toolip: "Locks edit field"
-                                alter_toolip: "Unlocks edit field"
+                        tooltip: "Locks edit field"
+                        alter_tooltip: "Unlocks edit field"
+                        tooltip_visible: false
+                        hovered: false;
                         checked: false
                     }
 
@@ -76,32 +85,65 @@ Item {
                         name: "save"
                         icon: "images/save.png"
                         action: "save"
+                        tooltip: "Saves the file"
+                        tooltip_visible: false
+                        hovered: false;
+                        enabled: true
+
+                    }
+
+                    ListElement {
+                        name: "information"
+                        icon: "images/information.png"
+                        action: "information"
+                        tooltip: "Shows detailed information about the file"
+                        tooltip_visible: false
+                        hovered: false;
                         enabled: true
                     }
                 }
 
                 delegate: Button {
-                        icon.source: model.checked ? model.alter_icon : model.icon;
-//                        title: model.checked ? model.alter_tooltip : model.alter_tooltip;
-
-                        anchors.verticalCenter: parent.verticalCenter;
-
-//                        ToolTip.visible: true;
-//                        ToolTip.text: "it works";
-
-//                        onHoveredChanged: {
-//                            console.log("it w", ToolTip.visible);
-//                        }
-
                         Text{
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
+
+                        icon.source: model.checked ? model.alter_icon : model.icon;
+                        anchors.verticalCenter: parent.verticalCenter;
+
+                        ToolTip {
+                            text: model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: {
                             barModel.actions[model.action]()
                         }
-                    }
+
+                        onHoveredChanged: {
+                            if (!barModel.getElementByName(model.name).hovered){
+                                toolTipTimerTopBar.start();
+                                barModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerTopBar.stop();
+                                barModel.getElementByName(model.name).tooltip_visible = false;
+                                barModel.getElementByName(model.name).hovered = false;
+                            }
+
+                        }
+
+                        Timer {
+                            id: toolTipTimerTopBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                barModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
+                }
             }
         }
 
@@ -215,84 +257,32 @@ Item {
 
                         delegate: Rectangle {
                             color: "#B3FAA7";
-                            border.width: 1
+                            border.width: Number.isInteger(model.index / CSVWindowModel.rowCount()) ? 2 : 1;
+                            radius: Number.isInteger(model.index / CSVWindowModel.rowCount()) ? 10 : 0;
 
                             TextEdit {
-                                text: model.display
+                                text: model.display;
                                 clip: true;
+                                enabled: (((model.index % CSVWindowModel.rowCount())) > 0);
+                                font.bold: Number.isInteger(model.index / CSVWindowModel.rowCount());
                                 font.pixelSize: editField.actions["fontSize"];
                                 wrapMode: TextEdit.WrapAnywhere;
                                 anchors.centerIn: parent
                                 onTextChanged: {
-//                                    console.log(tableModel.columnCount);
                                     if (editField.loaded){
-//                                        const ix = tableModel.index(0, 0);
-//                                        tableModel.setData(ix, "display", "Yaroslav")
+                                        const ix = editField.model.index(Math.floor(model.index / CSVWindowModel.rowCount()), model.index % CSVWindowModel.rowCount());
+                                        editField.model.setData(ix, text);
+
+                                        if (Storage.getAutoSave() === "true"){
+                                            CSVWindow.onSave();
+                                        }
                                     }
                                 }
                             }
                         }
 
-//                        Component {
-//                            id: tableModelColumn
-
-//                            TableModelColumn {
-
-//                            }
-//                        }
-
                         Component.onCompleted: {
                             editField.loaded = true;
-
-
-//                            tableModel.insertColumn(test);
-//                            tableModel.removeColumn(tableModel.columns[0]);
-//                                console.log(tableModel.columnCount);
-//                            console.log(tableModel.insertColumn(tableModelColumn.createObject(tableModel, {"display": "Name"})))
-//                            console.log(tableModel.columnCount);
-
-                            TableModel.appendRow({
-                                                    name: "It works",
-                                                 });
-//                            for (var value in tableModel.columns){
-//                                console.log(tableModel.columns[value].display);
-//                            }
-
-//                            console.log(tableModel.removeColumn("stub"));
-//                            tableModel.insertColumns(["Age", "Name"], 2);
-
-//                            console.log(tableModel.columnCount);
-//                            tableModel.insertColumn({display: "Name"});
-//                            tableModel.insertColumn({display: "Age"});
-
-//                            tableModel.appendRow({
-//                                                 Age: "18",
-//                                                 })
-//                            tableModel.appendRow({
-
-//                                                 })
-
-//                            tableModel.setData("Name", "display", "it works");
-//                            tableModel.appendRow({"Name": "it works"})
-
-//                            const data = CSVWindow.onReadTable();
-//                            for (let column in data){
-//                                const row = data[column];
-//                                for (let i = 0; i < row.length; i++){
-//                                    let input = {};
-//                                    input[column] = row[i];
-//                                    console.log(input);
-//                                    tableModel.appendRow(input);
-////                                    tableModel.appendRow({: row[i]})
-//                                }
-//                            }
-
-
-//                            tableModel.insertColumn("Yaroslav")
-//                            tableModel.appendRow({
-//                                                     "name": "Yaroslav",
-//                                                     "color": "Jjjk",
-//                                                 })
                         }
                     }
                 }

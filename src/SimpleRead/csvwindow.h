@@ -3,6 +3,7 @@
 
 #include "dataview.h"
 #include "filewindow.h"
+#include "statistics.h"
 
 #include <QWidget>
 #include <QObject>
@@ -20,7 +21,7 @@ using namespace rapidcsv;
 /*!
  * \brief The CSVWindow class used for representation of CSV files
  */
-class CSVWindow : public QObject, public TableWindow, public QMLWindow
+class CSVWindow : public QObject, public TableWindow, public QMLWindow, public Statistics
 {
 private:
     Q_OBJECT
@@ -30,13 +31,14 @@ private:
 
     Document doc;
 public:
-    explicit CSVWindow(QObject* parent = 0) {};
+    explicit CSVWindow(QObject* parent = 0) {}
+
+    Q_INVOKABLE void setFileName(QString);
 
     // Custom overrides
     Q_INVOKABLE void onOpen();
 
-    Q_INVOKABLE void setFileName(QString);
-
+    Q_INVOKABLE void onClose();
 
     Q_INVOKABLE void onInit() override;
 
@@ -45,6 +47,8 @@ public:
     Q_INVOKABLE void onWriteTable(QVariantMap) override;
 
     Q_INVOKABLE QVariantMap onReadTable() const override;
+
+    Q_INVOKABLE Statistics* getStatistics();
 };
 
 #endif // CSVWINDOW_H

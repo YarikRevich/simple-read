@@ -10,7 +10,7 @@ class SettingsWindow : public QObject, public QMLWindow
     Q_OBJECT
 
 public:
-    explicit SettingsWindow(QObject* = 0){};
+    explicit SettingsWindow(QObject* = 0){}
     Q_INVOKABLE void onOpen();
     Q_INVOKABLE void onInit() override;
     Q_INVOKABLE void onSave() override;

@@ -38,10 +38,9 @@ ApplicationWindow {
                   checked: Storage.getAutoSave() === "true" ? true : false
                   onCheckedChanged: checked ? Storage.setAutoSave("true") : Storage.setAutoSave("false")
               }
-              Labs.MenuSeparator{}
               Labs.MenuItem {
-                  text: qsTr("&Print")
-                  onTriggered: {}
+                  text: qsTr("&Preferences")
+                  onTriggered: SettingsWindow.onOpen();
               }
         }
 
@@ -61,17 +60,6 @@ ApplicationWindow {
                   }
               }
         }
-
-        Labs.Menu {
-               id: helpMenu
-               title: qsTr("Help")
-               Labs.MenuItem {
-                   text: qsTr("&About")
-                   onTriggered: {
-                        SettingsWindow.onOpen();
-                   }
-               }
-         }
     }
 
     Row{
@@ -95,10 +83,6 @@ ApplicationWindow {
         }
     }
 
-    /*!
-      \brief
-      \qmltype FileDialog
-    */
     FileDialog {
         id: fileDialogWindow;
         title: qsTr("Please choose a file");

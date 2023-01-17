@@ -11,11 +11,13 @@
 class BaseWindow
 {
 public:
-    virtual void onOpen(const char *) const = 0;
+    virtual void onOpen(const char *) = 0;
 
     virtual void onInit() = 0;
 
-    virtual void onSave(){};
+    virtual void onClose() = 0;
+
+    virtual void onSave(){}
 };
 
 #endif // BASEWINDOW_H

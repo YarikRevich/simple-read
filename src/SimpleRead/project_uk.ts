@@ -11,19 +11,16 @@
 <context>
     <name>csvwindow</name>
     <message>
-        <location filename="csvwindow.qml" line="38"/>
         <source>Lock edit</source>
-        <translation type="unfinished">Заблокувати редагування</translation>
+        <translation type="obsolete">Заблокувати редагування</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="38"/>
         <source>Unlock edit</source>
-        <translation type="unfinished">Розблокувати редагування</translation>
+        <translation type="obsolete">Розблокувати редагування</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="61"/>
         <source>Save</source>
-        <translation type="unfinished">Зберегти</translation>
+        <translation type="obsolete">Зберегти</translation>
     </message>
 </context>
 <context>
@@ -69,47 +66,37 @@
         <translation>Автозбереження</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="43"/>
-        <source>&amp;Print</source>
-        <translation>Надрукувати</translation>
+        <location filename="mainwindow.qml" line="42"/>
+        <source>&amp;Preferences</source>
+        <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="50"/>
+        <location filename="mainwindow.qml" line="49"/>
         <source>&amp;View</source>
         <translation>Вигляд</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="52"/>
+        <location filename="mainwindow.qml" line="51"/>
         <source>&amp;Zoom In</source>
         <translation>Приблизити</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="58"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom Out</source>
         <translation>Відсунути</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="67"/>
-        <source>Help</source>
-        <translation>Допомога</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="69"/>
-        <source>&amp;About</source>
-        <translation>Про додаток</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="83"/>
+        <location filename="mainwindow.qml" line="71"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="92"/>
+        <location filename="mainwindow.qml" line="79"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="112"/>
+        <location filename="mainwindow.qml" line="88"/>
         <source>Please choose a file</source>
         <translation>Будь ласка виберіть файл</translation>
     </message>
@@ -117,49 +104,57 @@
 <context>
     <name>settingswindow</name>
     <message>
-        <location filename="settingswindow.qml" line="45"/>
+        <location filename="settingswindow.qml" line="52"/>
         <source>Languages</source>
         <translation>Мови</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="49"/>
+        <location filename="settingswindow.qml" line="57"/>
         <source>About</source>
         <translation>Про додаток</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="93"/>
+        <location filename="settingswindow.qml" line="116"/>
         <source>English</source>
         <translation>Англійська</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="98"/>
+        <location filename="settingswindow.qml" line="122"/>
         <source>Polish</source>
         <translation>Польська</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="103"/>
+        <location filename="settingswindow.qml" line="128"/>
         <source>Ukrainian</source>
         <translation>Українська</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="118"/>
+        <location filename="settingswindow.qml" line="145"/>
         <source>Chosen language</source>
         <translation>Обрана мова</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="148"/>
+        <location filename="settingswindow.qml" line="187"/>
         <source>SimpleRead is an open-source project</source>
         <translation>SimpleRead - це open-source проєкт</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="149"/>
+        <location filename="settingswindow.qml" line="192"/>
         <source>More information can be find on</source>
         <translation>Більше інформації можна знайти на</translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="150"/>
+        <location filename="settingswindow.qml" line="199"/>
         <source>Version</source>
         <translation>Версія</translation>
+    </message>
+</context>
+<context>
+    <name>statisticswindow</name>
+    <message>
+        <location filename="statisticswindow.qml" line="45"/>
+        <source>Load time</source>
+        <translation>Час завантаження</translation>
     </message>
 </context>
 </TS>

@@ -7,8 +7,8 @@
 #include <QQmlContext>
 #include <QTranslator>
 
-void QMLWindow::onOpen(const char * path) const {
-    QQuickView *view = new QQuickView(GlobalQMLEngine::engine, 0);
+void QMLWindow::onOpen(const char * path) {
+    this->view = new QQuickView(GlobalQMLEngine::engine, 0);
 
     view->setSource(QUrl(path));
     view->setResizeMode(QQuickView::SizeRootObjectToView);
@@ -20,7 +20,11 @@ void QMLWindow::onOpen(const char * path) const {
     view->setMinimumWidth(40 * primaryScreenSize.width() / 100);
 
     view->show();
-};
+}
+
+void QMLWindow::onClose() {
+    this->view->close();
+}
 
 void QMLWindow::setFileName(QString fileName){
     this->fileName = fileName;

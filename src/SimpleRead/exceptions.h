@@ -5,7 +5,8 @@
 #include <exception>
 
 /*!
- * \brief Exceptions namespace contains custom exceptions used for internal application usage
+ * \brief The Exceptions class contains custom exceptions used for both
+ *        internal and external application usage
  */
 class Exceptions : public QObject
 {
@@ -21,18 +22,27 @@ public:
         return Exceptions::instance;
     }
 
-    class NotImplementedLogic : public std::exception {
+    class NotImplementedLogic {
     public:
         constexpr static char * msg = "This logic seems to be not implemented";
 
         NotImplementedLogic(bool showToUser = false){
             if (showToUser){
-                Exceptions::getInstance()->error(NotImplementedLogic::msg);
+                emit Exceptions::getInstance()->error(NotImplementedLogic::msg);
             }
+            qWarning("%s", this->msg);
         }
+    };
 
-        const char * what() const throw() {
-            return NotImplementedLogic::msg;
+    class LimitedFunctionality {
+    public:
+        constexpr static char * msg = "There is a limited functionality for this kind of class";
+
+        LimitedFunctionality(bool showToUser = false){
+            if (showToUser){
+                emit Exceptions::getInstance()->error(LimitedFunctionality::msg);
+            }
+            qWarning("%s", this->msg);
         }
     };
     Q_SIGNALS:

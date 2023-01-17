@@ -132,8 +132,6 @@ Rectangle {
                         }
                     }
                 delegate: Button {
-
-
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: " " + qsTr(model.text);
 

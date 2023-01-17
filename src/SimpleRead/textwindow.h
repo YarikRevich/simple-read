@@ -2,14 +2,12 @@
 #define TEXTWINDOW_H
 
 #include <QString>
+#include "textwindowread.h"
+#include "textwindowwrite.h"
 
-class TextWindow
+class TextWindow : public TextWindowRead, public TextWindowWrite
 {
 public:
-    virtual void onWriteText(QString, int start, int end) = 0;
-
-    virtual QString onReadText(int start, int end) = 0;
-
     virtual int getContentSize() = 0;
 };
 

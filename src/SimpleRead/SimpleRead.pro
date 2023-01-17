@@ -47,6 +47,8 @@ HEADERS += \
     statisticswindow.h \
     tablewindow.h \
     textwindow.h \
+    textwindowread.h \
+    textwindowwrite.h \
     timer.h \
     translatorregistrator.h \
     txtwindow.h
@@ -69,6 +71,7 @@ CONFIG += lrelease \
 RESOURCES += \
     mainwindow.qml \
     settingswindow.qml \
+    statisticswindow.qml \
     docxwindow.qml \
     csvwindow.qml \
     pdfwindow.qml \
@@ -102,6 +105,7 @@ DISTFILES += \
     logger.qdoc \
     pdfwindow.qml \
     settingswindow.qml \
+    statisticswindow.qml \
     storage.js \
     txtwindow.qml
 

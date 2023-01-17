@@ -4,6 +4,7 @@
 #include "dataview.h"
 #include "filewindow.h"
 #include "textwindow.h"
+#include "statistics.h"
 #include <sstream>
 
 #include <QWidget>
@@ -16,17 +17,19 @@
 /*!
  * \brief The TXTWindow class used for representation of opened files
  */
-class TXTWindow : public QObject, public TextWindow, public QMLWindow
+class TXTWindow : public QObject, public TextWindow, public QMLWindow, public Statistics
 {
     Q_OBJECT
 
     std::stringstream file_out_buffer;
     std::stringstream file_in_buffer;
 public:
-    explicit TXTWindow(QObject* parent = 0) : QObject(parent){};
+    explicit TXTWindow(QObject* parent = 0) : QObject(parent){}
 
     // Event callbacks
     Q_INVOKABLE void onOpen();
+
+    Q_INVOKABLE void onClose();
 
     Q_INVOKABLE void onInit() override;
 
@@ -39,6 +42,8 @@ public:
     Q_INVOKABLE int getContentSize() override;
 
     Q_INVOKABLE void setFileName(QString);
+
+    Q_INVOKABLE Statistics* getStatistics();
 };
 
 #endif // TXTWINDOW_H

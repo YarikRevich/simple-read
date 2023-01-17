@@ -23,6 +23,12 @@ void PDFWindow::onOpen(){
     QMLWindow::onOpen(QML_PDFWINDOW);
 }
 
+void PDFWindow::onClose() {
+    qInfo("PDFWindow was closed");
+
+    QMLWindow::onClose();
+}
+
 void PDFWindow::onSave(){
 };
 

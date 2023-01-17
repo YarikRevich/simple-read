@@ -2,24 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en">
 <context>
-    <name>csvwindow</name>
-    <message>
-        <location filename="csvwindow.qml" line="38"/>
-        <source>Lock edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="csvwindow.qml" line="38"/>
-        <source>Unlock edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="csvwindow.qml" line="61"/>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>mainwindow</name>
     <message>
         <location filename="mainwindow.qml" line="10"/>
@@ -47,47 +29,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="43"/>
-        <source>&amp;Print</source>
+        <location filename="mainwindow.qml" line="42"/>
+        <source>&amp;Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="50"/>
+        <location filename="mainwindow.qml" line="49"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="52"/>
+        <location filename="mainwindow.qml" line="51"/>
         <source>&amp;Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="58"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="67"/>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="69"/>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.qml" line="83"/>
+        <location filename="mainwindow.qml" line="71"/>
         <source>Open file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="92"/>
+        <location filename="mainwindow.qml" line="79"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="112"/>
+        <location filename="mainwindow.qml" line="88"/>
         <source>Please choose a file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -95,48 +67,56 @@
 <context>
     <name>settingswindow</name>
     <message>
-        <location filename="settingswindow.qml" line="45"/>
+        <location filename="settingswindow.qml" line="52"/>
         <source>Languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="49"/>
+        <location filename="settingswindow.qml" line="57"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="93"/>
+        <location filename="settingswindow.qml" line="116"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="98"/>
+        <location filename="settingswindow.qml" line="122"/>
         <source>Polish</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="103"/>
+        <location filename="settingswindow.qml" line="128"/>
         <source>Ukrainian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="118"/>
+        <location filename="settingswindow.qml" line="145"/>
         <source>Chosen language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="148"/>
+        <location filename="settingswindow.qml" line="187"/>
         <source>SimpleRead is an open-source project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="149"/>
+        <location filename="settingswindow.qml" line="192"/>
         <source>More information can be find on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="settingswindow.qml" line="150"/>
+        <location filename="settingswindow.qml" line="199"/>
         <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>statisticswindow</name>
+    <message>
+        <location filename="statisticswindow.qml" line="45"/>
+        <source>Load time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

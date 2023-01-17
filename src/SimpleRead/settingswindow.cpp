@@ -8,8 +8,8 @@ void SettingsWindow::onOpen(){
 
 void SettingsWindow::onInit(){
     throw Exceptions::NotImplementedLogic();
-};
+}
 
 void SettingsWindow::onSave(){
     throw Exceptions::NotImplementedLogic();
-};
+}

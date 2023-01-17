@@ -12,12 +12,6 @@ Item {
     height: 80 * Screen.desktopAvailableHeight / 100;
     width: 80 * Screen.desktopAvailableWidth / 100;
 
-    Labs.MessageDialog {
-        id: unlockEditError
-        title: "Function error"
-        text: "DOCX files are available only for reading"
-    }
-
     ColumnLayout {
         anchors.fill: parent;
         anchors.margins: 2;
@@ -53,32 +47,62 @@ Item {
                     }
 
                     property var actions: {
-                        "lock_unlock_edit": function(){
-                            unlockEditError.open();
-                        },
+                        "information": function(){
+                            StatisticsWindow.setStatistics(DOCXWindow.getStatistics());
+                            StatisticsWindow.onInit();
+                            StatisticsWindow.onOpen();
+                        }
                     }
 
                     ListElement {
-                        name: "lock_unlock_edit"
-                        icon: "images/lock_edit.png"
-                        alter_icon: "images/unlock_edit.png"
-                        action: "lock_unlock_edit"
-                        checked: false
+                        name: "information"
+                        icon: "images/information.png"
+                        action: "information"
+                        tooltip: "Shows detailed information about the file"
+                        tooltip_visible: false
+                        hovered: false;
+                        enabled: true
                     }
                 }
 
                 delegate: Button {
-                        icon.source: model.checked ? model.alter_icon : model.icon;
-
-                        anchors.verticalCenter: parent.verticalCenter;
-
                         Text{
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
+
+                        icon.source: model.checked ? model.alter_icon : model.icon;
+                        anchors.verticalCenter: parent.verticalCenter;
+
+                        ToolTip {
+                            text: model.tooltip;
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: {
                             barModel.actions[model.action]()
+                        }
+
+                        onHoveredChanged: {
+                            if (!barModel.getElementByName(model.name).hovered){
+                                toolTipTimerTopBar.start();
+                                barModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerTopBar.stop();
+                                barModel.getElementByName(model.name).tooltip_visible = false;
+                                barModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
+
+                        Timer {
+                            id: toolTipTimerTopBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                barModel.getElementByName(model.name).tooltip_visible = true;
+                            }
                         }
                     }
             }
@@ -88,117 +112,115 @@ Item {
             Layout.fillHeight: true;
             Layout.fillWidth: true;
 
-           Rectangle{
-               id: scrollBody;
-               width: 95 * parent.width / 100;
-               height: 90 * parent.height / 100;
+            Rectangle{
+                id: scrollBody;
+                width: 95 * parent.width / 100;
+                height: 90 * parent.height / 100;
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                    ScrollView{
-                        anchors.fill: parent;
-                        focus: true;
-                        clip: true;
+                ScrollView{
+                    id: lineScroll;
+                    anchors.fill: parent;
+                    clip: true;
 
-                        ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
-                        ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
+                    ScrollBar.vertical.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.vertical.visible: ScrollBar.vertical.size < 1;
 
-                        ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
-                        ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
+                    ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
 
-                        Rectangle {
-                            id: lineCounter;
-                            implicitWidth: 3 * scrollBody.width / 100;
-                            color: "#B3FAA7";
-                            border.width: 1;
+                    Rectangle {
+                        id: lineCounter;
+                        color: "#B3FAA7";
+                        implicitWidth: 3 * scrollBody.width / 100;
+                        border.width: 1;
 
-                            function reloadHeight(){
-                                if (editField.height > scrollBody.height){
-                                    lineCounter.height = editField.height;
-                                }else{
-                                    lineCounter.height = scrollBody.height
-                                }
+                        function reloadHeight(){
+                            if (editField.height > scrollBody.height){
+                                lineCounter.height = editField.height;
+                            }else{
+                                lineCounter.height = scrollBody.height
                             }
+                        }
 
-                            function reloadLines(){
-                                if (lineCounterModel.count > editField.lineCount){
-                                    for (var a = lineCounterModel.count; a >= editField.lineCount; a--){
-                                        lineCounterModel.remove(a);
-                                    }
-                                }else{
-                                    for (let a = lineCounterModel.count; a < editField.lineCount; a++){
-                                        lineCounterModel.set(a, {count: a+1});
-                                    }
+                        function reloadLines(){
+                            if (lineCounterModel.count > editField.lineCount){
+                                for (var a = lineCounterModel.count; a >= editField.lineCount; a--){
+                                    lineCounterModel.remove(a);
                                 }
-                            }
-
-                            ListView {
-                                id: lineCounterList;
-                                anchors.fill: parent;
-                                anchors.topMargin: 5;
-                                anchors.horizontalCenter: parent.horizontalCenter;
-
-                                model: ListModel {
-                                    id: lineCounterModel;
-
-                                    ListElement {
-                                        count: 1;
-                                    }
-                                }
-
-                                delegate: Text {
-                                        anchors.horizontalCenter: parent.horizontalCenter
-                                        text: model.count;
-                                        color: "gray";
-                                        font.pixelSize: editField.font.pixelSize;
+                            }else{
+                                for (let a = lineCounterModel.count; a < editField.lineCount; a++){
+                                    lineCounterModel.set(a, {count: a+1});
                                 }
                             }
                         }
 
-                        TextArea {
-                            id: editField;
+                        ListView {
+                            id: lineCounterList;
                             anchors.fill: parent;
-                            anchors.leftMargin: 3 * scrollBody.width / 100;
-                            Layout.alignment: Qt.AlignCenter;
+                            anchors.topMargin: 5;
+                            anchors.horizontalCenter: parent.horizontalCenter;
 
-                            enabled: false;
-                            color: "black";
-                            focus: true;
-                            text: DOCXWindow.onReadText();
+                            model: ListModel {
+                                id: lineCounterModel;
 
-                            font.pointSize: 24;
-                            wrapMode: TextEdit.WrapAnywhere;
-                            selectByMouse: true;
-
-                            background:
-                                Rectangle {
-                                color: "#B3FAA7";
-                                radius: 10;
-                                border.width: 1;
-                                border.color: "black";
-                            }
-
-                            onTextChanged: {
-                                DOCXWindow.onWriteText(editField.text);
-                                if (Storage.getAutoSave() === "true"){
-                                    DOCXWindow.onSave();
+                                ListElement {
+                                    count: 1;
                                 }
                             }
-                            onLineCountChanged: {
-                                lineCounter.reloadHeight();
-                                lineCounter.reloadLines();
-                            }
 
-                            Component.onCompleted: {
-                                lineCounter.reloadHeight();
-                                lineCounter.reloadLines();
+                            delegate: Text {
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    text: model.count;
+                                    color: "gray";
+                                    font.pixelSize: editField.font.pixelSize;
                             }
                         }
                     }
-                }
-           }
 
+                    TextArea {
+                        id: editField;
+                        anchors.fill: parent;
+                        anchors.leftMargin: 3 * scrollBody.width / 100;
+                        Layout.alignment: Qt.AlignCenter;
+
+                        enabled: false;
+                        color: "black";
+                        focus: true;
+                        renderType: Text.NativeRendering;
+
+                        font.pointSize: 24;
+                        wrapMode: TextEdit.WrapAnywhere;
+                        selectByMouse: true;
+
+                        property bool loaded: false;
+
+                        background:
+                            Rectangle {
+                            color: "#B3FAA7";
+                            radius: 10;
+                            border.width: 1;
+                            border.color: "black";
+                        }
+
+                        onLineCountChanged: {
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
+                        }
+
+                        Component.onCompleted: {
+                            editField.loaded = true;
+                            text = DOCXWindow.onReadText(0, -1);
+
+                            lineCounter.reloadHeight();
+                            lineCounter.reloadLines();
+                        }
+                    }
+                }
+            }
+        }
 
         Rectangle {
             id: bottomMenu;
@@ -219,6 +241,15 @@ Item {
                 model: ListModel {
                     id: bottomModel
 
+                    function getElementByName(name){
+                        for (let i = 0; i < bottomModel.count; i++){
+                            const bottomModelElement = bottomModel.get(i)
+                            if (bottomModelElement.name === name){
+                                return bottomModelElement
+                            }
+                        }
+                    }
+
                     property var actions: {
                         "increase_font": function(){
                             editField.font.pixelSize += 1;
@@ -233,13 +264,21 @@ Item {
                     }
 
                     ListElement {
+                        name: "decrease_font"
                         icon: "images/decrease_font.png"
                         action: "decrease_font"
+                        tooltip: "Decreases font of the viewport"
+                        tooltip_visible: false
+                        hovered: false;
                     }
 
                     ListElement {
+                        name: "increase_font"
                         icon: "images/increase_font.png"
                         action: "increase_font"
+                        tooltip: "Increases font of the viewport"
+                        tooltip_visible: false
+                        hovered: false;
                     }
                 }
 
@@ -252,9 +291,70 @@ Item {
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                         }
+
+                        ToolTip {
+                            text:  model.tooltip;
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: bottomModel.actions[model.action]()
+
+                        onHoveredChanged: {
+                            if (!bottomModel.getElementByName(model.name).hovered){
+                                toolTipTimerBottomBar.start();
+                                bottomModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerBottomBar.stop();
+                                bottomModel.getElementByName(model.name).tooltip_visible = false;
+                                bottomModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
+
+                        Timer {
+                            id: toolTipTimerBottomBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                bottomModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
                     }
             }
+        }
+    }
+
+    Labs.MessageDialog {
+        id: errorDialogWindow
+        title: "Error";
+    }
+
+    function showErrorDialogWindow(msg){
+        errorDialogWindow.text = msg;
+        errorDialogWindow.open()
+    }
+
+    Labs.MessageDialog {
+        id: warningDialogWindow
+        title: "Warning";
+    }
+
+    function showWarningDialogWindow(msg){
+        warningDialogWindow.text = msg;
+        warningDialogWindow.open()
+    }
+
+    Connections {
+        id: exceptionsConnection
+        target: Exceptions;
+
+        property bool loaded: false;
+        function onError(msg){
+            showErrorDialogWindow(msg)
+        }
+
+        function onWarning(msg){
+            showWarningDialogWindow(msg)
         }
     }
 }

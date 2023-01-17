@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include "timer.h"
-#include "exceptions.h"
 
 void TXTWindow::onInit(){
     std::ifstream file_in(this->fileName.toStdString(), std::ios_base::in);
@@ -13,13 +12,21 @@ void TXTWindow::onInit(){
         Timer timer;
         char buf[1024 * 1024];
         this->file_in_buffer << file_in.rdbuf()->pubsetbuf(buf, 256 * 1024);
+
     }
 
+    this->setLoadTime(Timer::time);
     qInfo("txt file is read");
 }
 
 void TXTWindow::onOpen(){
     QMLWindow::onOpen(QML_TXTWINDOW);
+}
+
+void TXTWindow::onClose() {
+    qInfo("TXTWindow was closed");
+
+    QMLWindow::onClose();
 }
 
 void TXTWindow::onSave(){
@@ -31,15 +38,11 @@ void TXTWindow::onSave(){
 }
 
 void TXTWindow::onWriteText(QString text, int start, int end){
-//    this->file_out_buffer.str(std::string());
-    std::string temp_str = this->file_out_buffer.str();
-//    temp_str.insert(1, 2, )
-
+    this->file_out_buffer.str(std::string());
     this->file_out_buffer << text.toStdString();
 }
 
 QString TXTWindow::onReadText(int start, int end){
-    emit Exceptions::getInstance()->error("it works");
     return QString::fromStdString(this->file_in_buffer.str().substr(start, end));
 }
 
@@ -49,4 +52,8 @@ int TXTWindow::getContentSize() {
 
 void TXTWindow::setFileName(QString fileName){
     QMLWindow::setFileName(fileName);
+}
+
+Statistics* TXTWindow::getStatistics(){
+    return this;
 }

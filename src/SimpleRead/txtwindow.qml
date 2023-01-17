@@ -4,7 +4,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Controls
 import Qt.labs.platform as Labs
-//import "storage.js" as Storage
+import "storage.js" as Storage
 
 Item {
     id: root;
@@ -63,7 +63,9 @@ Item {
                         },
 
                         "information": function(){
-                            console.log("Information button pressed");
+                            StatisticsWindow.setStatistics(TXTWindow.getStatistics());
+                            StatisticsWindow.onInit();
+                            StatisticsWindow.onOpen();
                         }
                     }
 
@@ -72,8 +74,10 @@ Item {
                         icon: "images/lock_edit.png"
                         alter_icon: "images/unlock_edit.png"
                         action: "lock_unlock_edit"
-                                toolip: "Locks edit field"
-                                alter_toolip: "Unlocks edit field"
+                        tooltip: "Locks edit field"
+                        alter_tooltip: "Unlocks edit field"
+                        tooltip_visible: false
+                        hovered: false;
                         checked: false
                     }
 
@@ -81,39 +85,65 @@ Item {
                         name: "save"
                         icon: "images/save.png"
                         action: "save"
+                        tooltip: "Saves the file"
+                        tooltip_visible: false
+                        hovered: false;
                         enabled: true
+
                     }
 
                     ListElement {
                         name: "information"
                         icon: "images/information.png"
                         action: "information"
+                        tooltip: "Shows detailed information about the file"
+                        tooltip_visible: false
+                        hovered: false;
                         enabled: true
                     }
                 }
 
                 delegate: Button {
-                        icon.source: model.checked ? model.alter_icon : model.icon;
-//                        title: model.checked ? model.alter_tooltip : model.alter_tooltip;
-
-                        anchors.verticalCenter: parent.verticalCenter;
-
-//                        ToolTip.visible: true;
-//                        ToolTip.text: "it works";
-
-//                        onHoveredChanged: {
-//                            console.log("it w", ToolTip.visible);
-//                        }
-
                         Text{
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
+
+                        icon.source: model.checked ? model.alter_icon : model.icon;
+                        anchors.verticalCenter: parent.verticalCenter;
+
+                        ToolTip {
+                            text: model.alter_tooltip ? (model.checked ? model.alter_tooltip : model.tooltip) : model.tooltip
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: {
                             barModel.actions[model.action]()
                         }
-                    }
+
+                        onHoveredChanged: {
+                            if (!barModel.getElementByName(model.name).hovered){
+                                toolTipTimerTopBar.start();
+                                barModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerTopBar.stop();
+                                barModel.getElementByName(model.name).tooltip_visible = false;
+                                barModel.getElementByName(model.name).hovered = false;
+                            }
+
+                        }
+
+                        Timer {
+                            id: toolTipTimerTopBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                barModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
+                }
             }
         }
 
@@ -139,12 +169,6 @@ Item {
 
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOn;
                     ScrollBar.horizontal.visible: ScrollBar.horizontal.size < 1;
-
-
-                    onContentHeightChanged: {
-                        console.log(lineScroll.contentHeight, "CHANGED");
-                    }
-
 
                     Rectangle {
                         id: lineCounter;
@@ -221,32 +245,18 @@ Item {
                         }
 
                         onTextChanged: {
-//                            console.log(editField.lineCount, editField.text.length, editField.width, editField.font.pointSize, editField.width / editField.font.pixelSize);
-//                            TXTWindow.onWriteText(editField.text);
+                            TXTWindow.onWriteText(editField.text, 0, -1);
                             if (Storage.getAutoSave() === "true"){
-//                                TXTWindow.onSave();
+                                TXTWindow.onSave();
                             }
                         }
                         onLineCountChanged: {
                             lineCounter.reloadHeight();
                             lineCounter.reloadLines();
-
-//                            console.log(lineScroll.contentHeight, lineScroll.height);
-//                            console.log(editField.text.length, editField.y, editField.font.pixelSize, editField.contentWidth, editField.font.letterSpacing, lineScroll.contentHeight);
-//                            console.log(lineScroll.height, editField.text.length, lineScroll.font.pixelSize, editField.width, lineScroll.contentHeight, editField.lineCount);
                         }
 
                         Component.onCompleted: {
                             editField.loaded = true;
-//                            const contentSize = TXTWindow.getContentSize()
-//                            console.log((contentSize - lineScroll.height) < 0);
-//                            if ((contentSize - lineScroll.height) < 0){
-//                                text = TXTWindow.onReadText(0, -1);
-//                            }else{
-//                                const shiftLineNumber = parseInt((contentSize - lineScroll.height) / editField.font.pixelSize);
-//                                console.log(shiftLineNumber, contentSize, lineScroll.height, editField.font.pixelSize);
-//                            }
-
                             text = TXTWindow.onReadText(0, -1);
 
                             lineCounter.reloadHeight();
@@ -256,7 +266,6 @@ Item {
                 }
             }
         }
-
 
         Rectangle {
             id: bottomMenu;
@@ -277,6 +286,15 @@ Item {
                 model: ListModel {
                     id: bottomModel
 
+                    function getElementByName(name){
+                        for (let i = 0; i < bottomModel.count; i++){
+                            const bottomModelElement = bottomModel.get(i)
+                            if (bottomModelElement.name === name){
+                                return bottomModelElement
+                            }
+                        }
+                    }
+
                     property var actions: {
                         "increase_font": function(){
                             editField.font.pixelSize += 1;
@@ -291,13 +309,21 @@ Item {
                     }
 
                     ListElement {
+                        name: "decrease_font"
                         icon: "images/decrease_font.png"
                         action: "decrease_font"
+                        tooltip: "Decreases font of the viewport"
+                        tooltip_visible: false
+                        hovered: false;
                     }
 
                     ListElement {
+                        name: "increase_font"
                         icon: "images/increase_font.png"
                         action: "increase_font"
+                        tooltip: "Increases font of the viewport"
+                        tooltip_visible: false
+                        hovered: false;
                     }
                 }
 
@@ -310,24 +336,57 @@ Item {
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                         }
+
+                        ToolTip {
+                            text:  model.tooltip;
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: bottomModel.actions[model.action]()
+
+                        onHoveredChanged: {
+                            if (!bottomModel.getElementByName(model.name).hovered){
+                                toolTipTimerBottomBar.start();
+                                bottomModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerBottomBar.stop();
+                                bottomModel.getElementByName(model.name).tooltip_visible = false;
+                                bottomModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
+
+                        Timer {
+                            id: toolTipTimerBottomBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                bottomModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
                     }
             }
         }
     }
 
     Labs.MessageDialog {
-        id: messageDialog
-        title: "Extension error"
-        text: "An extension of the chosen file is not supported yet."
+        id: errorDialogWindow
+        title: "Error";
     }
 
-    Binding {
-        target: {
-            messageDialog.open()
-        }
-        when: editField.loaded;
-        delayed: true;
+    function showErrorDialogWindow(msg){
+        errorDialogWindow.text = msg;
+        errorDialogWindow.open()
+    }
+
+    Labs.MessageDialog {
+        id: warningDialogWindow
+        title: "Warning";
+    }
+
+    function showWarningDialogWindow(msg){
+        warningDialogWindow.text = msg;
+        warningDialogWindow.open()
     }
 
     Connections {
@@ -336,11 +395,11 @@ Item {
 
         property bool loaded: false;
         function onError(msg){
-            showErrorDialogWindow()
+            showErrorDialogWindow(msg)
         }
 
         function onWarning(msg){
-            showWarningDialogWindow()
+            showWarningDialogWindow(msg)
         }
     }
 }
