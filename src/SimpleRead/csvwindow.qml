@@ -290,6 +290,71 @@ Item {
         }
 
 
+//        Rectangle {
+//            id: bottomMenu;
+//            color: "#D9D9D9";
+//            Layout.fillWidth: true;
+//            Layout.preferredHeight: 10 * parent.height / 100;
+//            Layout.alignment: Qt.AlignCenter;
+
+//            ListView {
+//                anchors.fill: parent;
+//                orientation: ListView.Horizontal;
+//                anchors.bottom: parent.bottom
+//                anchors.verticalCenter: parent.verticalCenter;
+//                anchors.horizontalCenter: parent.horizontalCenter;
+//                Layout.alignment: Qt.AlignRight;
+//                spacing: 1;
+
+//                model: ListModel {
+//                    id: bottomModel
+
+//                    property var actions: {
+//                        "increase_font": function(){
+//                            lineCounterList.setFontSizeByIncreament(-1)
+//                            lineCounterList.forceLayout()
+
+//                            editField.setFontSizeByIncreament(1)
+//                            editField.forceLayout()
+//                            editField.anchors.leftMargin += 0.08;
+//                            lineCounter.implicitWidth += 0.2;
+//                        },
+//                        "decrease_font": function(){
+//                            lineCounterList.setFontSizeByIncreament(-1)
+//                            lineCounterList.forceLayout()
+
+//                            editField.setFontSizeByIncreament(-1)
+//                            editField.forceLayout()
+//                            editField.anchors.leftMargin -= 0.08;
+//                            lineCounter.implicitWidth -= 0.2;
+
+//                        },
+//                    }
+
+//                    ListElement {
+//                        icon: "images/decrease_font.png"
+//                        action: "decrease_font"
+//                    }
+
+//                    ListElement {
+//                        icon: "images/increase_font.png"
+//                        action: "increase_font"
+//                    }
+//                }
+
+//                delegate: Button {
+//                        Layout.alignment: Qt.AlignRight;
+//                        anchors.verticalCenter: parent.verticalCenter;
+//                        icon.source: model.icon;
+
+//                        Text{
+//                            text: ""
+//                            anchors.verticalCenter: parent.verticalCenter
+//                        }
+//                        onClicked: bottomModel.actions[model.action]()
+//                    }
+//            }
+//        }
         Rectangle {
             id: bottomMenu;
             color: "#D9D9D9";
@@ -309,6 +374,15 @@ Item {
                 model: ListModel {
                     id: bottomModel
 
+                    function getElementByName(name){
+                        for (let i = 0; i < bottomModel.count; i++){
+                            const bottomModelElement = bottomModel.get(i)
+                            if (bottomModelElement.name === name){
+                                return bottomModelElement
+                            }
+                        }
+                    }
+
                     property var actions: {
                         "increase_font": function(){
                             lineCounterList.setFontSizeByIncreament(-1)
@@ -316,7 +390,6 @@ Item {
 
                             editField.setFontSizeByIncreament(1)
                             editField.forceLayout()
-//                            editField.font.pixelSize += 1;
                             editField.anchors.leftMargin += 0.08;
                             lineCounter.implicitWidth += 0.2;
                         },
@@ -326,21 +399,27 @@ Item {
 
                             editField.setFontSizeByIncreament(-1)
                             editField.forceLayout()
-//                            editField.font.pixelSize -= 1;
                             editField.anchors.leftMargin -= 0.08;
                             lineCounter.implicitWidth -= 0.2;
-
                         },
                     }
 
                     ListElement {
+                        name: "decrease_font"
                         icon: "images/decrease_font.png"
                         action: "decrease_font"
+                        tooltip: QT_TR_NOOP("Decreases font of the viewport")
+                        tooltip_visible: false
+                        hovered: false;
                     }
 
                     ListElement {
+                        name: "increase_font"
                         icon: "images/increase_font.png"
                         action: "increase_font"
+                        tooltip: QT_TR_NOOP("Increases font of the viewport")
+                        tooltip_visible: false
+                        hovered: false;
                     }
                 }
 
@@ -353,7 +432,34 @@ Item {
                             text: ""
                             anchors.verticalCenter: parent.verticalCenter
                         }
+
+                        ToolTip {
+                            text: qsTr(model.tooltip);
+                            visible: model.tooltip_visible
+                        }
+
                         onClicked: bottomModel.actions[model.action]()
+
+                        onHoveredChanged: {
+                            if (!bottomModel.getElementByName(model.name).hovered){
+                                toolTipTimerBottomBar.start();
+                                bottomModel.getElementByName(model.name).hovered = true;
+                            }else{
+                                toolTipTimerBottomBar.stop();
+                                bottomModel.getElementByName(model.name).tooltip_visible = false;
+                                bottomModel.getElementByName(model.name).hovered = false;
+                            }
+                        }
+
+                        Timer {
+                            id: toolTipTimerBottomBar
+                            interval: 2000
+                            running: false
+                            repeat: false
+                            onTriggered: {
+                                bottomModel.getElementByName(model.name).tooltip_visible = true;
+                            }
+                        }
                     }
             }
         }

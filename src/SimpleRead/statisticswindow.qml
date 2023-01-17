@@ -24,6 +24,7 @@ Rectangle {
 
             ListView {
                 id: listView;
+                anchors.fill: parent;
 
                 model: ListModel {
                     id: listModel

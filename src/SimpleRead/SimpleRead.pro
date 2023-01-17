@@ -76,7 +76,6 @@ RESOURCES += \
     csvwindow.qml \
     pdfwindow.qml \
     txtwindow.qml \
-    utils.qml \
     images/united-states.png \
     images/poland.png \
     images/ukraine.png \

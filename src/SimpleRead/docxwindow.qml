@@ -267,7 +267,7 @@ Item {
                         name: "decrease_font"
                         icon: "images/decrease_font.png"
                         action: "decrease_font"
-                        tooltip: "Decreases font of the viewport"
+                        tooltip: QT_TR_NOOP("Decreases font of the viewport")
                         tooltip_visible: false
                         hovered: false;
                     }
@@ -276,7 +276,7 @@ Item {
                         name: "increase_font"
                         icon: "images/increase_font.png"
                         action: "increase_font"
-                        tooltip: "Increases font of the viewport"
+                        tooltip: QT_TR_NOOP("Increases font of the viewport")
                         tooltip_visible: false
                         hovered: false;
                     }
@@ -293,7 +293,7 @@ Item {
                         }
 
                         ToolTip {
-                            text:  model.tooltip;
+                            text: qsTr(model.tooltip);
                             visible: model.tooltip_visible
                         }
 

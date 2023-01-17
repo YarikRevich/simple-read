@@ -19,7 +19,7 @@ void TXTWindow::onInit(){
     double size = file_in.tellg();
     double megabytes = size / (1024.0 * 1024.0);
 
-    this->setFileSize(std::to_string(megabytes));
+    this->setFileSize(std::to_string(megabytes) + " MB");
 
     qInfo("txt file is read");
 }

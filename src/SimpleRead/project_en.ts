@@ -2,6 +2,32 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en">
 <context>
+    <name>csvwindow</name>
+    <message>
+        <location filename="csvwindow.qml" line="411"/>
+        <source>Decreases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="420"/>
+        <source>Increases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>docxwindow</name>
+    <message>
+        <location filename="docxwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>mainwindow</name>
     <message>
         <location filename="mainwindow.qml" line="10"/>
@@ -65,6 +91,19 @@
     </message>
 </context>
 <context>
+    <name>pdfwindow</name>
+    <message>
+        <location filename="pdfwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="pdfwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>settingswindow</name>
     <message>
         <location filename="settingswindow.qml" line="52"/>
@@ -115,8 +154,46 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="45"/>
+        <location filename="statisticswindow.qml" line="51"/>
         <source>Load time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="statisticswindow.qml" line="57"/>
+        <source>File size</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>txtwindow</name>
+    <message>
+        <location filename="txtwindow.qml" line="77"/>
+        <source>Locks edit field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="78"/>
+        <source>Unlocks edit field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="88"/>
+        <source>Saves the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="99"/>
+        <source>Shows detailed information about the file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="315"/>
+        <source>Decreases font of the viewport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="324"/>
+        <source>Increases font of the viewport</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

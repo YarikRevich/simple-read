@@ -12,21 +12,6 @@
     <name>csvwindow</name>
     <message>
         <source>Lock edit</source>
-        <translation type="obsolete">Заблокувати редагування</translation>
-    </message>
-    <message>
-        <source>Unlock edit</source>
-        <translation type="obsolete">Розблокувати редагування</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Зберегти</translation>
-    </message>
-</context>
-<context>
-    <name>docxwindow</name>
-    <message>
-        <source>Lock edit</source>
         <translation type="vanished">Заблокувати редагування</translation>
     </message>
     <message>
@@ -36,6 +21,29 @@
     <message>
         <source>Save</source>
         <translation type="vanished">Зберегти</translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="411"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Зменшує розмір шрифту</translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="420"/>
+        <source>Increases font of the viewport</source>
+        <translation>Збільшує розмір шрифту</translation>
+    </message>
+</context>
+<context>
+    <name>docxwindow</name>
+    <message>
+        <location filename="docxwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Зменшує розмір шрифту</translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Збільшує розмір шрифту</translation>
     </message>
 </context>
 <context>
@@ -102,6 +110,19 @@
     </message>
 </context>
 <context>
+    <name>pdfwindow</name>
+    <message>
+        <location filename="pdfwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Зменшує розмір шрифту</translation>
+    </message>
+    <message>
+        <location filename="pdfwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Збільшує розмір шрифту</translation>
+    </message>
+</context>
+<context>
     <name>settingswindow</name>
     <message>
         <location filename="settingswindow.qml" line="52"/>
@@ -152,9 +173,47 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="45"/>
+        <location filename="statisticswindow.qml" line="51"/>
         <source>Load time</source>
         <translation>Час завантаження</translation>
+    </message>
+    <message>
+        <location filename="statisticswindow.qml" line="57"/>
+        <source>File size</source>
+        <translation>Розмір файлу</translation>
+    </message>
+</context>
+<context>
+    <name>txtwindow</name>
+    <message>
+        <location filename="txtwindow.qml" line="77"/>
+        <source>Locks edit field</source>
+        <translation>Блокує редагування поля</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="78"/>
+        <source>Unlocks edit field</source>
+        <translation>Розблоковує редагування поля</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="88"/>
+        <source>Saves the file</source>
+        <translation>Зберігає файл</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="99"/>
+        <source>Shows detailed information about the file</source>
+        <translation>Висвітлює детальну інформацію стосовно файлу</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="315"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Зменшує розмір шрифту</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="324"/>
+        <source>Increases font of the viewport</source>
+        <translation>Збільшує розмір шрифту</translation>
     </message>
 </context>
 </TS>

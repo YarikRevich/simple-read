@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "exceptions.h"
 #include "timer.h"
+#include <fstream>
 
 void DOCXWindow::onInit(){
     {
@@ -26,6 +27,13 @@ void DOCXWindow::onInit(){
         }
     }
     this->setLoadTime(Timer::time);
+
+    std::ifstream file(this->fileName.toStdString(), std::ios::in);
+    file.seekg(0, std::ios_base::end);
+    double size = file.tellg();
+    double megabytes = size / (1024.0 * 1024.0);
+
+    this->setFileSize(std::to_string(megabytes) + " MB");
 
     Exceptions::LimitedFunctionality(true);
 }

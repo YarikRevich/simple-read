@@ -15,6 +15,16 @@
         <source>Save</source>
         <translation type="vanished">Zapisać</translation>
     </message>
+    <message>
+        <location filename="csvwindow.qml" line="411"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="csvwindow.qml" line="420"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
+    </message>
 </context>
 <context>
     <name>docxwindow</name>
@@ -29,6 +39,16 @@
     <message>
         <source>Save</source>
         <translation type="vanished">Zapisać</translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="docxwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 <context>
@@ -46,7 +66,7 @@
     <message>
         <location filename="mainwindow.qml" line="28"/>
         <source>&amp;Open</source>
-        <translation>Otworzyć</translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <location filename="mainwindow.qml" line="32"/>
@@ -81,7 +101,7 @@
     <message>
         <location filename="mainwindow.qml" line="71"/>
         <source>Open file</source>
-        <translation>Otworzyć plik</translation>
+        <translation>Otwórz plik</translation>
     </message>
     <message>
         <location filename="mainwindow.qml" line="79"/>
@@ -92,6 +112,19 @@
         <location filename="mainwindow.qml" line="88"/>
         <source>Please choose a file</source>
         <translation>Proszę wybrać plik</translation>
+    </message>
+</context>
+<context>
+    <name>pdfwindow</name>
+    <message>
+        <location filename="pdfwindow.qml" line="270"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="pdfwindow.qml" line="279"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 <context>
@@ -145,9 +178,47 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="45"/>
+        <location filename="statisticswindow.qml" line="51"/>
         <source>Load time</source>
         <translation>Czas ładowania</translation>
+    </message>
+    <message>
+        <location filename="statisticswindow.qml" line="57"/>
+        <source>File size</source>
+        <translation>Rozmiar pliku</translation>
+    </message>
+</context>
+<context>
+    <name>txtwindow</name>
+    <message>
+        <location filename="txtwindow.qml" line="77"/>
+        <source>Locks edit field</source>
+        <translation>Blokuje pole edycyjne</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="78"/>
+        <source>Unlocks edit field</source>
+        <translation>Unlocks edit field</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="88"/>
+        <source>Saves the file</source>
+        <translation>Zapisuje plik</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="99"/>
+        <source>Shows detailed information about the file</source>
+        <translation>Wyświetla szczegółowe informacje o pliku</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="315"/>
+        <source>Decreases font of the viewport</source>
+        <translation>Zmniejsza czcionkę rzutni</translation>
+    </message>
+    <message>
+        <location filename="txtwindow.qml" line="324"/>
+        <source>Increases font of the viewport</source>
+        <translation>Zwiększa czcionkę rzutni</translation>
     </message>
 </context>
 </TS>

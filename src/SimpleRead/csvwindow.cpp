@@ -2,6 +2,7 @@
 #include <rapidcsv.h>
 #include <QVariantMap>
 #include "timer.h"
+#include <fstream>
 
 using namespace rapidcsv;
 
@@ -28,14 +29,19 @@ void CSVWindow::onInit(){
             }
             result[QString::fromStdString(columnName)] = columnData;
 
-
-
         this->file_in_buffer = result;
         this->file_out_buffer = result;
         }
     }
 
     this->setLoadTime(Timer::time);
+
+    std::ifstream file(this->fileName.toStdString(), std::ios::in);
+    file.seekg(0, std::ios_base::end);
+    double size = file.tellg();
+    double megabytes = size / (1024.0 * 1024.0);
+
+    this->setFileSize(std::to_string(megabytes) + " MB");
 }
 
 void CSVWindow::onOpen() {
