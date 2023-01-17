@@ -51,10 +51,10 @@ Item {
                             const barModelElement = barModel.getElementByName("lock_unlock_edit")
                             if (barModelElement.checked){
                                 barModelElement.checked = false;
-                                editField.enabled = true;
+                                editField.readOnly = false;
                             } else{
                                 barModelElement.checked = true;
-                                editField.enabled = false;
+                                editField.readOnly = true;
                             }
                         },
 
@@ -225,7 +225,6 @@ Item {
                         anchors.leftMargin: 3 * scrollBody.width / 100;
                         Layout.alignment: Qt.AlignCenter;
 
-                        enabled: true;
                         color: "black";
                         focus: true;
                         renderType: Text.NativeRendering;

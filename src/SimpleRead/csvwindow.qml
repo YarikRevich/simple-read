@@ -298,10 +298,6 @@ Item {
                                         }
                                     }
                                 }
-
-                                Component.onCompleted: {
-                                    console.log(editField.actions["fontSize"]);
-                                }
                             }
                         }
 

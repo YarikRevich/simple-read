@@ -23,12 +23,12 @@
         <translation type="vanished">Зберегти</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="411"/>
+        <location filename="csvwindow.qml" line="368"/>
         <source>Decreases font of the viewport</source>
         <translation>Зменшує розмір шрифту</translation>
     </message>
     <message>
-        <location filename="csvwindow.qml" line="420"/>
+        <location filename="csvwindow.qml" line="377"/>
         <source>Increases font of the viewport</source>
         <translation>Збільшує розмір шрифту</translation>
     </message>
@@ -74,37 +74,46 @@
         <translation>Автозбереження</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="42"/>
         <source>&amp;Preferences</source>
-        <translation>Налаштування</translation>
+        <translation type="vanished">Налаштування</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="49"/>
+        <location filename="mainwindow.qml" line="45"/>
+        <source>Actions</source>
+        <translation>Дії</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="48"/>
+        <source>Go to settings</source>
+        <translation>Перейти до налаштувань</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.qml" line="55"/>
         <source>&amp;View</source>
         <translation>Вигляд</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="51"/>
+        <location filename="mainwindow.qml" line="57"/>
         <source>&amp;Zoom In</source>
         <translation>Приблизити</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="57"/>
+        <location filename="mainwindow.qml" line="63"/>
         <source>&amp;Zoom Out</source>
         <translation>Відсунути</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="71"/>
+        <location filename="mainwindow.qml" line="77"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="79"/>
+        <location filename="mainwindow.qml" line="85"/>
         <source>Settings</source>
         <translation>Налаштування</translation>
     </message>
     <message>
-        <location filename="mainwindow.qml" line="88"/>
+        <location filename="mainwindow.qml" line="94"/>
         <source>Please choose a file</source>
         <translation>Будь ласка виберіть файл</translation>
     </message>
@@ -173,12 +182,12 @@
 <context>
     <name>statisticswindow</name>
     <message>
-        <location filename="statisticswindow.qml" line="51"/>
+        <location filename="statisticswindow.qml" line="52"/>
         <source>Load time</source>
         <translation>Час завантаження</translation>
     </message>
     <message>
-        <location filename="statisticswindow.qml" line="57"/>
+        <location filename="statisticswindow.qml" line="58"/>
         <source>File size</source>
         <translation>Розмір файлу</translation>
     </message>

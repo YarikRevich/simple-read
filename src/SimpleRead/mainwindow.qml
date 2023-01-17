@@ -38,8 +38,14 @@ ApplicationWindow {
                 checked: Storage.getAutoSave() === "true" ? true : false
                 onCheckedChanged: checked ? Storage.setAutoSave("true") : Storage.setAutoSave("false")
             }
+        }
+
+        Labs.Menu {
+            id: actionsMenu
+            title: qsTr("Actions")
+
             Labs.MenuItem {
-                text: qsTr("&Preferences")
+                text: qsTr("Go to settings")
                 onTriggered: SettingsWindow.onOpen();
             }
         }
