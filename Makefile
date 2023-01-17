@@ -9,7 +9,7 @@ help:
 
 .PHONY: build
 build: ## build the project
-	@cd src && mkdir build && cd build && qmake ../SimpleRead && make
+	@cd src && mkdir build && cd build && qmake -config release ../SimpleRead && make
 
 UNAME := $(shell uname)
 
@@ -18,6 +18,3 @@ install: ## install the application
 ifeq ($(UNAME), Darwin)
 	@cp -r src/build/target/SimpleRead.app /Volumes/Data/Applications
 endif
-
-docs: ## generate documentation
-
