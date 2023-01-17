@@ -63,12 +63,10 @@ void CSVWindow::onSave(){
     for (auto column : this->file_out_buffer.keys()){
         int rowIndex = 0;
         for (auto row : this->file_out_buffer[column].toList()){
-//            qInfo() << this->doc.GetColumnIdx(column.toStdString()) << rowIndex << row.toString().toStdString().c_str();
             this->doc.SetCell(this->doc.GetColumnIdx(column.toStdString()), rowIndex, row.toString().toStdString());
             rowIndex++;
         }
     }
-//    qInfo() << this->doc.GetCell<std::string>(0, 0).c_str();
     this->doc.Save();
 }
 
@@ -76,6 +74,7 @@ void CSVWindow::onWriteTable(QVariantMap table){
     qInfo("CSVWindow write table event happened");
 
     this->file_out_buffer = table;
+    this->file_in_buffer = table;
 }
 
 QVariantMap CSVWindow::onReadTable() const{
