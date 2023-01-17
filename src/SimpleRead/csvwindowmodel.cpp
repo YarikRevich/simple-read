@@ -1,34 +1,49 @@
-//#include "csvwindowmodel.h"
+#include "csvwindowmodel.h"
 
-//CSVWindowModel::CSVWindowModel(CSVWindow *csvWindow)
-//{
-//}
+int CSVWindowModel::rowCount(const QModelIndex &parent) const {
+    QVariantMap table = this->csvWindow->onReadTable();
+    return table.value(table.keys()[0]).toList().length() + 1;
+}
 
-//int CSVWindowModel::columnCount(const QModelIndex &parent) const{
-//    return 2;
-//}
+int CSVWindowModel::columnCount(const QModelIndex &parent) const {
+    return this->csvWindow->onReadTable().keys().length();
+}
 
-//int CSVWindowModel::rowCount(const QModelIndex &parent) const{
-//    return 2;
-//}
+QVariant CSVWindowModel::data(const QModelIndex &index, int role) const {
+    if (!index.isValid() || role != Qt::DisplayRole)
+        return QVariant();
 
-//QVariant CSVWindowModel::data(const QModelIndex &index, int role) const{
-//    qInfo("HERE");
-//    return QVariant(QStringLiteral("Slava Ukraini!"));
-//};
+    QVariantMap table = this->csvWindow->onReadTable();
 
-//Qt::ItemFlags CSVWindowModel::flags(const QModelIndex &index) const{
-//    return Qt::ItemIsEditable;
-//};
+    if (index.row() == 0){
+        return table.keys()[index.column()];
+    }
 
-//QHash<int, QByteArray> CSVWindowModel::roleNames() const{
-//    QHash<int, QByteArray> names;
-//    names[0] = "age";
-//    names[1] = "name";
-//    return names;
-//};
+    return  table.value(table.keys()[index.column()]).toList()[index.row() - 1];
+}
 
-//QVariant CSVWindowModel::headerData(int section, Qt::Orientation orientation, int role) const {
+bool CSVWindowModel::setData(const QModelIndex &index, const QVariant &value, int role)
+    {
+        if (index.isValid() && role == Qt::EditRole) {
+            qInfo() << index.row() << index.column();
 
-//    return QVariant(QString::fromStdString("it works"));
-//};
+            QVariantMap table = this->csvWindow->onReadTable();
+            QList<QVariant> values = table[table.keys()[index.row()]].toList();
+            values[index.column()] = value;
+            table[table.keys()[index.row()]] = values;
+
+            this->csvWindow->onWriteTable(table);
+            emit dataChanged(index, index);
+            return true;
+        }
+        return false;
+    }
+
+QVariant CSVWindowModel::headerData(int section, Qt::Orientation orientation, int role) const {
+    if (role != Qt::DisplayRole || orientation != Qt::Horizontal)
+        return QVariant();
+
+    QVariantMap table = this->csvWindow->onReadTable();
+
+    return table.keys()[section];
+}
